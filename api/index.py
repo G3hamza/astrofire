@@ -1,5 +1,5 @@
-"""Vercel serverless entry point: the same FastAPI app (backend/app.py) serves /api/*, /ai/*, /docs.
-The React app is served as static files by Vercel (see vercel.json)."""
+"""Vercel entry point: the same FastAPI app (backend/app.py) serves everything: the built React app, /lite, /api/*, /ai/*, /docs.
+Vercel installs requirements.txt and builds frontend-app (see vercel.json)."""
 import sys
 from pathlib import Path
 

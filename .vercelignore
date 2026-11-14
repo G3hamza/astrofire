@@ -1,0 +1,18 @@
+# Never upload secrets or local-only files to Vercel
+.env
+.env.*
+!.env.example
+.venv/
+**/__pycache__/
+.pytest_cache/
+frontend-app/node_modules/
+frontend-app/dist/
+chroma_db/
+models/
+# Not PSI data (kept outside the public repo)
+data/raw/ntrs/
+data/raw/standards/
+data/raw/taskbook/
+data/curated/
+data/processed/chunks.jsonl
+data/processed/papers.*
