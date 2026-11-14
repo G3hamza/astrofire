@@ -3,7 +3,7 @@ NASA Space Apps Cairo 2026 · Challenge: **Flame in Freefall** · Team Starry Ni
 
 AstroFire answers, from **real NASA space fire tests**: **Will it burn? What proves it? How sure are we?** — and says plainly when NASA has no evidence.
 
-**Live demo:** _not deployed yet_ · **Demo video:** _not recorded yet_ · **2-minute demo script:** [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md) · **Data & low-bandwidth guide:** [`docs/DATA_ACCESS.md`](docs/DATA_ACCESS.md)
+**Live demo:** https://astrofire.vercel.app (backup: https://astrofire.vercel.app/lite/, API docs: https://astrofire.vercel.app/docs) · **Demo video:** _not recorded yet_ · **2-minute demo script:** [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md) · **Data & low-bandwidth guide:** [`docs/DATA_ACCESS.md`](docs/DATA_ACCESS.md)
 
 | Screen | Path | What it shows |
 |---|---|---|

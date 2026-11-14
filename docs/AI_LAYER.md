@@ -81,7 +81,7 @@ Switch provider: change `LLM_PROVIDER` + `LLM_MODEL` + the matching key, restart
 | `POST /ai/scenario` | `{environment, o2, pressure, material?, fuel_type?, gravity_g?, flow_cm_s?}` | verdict (Scenario contract values), coverage (Directly tested / Closest evidence / Gap), reasons[2-4], evidence[], blockers, caveats |
 | `POST /ai/compare` | `{ids: [2-3]}` | table[] (attribute, values, differs), narrative, sources |
 | `POST /ai/gaps` | `{scenario?}` | gaps[] (fuel × O2 band × pressure band × gravity with 0 space tests, high priority), covered[], cells[] (Gaps map), narrative |
-| `GET /ai/summary/{id}` | | objective, materials, conditions, outcome_summary, caveats, sources (precomputed at startup) |
+| `GET /ai/summary/{id}` | | objective, materials, conditions, outcome_summary, caveats, sources (written on first request, then cached) |
 | `GET /ai/health` | | ok + status |
 
 ```bash

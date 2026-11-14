@@ -133,9 +133,11 @@ def ai_summary(investigation_id: str):
 
 
 def warmup() -> dict:
-    """Load the BM25 index and precompute the 'what burned' summaries. No network calls for embeddings."""
+    """Load the BM25 index and the data tables at startup. No network calls: no LLM (summaries are written on first
+    request and cached), no embeddings. Keeps serverless cold starts fast and does not spend the LLM quota."""
     t0 = time.time()
     n = len(retrieval.chunks())
     retrieval.bm25_search("warm up", 1)
-    s = F.warm_summaries()
-    return {"chunks": n, "summaries": s, "seconds": round(time.time() - t0, 2)}
+    from .tables import engine, profiles
+    engine(); profiles()
+    return {"chunks": n, "seconds": round(time.time() - t0, 2)}
