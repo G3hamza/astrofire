@@ -11,9 +11,9 @@ jobs:
         run: pip install -r requirements.txt
       - name: Check project structure
         run: |
-          for p in data/raw/psi data/raw/ntrs pipelines backend schemas tests docs; do test -e "$p" || { echo "missing $p"; exit 1; }; done
+          for p in data/raw/psi pipelines backend ai schemas tests docs; do test -e "$p" || { echo "missing $p"; exit 1; }; done
       - name: Python syntax
-        run: python -m compileall -q pipelines backend tests
+        run: python -m compileall -q pipelines backend ai tests
       - name: Validate committed Bronze against manifest, then rebuild Silver/Gold/RAG and validate
         run: python -m pipelines.orchestration.run_all
       - uses: actions/setup-node@v4
