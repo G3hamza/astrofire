@@ -5,13 +5,13 @@
 | **Team Name** | Team Starry Night |
 | **Selected NASA Space Apps Challenge** | Flame in Freefall |
 | **Demo Link** | _add the demo video link (YouTube / Google Drive, set to "anyone with the link")_ |
-| **Proposal Link** | https://github.com/G3hamza/astrofire/blob/main/docs/PROPOSAL.md (PDF: https://github.com/G3hamza/astrofire/blob/main/docs/AstroFire_Proposal.pdf) |
+| **Proposal Link** | https://github.com/G3hamza/astrofire/blob/main/docs/PROPOSAL.md (PDF: https://github.com/G3hamza/astrofire/blob/main/docs/StarryNight_Proposal.pdf) |
 | **Project Link** | https://astrofire.vercel.app |
 | **Official Team Page** | _the team page URL on spaceappschallenge.org (copy it from the global site after logging in)_ |
 | **Subjects** | Space Exploration, Fire Safety, Combustion, Microgravity, Human Spaceflight, Moon, Mars, Habitats, Data Analysis, Artificial Intelligence, Open Data, Software |
 
 ## Short description (if asked)
-AstroFire is an evidence-first fire-safety analyst built only on NASA's Physical Sciences Informatics combustion data. It
+StarryNight is an evidence-first fire-safety analyst built only on NASA's Physical Sciences Informatics combustion data. It
 tells engineers what NASA tests show about whether a cabin material burns under spacecraft, ISS, Moon or Mars conditions,
 says plainly when no test covers the case, cites the exact NASA record for every answer, ranks the 24 PSI investigations for each habitat,
 and shows the central gap: no solid cabin material has been burned at Moon/Mars atmosphere or gravity.

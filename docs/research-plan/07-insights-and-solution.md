@@ -4,7 +4,7 @@
 
 **How Might We** help engineers trust a fire-safety answer for conditions nobody has fully tested?
 
-**Value proposition:** For mission and habitat engineers who need to choose safe cabin materials, AstroFire is an AI fire-safety evidence tool that answers *will it burn, what proves it, and how sure are we* in minutes. Unlike reading papers or asking a chatbot, every answer is built from NASA experiments and shows how close that evidence is to your mission.
+**Value proposition:** For mission and habitat engineers who need to choose safe cabin materials, StarryNight is an AI fire-safety evidence tool that answers *will it burn, what proves it, and how sure are we* in minutes. Unlike reading papers or asking a chatbot, every answer is built from NASA experiments and shows how close that evidence is to your mission.
 
 ## Solution ideas considered (scored impact × feasibility × judge appeal × originality, 1–5 each)
 | Idea | Score |

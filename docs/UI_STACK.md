@@ -1,4 +1,4 @@
-# AstroFire — UI stack for a hand-crafted (not "AI-generated") interface
+# StarryNight — UI stack for a hand-crafted (not "AI-generated") interface
 
 Goal: a mission-control instrument that looks designed by people who care about the data, not a template.
 Keep the current base (it already works, is tested and deploys), and add a few precise tools on top.

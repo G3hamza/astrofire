@@ -1,6 +1,6 @@
-# AstroFire — UI Context (brief for designing or rebuilding the interface)
+# StarryNight — UI Context (brief for designing or rebuilding the interface)
 
-Give this file (plus `docs/CONTEXT.md`) to a designer, a UI tool or an AI to redesign AstroFire without breaking it.
+Give this file (plus `docs/CONTEXT.md`) to a designer, a UI tool or an AI to redesign StarryNight without breaking it.
 It lists every screen, what data each screen gets from the API, the components, states, design tokens and the rules
 the UI must never break. Source of truth: `frontend-app/src/` (React 18 + Vite + TypeScript + Tailwind + Recharts).
 
@@ -20,7 +20,7 @@ Mood: mission control — dark, calm, precise, data-dense but readable. Every nu
    `Insufficient validated experimental evidence`.
 3. **Outcome colors always come with an icon and a text label** (color-blind safe, NFR6). Never color alone.
 4. **Every fact shows its source**: investigation id + `file#row` chip and/or a PSI link. Never hide citations.
-5. **Separate NASA findings from AstroFire interpretation** visually (different headings / tone), and always show limits.
+5. **Separate NASA findings from StarryNight interpretation** visually (different headings / tone), and always show limits.
 6. **Insufficient evidence is a first-class result**, not an error: it gets the strongest (danger) treatment and its
    blockers listed.
 7. Observed vs inferred vs not recorded vs assumed must be visible on every outcome / pressure (BasisBadge).
@@ -67,7 +67,7 @@ Colors are CSS variables (RGB channels) in `src/index.css`, mapped in `tailwind.
 
 | Route | Purpose | API calls | Key UI |
 |---|---|---|---|
-| `/` Home | Headline gap + entry points | `GET /api/stats`, `/api/analytics/overview`, `/api/missions` | Hero: "263 solid tests, all 13.6–22.2 % O₂, ~0 g"; KPI tiles; mission coverage; **Ask AstroFire box** (2 example chips → `/ask?q=`); WhyItMatters; ChallengeResources |
+| `/` Home | Headline gap + entry points | `GET /api/stats`, `/api/analytics/overview`, `/api/missions` | Hero: "263 solid tests, all 13.6–22.2 % O₂, ~0 g"; KPI tiles; mission coverage; **Ask StarryNight box** (2 example chips → `/ask?q=`); WhyItMatters; ChallengeResources |
 | `/scenario` | Material + conditions → verdict | `GET /api/missions`, `/api/material-families`; `POST /api/scenario/parse` (free text); `POST /api/scenario` | Mission presets, sliders (gravity 0–1 g, O₂ 0–100, pressure >0, flow), **"Describe it in your own words" (`<details open>`)**, VerdictBanner, blockers/flags callouts, evidence table → EvidenceDrawer, WhyUntestedCard, AtmosphereEvidenceCard, GravityBoundsCard, ComingNextCard |
 | `/compare` | 2–4 scenarios side by side | `POST /api/scenario` ×N | Columns per scenario with verdict + key numbers |
 | `/gaps` | Gravity × O₂ × pressure coverage | `GET /api/gaps` | Grid; cell = space tests / droplet / gas flame counts; mission pins (Moon/Mars) |
@@ -141,7 +141,7 @@ Errors: `422` invalid input (show field message), `429` rate limit (20/min per v
 
 ## 10. Copy voice
 Short, factual, sourced. "Evidence suggests…", "NASA never tested…", "Closest evidence:", "Not recorded by NASA".
-Never "safe", "guaranteed", "AI predicts". Label interpretation as "AstroFire interpretation".
+Never "safe", "guaranteed", "AI predicts". Label interpretation as "StarryNight interpretation".
 
 ## 11. Where to change things
 Tokens `frontend-app/src/index.css` + `tailwind.config.js` · routes `src/main.tsx` · nav `components/AppShell.tsx` ·

@@ -1,9 +1,9 @@
-# 00 · Status — AstroFire @ NASA Space Apps Cairo 2026
+# 00 · Status — StarryNight @ NASA Space Apps Cairo 2026
 
 **Updated:** Thu 12 Nov 2026, 18:30 Cairo
 **Event:** Fri 13 – Sat 14 Nov 2026, Sewedy University of Technology (SUT) — per the Cairo judging guidelines
 **Submission form:** arrives by email **Sat 14 Nov, 10:00** (Cairo)
-**Challenge:** Flame in Freefall · **Project:** AstroFire
+**Challenge:** Flame in Freefall · **Project:** StarryNight
 
 ## Reality check (time)
 The event starts tomorrow. The prompt's default split (Research 30 / Build 50 / Pitch 20) is replaced by:
@@ -27,7 +27,7 @@ Field research (interviews/survey) is cut to 3 fast chats with mentors at the ve
 | 9 | Pitch + submission | 10-pitch.md | ✅ draft, rehearse Sat |
 
 ## Decisions needed from you (with my recommendation)
-1. **Team name on the form.** The Cairo email greets you as **"Starry Night"** — that looks like your registered team name. → Use *Starry Night* as team name, *AstroFire* as project name. Confirm with the team.
+1. **Team name on the form.** The Cairo email greets you as **"Starry Night"** — that looks like your registered team name. → Use *Starry Night* as team name, *StarryNight* as project name. Confirm with the team.
 2. **Lock the Must-have scope** in 08 tonight. → Approve as written; no new features after Fri 14:00.
 3. **Live AI or rule-based demo?** → Build the real AI (RAG) but keep the rule-based dashboard as the fallback demo.
 4. **Hardware (ESP32 fan demo)?** → Skip it. One day is not enough; it adds risk, not points.

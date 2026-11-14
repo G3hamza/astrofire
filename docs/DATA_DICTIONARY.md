@@ -6,7 +6,7 @@ Auto-generated from the files by `pipelines/validation/dictionary.py`. Each file
 
 | column | filled | example | meaning |
 |---|---|---|---|
-| record_id | 129/129 | BASS-II-B1 | Unique record id within AstroFire (investigation acronym + NASA test/sample number). |
+| record_id | 129/129 | BASS-II-B1 | Unique record id within StarryNight (investigation acronym + NASA test/sample number). |
 | investigation_id | 129/129 | PSI-25 | NASA PSI accession (e.g. PSI-25). |
 | investigation | 129/129 | BASS-II | Investigation acronym. |
 | source_file | 129/129 | data/raw/psi/PSI-25_BASS-II/Experimental | Bronze file the row came from (path in repo). |
@@ -49,7 +49,7 @@ Auto-generated from the files by `pipelines/validation/dictionary.py`. Each file
 
 | column | filled | example | meaning |
 |---|---|---|---|
-| record_id | 121/121 | BASS-1 | Unique record id within AstroFire (investigation acronym + NASA test/sample number). |
+| record_id | 121/121 | BASS-1 | Unique record id within StarryNight (investigation acronym + NASA test/sample number). |
 | investigation_id | 121/121 | PSI-26 | NASA PSI accession (e.g. PSI-25). |
 | investigation | 121/121 | BASS | Investigation acronym. |
 | source_file | 121/121 | data/raw/psi/PSI-26_BASS/Experimental ta | Bronze file the row came from (path in repo). |
@@ -81,7 +81,7 @@ Auto-generated from the files by `pipelines/validation/dictionary.py`. Each file
 
 | column | filled | example | meaning |
 |---|---|---|---|
-| record_id | 2/2 | SAFFIRE-I-S1 | Unique record id within AstroFire (investigation acronym + NASA test/sample number). |
+| record_id | 2/2 | SAFFIRE-I-S1 | Unique record id within StarryNight (investigation acronym + NASA test/sample number). |
 | investigation_id | 2/2 | PSI-98 | NASA PSI accession (e.g. PSI-25). |
 | investigation | 2/2 | SAFFIRE-I | Investigation acronym. |
 | source_file | 2/2 | data/raw/psi/PSI-98_SAFFIRE-I/Experiment | Bronze file the row came from (path in repo). |
@@ -121,7 +121,7 @@ Auto-generated from the files by `pipelines/validation/dictionary.py`. Each file
 
 | column | filled | example | meaning |
 |---|---|---|---|
-| record_id | 9/9 | SAFFIRE-II-2-1 | Unique record id within AstroFire (investigation acronym + NASA test/sample number). |
+| record_id | 9/9 | SAFFIRE-II-2-1 | Unique record id within StarryNight (investigation acronym + NASA test/sample number). |
 | investigation_id | 9/9 | PSI-99 | NASA PSI accession (e.g. PSI-25). |
 | investigation | 9/9 | SAFFIRE-II | Investigation acronym. |
 | source_file | 9/9 | data/raw/psi/PSI-99_SAFFIRE-II/Experimen | Bronze file the row came from (path in repo). |
@@ -161,7 +161,7 @@ Auto-generated from the files by `pipelines/validation/dictionary.py`. Each file
 
 | column | filled | example | meaning |
 |---|---|---|---|
-| record_id | 2/2 | SAFFIRE-III-S1 | Unique record id within AstroFire (investigation acronym + NASA test/sample number). |
+| record_id | 2/2 | SAFFIRE-III-S1 | Unique record id within StarryNight (investigation acronym + NASA test/sample number). |
 | investigation_id | 2/2 | PSI-100 | NASA PSI accession (e.g. PSI-25). |
 | investigation | 2/2 | SAFFIRE-III | Investigation acronym. |
 | source_file | 2/2 | data/raw/psi/PSI-100_SAFFIRE-III/Experim | Bronze file the row came from (path in repo). |
@@ -201,7 +201,7 @@ Auto-generated from the files by `pipelines/validation/dictionary.py`. Each file
 
 | column | filled | example | meaning |
 |---|---|---|---|
-| record_id | 8/8 | SAME-1 | Unique record id within AstroFire (investigation acronym + NASA test/sample number). |
+| record_id | 8/8 | SAME-1 | Unique record id within StarryNight (investigation acronym + NASA test/sample number). |
 | investigation_id | 8/8 | PSI-102 | NASA PSI accession (e.g. PSI-25). |
 | investigation | 8/8 | SAME | Investigation acronym. |
 | source_file | 8/8 | data/raw/psi/PSI-102_SAME/Experimental t | Bronze file the row came from (path in repo). |
@@ -227,7 +227,7 @@ Auto-generated from the files by `pipelines/validation/dictionary.py`. Each file
 
 | column | filled | example | meaning |
 |---|---|---|---|
-| record_id | 109/109 | SAME-R-kapton-51 | Unique record id within AstroFire (investigation acronym + NASA test/sample number). |
+| record_id | 109/109 | SAME-R-kapton-51 | Unique record id within StarryNight (investigation acronym + NASA test/sample number). |
 | investigation_id | 109/109 | PSI-101 | NASA PSI accession (e.g. PSI-25). |
 | investigation | 109/109 | SAME-R | Investigation acronym. |
 | source_file | 109/109 | data/raw/psi/PSI-101_SAME-R/Experimental | Bronze file the row came from (path in repo). |
@@ -261,7 +261,7 @@ Auto-generated from the files by `pipelines/validation/dictionary.py`. Each file
 
 | column | filled | example | meaning |
 |---|---|---|---|
-| record_id | 274/274 | FLEX-1 | Unique record id within AstroFire (investigation acronym + NASA test/sample number). |
+| record_id | 274/274 | FLEX-1 | Unique record id within StarryNight (investigation acronym + NASA test/sample number). |
 | investigation_id | 274/274 | PSI-69 | NASA PSI accession (e.g. PSI-25). |
 | investigation | 274/274 | FLEX | Investigation acronym. |
 | source_file | 274/274 | data/raw/psi/PSI-69_FLEX/Experimental ta | Bronze file the row came from (path in repo). |
@@ -299,7 +299,7 @@ Auto-generated from the files by `pipelines/validation/dictionary.py`. Each file
 
 | column | filled | example | meaning |
 |---|---|---|---|
-| record_id | 469/469 | SPICE-r0001 | Unique record id within AstroFire (investigation acronym + NASA test/sample number). |
+| record_id | 469/469 | SPICE-r0001 | Unique record id within StarryNight (investigation acronym + NASA test/sample number). |
 | investigation_id | 469/469 | PSI-107 | NASA PSI accession (e.g. PSI-25). |
 | investigation | 469/469 | SPICE | Investigation acronym. |
 | source_file | 469/469 | data/raw/psi/PSI-107_SPICE/Experimental  | Bronze file the row came from (path in repo). |
@@ -348,7 +348,7 @@ Auto-generated from the files by `pipelines/validation/dictionary.py`. Each file
 | column | filled | example | meaning |
 |---|---|---|---|
 | sample_id | 1862/1862 | BASS-II-B1-S |  |
-| record_id | 1862/1862 | BASS-II-B1 | Unique record id within AstroFire (investigation acronym + NASA test/sample number). |
+| record_id | 1862/1862 | BASS-II-B1 | Unique record id within StarryNight (investigation acronym + NASA test/sample number). |
 | investigation_id | 1862/1862 | PSI-25 | NASA PSI accession (e.g. PSI-25). |
 | material_id | 1862/1862 | MAT-pmma | FK -> silver/materials/materials.csv. |
 | material_original_name | 1862/1862 | 100 micron PMMA film   2 cm wide | Material text exactly as NASA wrote it. |
@@ -378,7 +378,7 @@ Auto-generated from the files by `pipelines/validation/dictionary.py`. Each file
 | column | filled | example | meaning |
 |---|---|---|---|
 | measurement_id | 6589/6589 | BASS-II-B1/o2_initial_pct |  |
-| record_id | 6589/6589 | BASS-II-B1 | Unique record id within AstroFire (investigation acronym + NASA test/sample number). |
+| record_id | 6589/6589 | BASS-II-B1 | Unique record id within StarryNight (investigation acronym + NASA test/sample number). |
 | investigation_id | 6589/6589 | PSI-25 | NASA PSI accession (e.g. PSI-25). |
 | quantity | 6589/6589 | o2_initial_pct | Measured quantity name. |
 | value | 6589/6589 | 22.2 |  |
@@ -455,7 +455,7 @@ Auto-generated from the files by `pipelines/validation/dictionary.py`. Each file
 
 | column | filled | example | meaning |
 |---|---|---|---|
-| record_id | 435/435 | SPICE-r0001 | Unique record id within AstroFire (investigation acronym + NASA test/sample number). |
+| record_id | 435/435 | SPICE-r0001 | Unique record id within StarryNight (investigation acronym + NASA test/sample number). |
 | fuel | 435/435 | Ethylene |  |
 | material_id | 435/435 | MAT-ethylene | FK -> silver/materials/materials.csv. |
 | nozzle_diameter_mm | 435/435 | 1.6002 |  |
@@ -470,7 +470,7 @@ Auto-generated from the files by `pipelines/validation/dictionary.py`. Each file
 
 | column | filled | example | meaning |
 |---|---|---|---|
-| record_id | 117/117 | SAME-1 | Unique record id within AstroFire (investigation acronym + NASA test/sample number). |
+| record_id | 117/117 | SAME-1 | Unique record id within StarryNight (investigation acronym + NASA test/sample number). |
 | investigation | 117/117 | SAME | Investigation acronym. |
 | material_id | 117/117 | MAT-teflon-ptfe | FK -> silver/materials/materials.csv. |
 | material | 117/117 | Teflon |  |
@@ -607,7 +607,7 @@ Auto-generated from the files by `pipelines/validation/dictionary.py`. Each file
 | original_record | 71/71 | "{\"PI\": \"Bhattacharjee\", \"Test #\": |  |
 | source_file | 71/71 | data/raw/psi/PSI-25_BASS-II/Experimental | Bronze file the row came from (path in repo). |
 | investigation | 71/71 | BASS-II | Investigation acronym. |
-| record_id | 69/71 | BASS-II-B2 | Unique record id within AstroFire (investigation acronym + NASA test/sample number). |
+| record_id | 69/71 | BASS-II-B2 | Unique record id within StarryNight (investigation acronym + NASA test/sample number). |
 | failure_reason | 71/71 | o2_final_pct=1.6 outside plausible range |  |
 | validation_rule | 71/71 | range:o2_pct |  |
 | severity | 71/71 | warn |  |

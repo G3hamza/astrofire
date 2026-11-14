@@ -1,4 +1,4 @@
-# AstroFire — how the prototype works (short version for the team)
+# StarryNight — how the prototype works (short version for the team)
 
 > **Full, detailed guide (domain knowledge, data, engine, backend, UI, AI, testing, deployment):** [`docs/guide/`](guide/README.md)
 

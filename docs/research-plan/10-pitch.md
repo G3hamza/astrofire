@@ -38,10 +38,10 @@
 | Which AI tools did you use? | List them (see disclosure below). |
 
 ## Submission checklist (Cairo form, Sat 14 Nov)
-- [ ] **Team name:** Starry Night (confirm) — project: AstroFire
+- [ ] **Team name:** Starry Night (confirm) — project: StarryNight
 - [ ] **Challenge:** Flame in Freefall
 - [ ] **Demo link:** 30 s video, public, English subtitles, AI footage labelled
-- [ ] **Proposal link:** FlameLedger/AstroFire proposal doc (rename to AstroFire), sharing set to "anyone with link"
+- [ ] **Proposal link:** FlameLedger/StarryNight proposal doc (rename to StarryNight), sharing set to "anyone with link"
 - [ ] **Project link:** deployed dashboard URL
 - [ ] **Official team page:** global Space Apps team page URL
 - [ ] **Subjects:** Artificial Intelligence & Machine Learning, Data Analysis, Data Visualization, Space Exploration, Fire Safety, Human Spaceflight, Software

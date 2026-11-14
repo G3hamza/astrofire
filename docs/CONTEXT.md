@@ -1,15 +1,15 @@
-# AstroFire — full project context
+# StarryNight — full project context
 
-One file that tells a new teammate, a reviewer or an AI assistant everything about AstroFire: what it is, why each
+One file that tells a new teammate, a reviewer or an AI assistant everything about StarryNight: what it is, why each
 decision was made, how every part works, where everything lives, and what is still open.
 Companion documents: **docs/HANDBOOK.md** (how to use, read and apply it, in plain words) and **docs/UI_CONTEXT.md**
 (everything needed to redesign the UI). Last updated: 14 Nov 2026.
 
 ---
 
-## 1. What AstroFire is
+## 1. What StarryNight is
 
-**AstroFire** is a web app for the NASA Space Apps Cairo 2026 challenge **"Flame in Freefall"** (Team Starry Night).
+**StarryNight** is a web app for the NASA Space Apps Cairo 2026 challenge **"Flame in Freefall"** (Team Starry Night).
 It turns NASA's **Physical Sciences Informatics (PSI)** combustion data into fire-safety answers for spacecraft, the
 ISS, Moon and Mars bases and pressurized rovers.
 
@@ -25,7 +25,7 @@ NASA ran **263 solid-material fire tests in space**, all at **13.6–22.2 % oxyg
 "≥ 30 % O₂ at ≤ 10.2 psi / 70.3 kPa"). **No solid cabin material in PSI has been burned at that atmosphere or at
 Moon (0.166 g) / Mars (0.38 g) gravity.** The challenge text itself confirms PSI has no partial-gravity combustion data.
 
-### What the challenge asks, and where AstroFire answers it
+### What the challenge asks, and where StarryNight answers it
 | Challenge ask | Where |
 |---|---|
 | An "SI" (AI) dashboard that **summarizes, ranks and interprets** | Ask page + Ask AI panel (`/api/ask`), Rank page, Investigations page |

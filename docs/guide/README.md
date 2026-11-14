@@ -1,6 +1,6 @@
-# The AstroFire Guide — start here
+# The StarryNight Guide — start here
 
-This guide explains **everything** in the AstroFire prototype: the science behind it, the NASA data, how the data is cleaned,
+This guide explains **everything** in the StarryNight prototype: the science behind it, the NASA data, how the data is cleaned,
 how answers are calculated, the backend, the website, the "AI" part, testing and deployment.
 
 Every chapter is written in two layers:
@@ -14,7 +14,7 @@ People are planning homes on the Moon and Mars. Inside, the air will be differen
 and lower pressure**, and gravity will be weaker. Fire behaves differently in all of those conditions.
 
 NASA has done hundreds of real fire experiments in space and published the results in an online library called **PSI**.
-AstroFire reads all of that data and lets you ask: *"If this material catches fire in this habitat, will it keep burning?"*
+StarryNight reads all of that data and lets you ask: *"If this material catches fire in this habitat, will it keep burning?"*
 
 It answers with what NASA's tests actually show, links to the exact test that proves it, and, very importantly, **says honestly when
 NASA never tested those conditions**. That honesty is the point: it shows NASA where to test next.

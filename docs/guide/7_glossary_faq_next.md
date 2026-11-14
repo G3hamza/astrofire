@@ -37,7 +37,7 @@
 ## 7.2 FAQ
 
 **Why does Mars always say "Insufficient validated experimental evidence"?**
-Because no solid material in NASA's PSI data was ever burned at Mars gravity, at 34% O₂, or at 56.5 kPa. AstroFire refuses to guess
+Because no solid material in NASA's PSI data was ever burned at Mars gravity, at 34% O₂, or at 56.5 kPa. StarryNight refuses to guess
 outside tested conditions. That's the finding: it shows where NASA needs to test.
 
 **Why not just download the 255 GB?**

@@ -6,7 +6,7 @@ no probabilities**. Every answer can be traced to specific NASA tests.
 ## 3.1 The idea
 
 **🧒 Simple version.** You describe a situation: a material, the oxygen, the pressure, the gravity and how fast the air moves.
-AstroFire looks through all 263 real space fire tests and finds the ones **most similar** to your situation, like finding the
+StarryNight looks through all 263 real space fire tests and finds the ones **most similar** to your situation, like finding the
 classmates who are most like you. Then it looks at what happened in those tests: did they burn or go out? If the closest tests are
 still very different from your situation (for example, nobody ever tested at Mars gravity), it refuses to guess and tells you why.
 
@@ -40,7 +40,7 @@ The table shows **"differs most in: flow"** because flow was the largest of the 
 - This share is **never shown as a percentage** (SRS rule FR2.7). The UI shows a plain count instead: *"Closest tests: 2 of 5 burned"*,
   and the API sends a note: "NOT a calibrated probability".
 
-## 3.4 Step 3: blockers (when AstroFire refuses to guess)
+## 3.4 Step 3: blockers (when StarryNight refuses to guess)
 
 A **blocker** is a reason the data can't answer. Any blocker → verdict **"Insufficient validated experimental evidence"**,
 status *exploratory*, confidence *Low*.

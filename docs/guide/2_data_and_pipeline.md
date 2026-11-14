@@ -17,7 +17,7 @@ Informatics). The challenge told us to use its **combustion** section. It has 24
 
 ## 2.2 All 24 investigations
 
-| PSI ID | Name | What NASA did | Rows used | How AstroFire uses it |
+| PSI ID | Name | What NASA did | Rows used | How StarryNight uses it |
 |---|---|---|---|---|
 | PSI-25 | **BASS-II** | Burned solid samples (PMMA, Nomex, cotton-fiberglass…) in a small wind tunnel on the ISS, lowering O₂ below 21% | 129 | **Core solid evidence** |
 | PSI-26 | **BASS** | Earlier solid burns in the same glovebox | 121 | Solid evidence (many outcomes not recorded) |
@@ -94,7 +94,7 @@ The investigation registry is `pipelines/common.py → INVESTIGATIONS` (folder, 
 - Fuels in droplet/gas experiments are classified as liquid or gaseous fuel, never as cabin materials.
 
 ### Pressure of space solid tests
-The PSI tables for ISS/Cygnus solid tests **don't record pressure**. AstroFire assumes the cabin's **101.3 kPa** and labels it
+The PSI tables for ISS/Cygnus solid tests **don't record pressure**. StarryNight assumes the cabin's **101.3 kPa** and labels it
 **assumed** everywhere. FLEX, CFI and ACME pressures are measured (ACME CFI-G is "approx p").
 
 ## 2.4 Data problems we found in NASA's files (and what we did)

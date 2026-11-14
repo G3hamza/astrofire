@@ -1,4 +1,4 @@
-# AstroFire AI layer (`ai/`)
+# StarryNight AI layer (`ai/`)
 
 An evidence-grounded analyst over NASA PSI combustion data. **Verdicts and numbers come from deterministic code**
 (`backend/engine.py`, `backend/ranking.py`, the Gold tables). **The LLM only explains** evidence it is given, and every

@@ -2,7 +2,7 @@
 
 ## 6.1 AI: what exists today
 
-**🧒 Simple version.** You can type a sentence like *"Nomex on Mars at 34% oxygen and 8.2 psi"* and AstroFire fills in the form for
+**🧒 Simple version.** You can type a sentence like *"Nomex on Mars at 34% oxygen and 8.2 psi"* and StarryNight fills in the form for
 you. Today this is done by **simple word rules**, not a real AI model. Your teammate's chatbot will replace it later, using the same
 "plug" (API).
 

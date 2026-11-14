@@ -1,10 +1,10 @@
-# Data access: what AstroFire needs, what the big NASA downloads are, and how to work on slow Wi-Fi
+# Data access: what StarryNight needs, what the big NASA downloads are, and how to work on slow Wi-Fi
 
 > **Update (13 Nov):** the app now uses only the PSI combustion repository (all 24 investigations). The paper-transcribed tests
 > described below (Saffire IV–VI, LUCI) were removed from the app because NTRS papers are not in the challenge resources.
 
 ## TL;DR
-- **You don't need to download anything to run AstroFire.** Everything the app uses is already in this repo
+- **You don't need to download anything to run StarryNight.** Everything the app uses is already in this repo
   (`data/raw` is about 44 MB: PSI experimental tables + metadata + 307 NTRS paper texts).
 - The **255 GB / 152 GB / 33 GB** totals on NASA PSI pages are mostly **videos and ISS photos of the same tests**
   that are already rows in the experimental tables. Downloading them adds **no new test conditions**.

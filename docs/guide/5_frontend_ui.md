@@ -75,7 +75,7 @@ frontend-app/
 ## 5.5 How data flows in the browser
 
 1. A page calls `useQuery("key", client.something)` (`lib/api.ts`).
-2. `client.ts` calls `fetch("/api/...")`; errors become readable messages ("The AstroFire API is not reachable…").
+2. `client.ts` calls `fetch("/api/...")`; errors become readable messages ("The StarryNight API is not reachable…").
 3. Results are **cached** by key, so going back to a page is instant.
 4. TypeScript types (`lib/types.ts`) describe each response. They were written from real responses (`frontend-app/samples/`).
 5. **Scenario state lives in the URL** (`?material=…&mission=mars&flow=5`), so any scenario can be shared by copying the link.

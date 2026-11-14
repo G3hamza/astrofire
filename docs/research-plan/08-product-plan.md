@@ -1,7 +1,7 @@
 # 08 · Product plan
 
 ## 1. Lean Canvas
-| Block | AstroFire |
+| Block | StarryNight |
 |---|---|
 | Problem | Fire-safety answers for space are scattered; Earth tests miss microgravity risk; Moon/Mars conditions almost untested |
 | Segments | Mission/habitat engineers (primary) · safety reviewers · NASA researchers · educators (later) |

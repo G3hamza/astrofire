@@ -1,15 +1,16 @@
-# AstroFire — Project Proposal
+# StarryNight — Project Proposal
 
 **NASA Space Apps Cairo 2026 · Challenge: Flame in Freefall · Team Starry Night**
 Live project: https://astrofire.vercel.app · Code: https://github.com/G3hamza/astrofire
+_StarryNight was developed under the working name AstroFire, which is why the web and repository addresses still use "astrofire"._
 
 ---
 
 ## 1. Summary
-AstroFire is an evidence-first fire-safety analyst for spacecraft, the ISS, Moon and Mars bases and pressurized rovers.
+StarryNight is an evidence-first fire-safety analyst for spacecraft, the ISS, Moon and Mars bases and pressurized rovers.
 It turns NASA's Physical Sciences Informatics (PSI) combustion experiments into clear answers to three questions:
 **Will it burn? What proves it? How sure are we?** Every answer links to the exact NASA test record behind it, and when
-NASA has never tested a case, AstroFire says so plainly: *"Insufficient validated experimental evidence."*
+NASA has never tested a case, StarryNight says so plainly: *"Insufficient validated experimental evidence."*
 
 ## 2. The problem
 Fire behaves differently in space. Without gravity, hot gas does not rise, so flames depend on air flow and slow
@@ -21,7 +22,7 @@ At the same time, Artemis-era habitats are planned at an **"exploration atmosphe
 materials ignite and burn more easily, and a fire in a sealed habitat is among the most serious crew hazards (Apollo 1,
 the Mir fire, Apollo 13).
 
-AstroFire's analysis of the PSI data found the central gap: **NASA's 263 solid-material space fire tests all ran at
+StarryNight's analysis of the PSI data found the central gap: **NASA's 263 solid-material space fire tests all ran at
 13.6–22.2% oxygen, about 0 g and normal cabin pressure. No solid cabin material in PSI has been burned at Moon/Mars
 atmosphere or at Moon (0.166 g) or Mars (0.38 g) gravity.** Designers today cannot easily see what is known, what is
 not, and which experiments matter most for their habitat.
@@ -95,7 +96,7 @@ The full system is built, deployed and free to run (Vercel free tier, free Groq 
 
 ## 10. Use of AI (disclosure)
 - **In the product**: an open-weight language model (openai/gpt-oss-120b via Groq, fallbacks qwen3.8-27b and gpt-oss-20b)
-  writes answer text only from NASA evidence selected by AstroFire's code; it cannot add facts, numbers or verdicts, and
+  writes answer text only from NASA evidence selected by StarryNight's code; it cannot add facts, numbers or verdicts, and
   every answer states whether it was AI-written or a template.
 - **In development**: the team used AI coding assistants (Anthropic Claude) to help write and review code, tests and
   documentation. The team made the design decisions, set the data rules and reviewed the results.

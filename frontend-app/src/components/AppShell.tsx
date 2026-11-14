@@ -100,7 +100,7 @@ const FOOTER: { title: string; links: { label: string; to?: string; href?: strin
   { title: "Explore", links: [{ label: "Scenario check", to: "/scenario" }, { label: "Compare scenarios", to: "/compare" }, { label: "Gaps map", to: "/gaps" }, { label: "Evidence charts", to: "/charts" }] },
   { title: "Research", links: [{ label: "Habitat ranking", to: "/rank" }, { label: "Investigations", to: "/investigations" }, { label: "NASA experiments", to: "/experiments" }, { label: "Materials", to: "/materials" }] },
   { title: "Use", links: [{ label: "Ask the analyst", to: "/ask" }, { label: "Data and applications", to: "/applications" }, { label: "Data quality", to: "/data" }, { label: "API reference", href: "/docs" }] },
-  { title: "Project", links: [{ label: "About and AI use", to: "/about" }, { label: "Source code", href: "https://github.com/G3hamza/astrofire" }, { label: "Handbook (PDF)", href: "https://github.com/G3hamza/astrofire/blob/main/docs/AstroFire_Handbook.pdf" }, { label: "Lite version", href: "/lite/" }] },
+  { title: "Project", links: [{ label: "About and AI use", to: "/about" }, { label: "Source code", href: "https://github.com/G3hamza/astrofire" }, { label: "Handbook (PDF)", href: "https://github.com/G3hamza/astrofire/blob/main/docs/StarryNight_Handbook.pdf" }, { label: "Lite version", href: "/lite/" }] },
 ];
 
 export function AppShell({ children }: { children: ReactNode }) {

@@ -1,6 +1,6 @@
-# The AstroFire Handbook
+# The StarryNight Handbook
 
-**For young engineers (and anyone new): how to use AstroFire, how to read what it tells you, how to apply it, and how
+**For young engineers (and anyone new): how to use StarryNight, how to read what it tells you, how to apply it, and how
 it works inside.** Plain words first, then the technical details. No step is skipped.
 
 Open it here: **https://astrofire.vercel.app**
@@ -29,9 +29,9 @@ the results in a database called **PSI** (Physical Sciences Informatics). There 
 burning solids (BASS, BASS-II, Saffire), smoke from overheated materials (SAME, SAME-R), burning fuel droplets (FLEX,
 CFI), gas flames (ACME), and more.
 
-### 1.4 What AstroFire does
-AstroFire reads all that NASA data and answers your questions, **always showing the NASA test that proves the answer**.
-If NASA never tested something, AstroFire says so: **"Insufficient validated experimental evidence."**
+### 1.4 What StarryNight does
+StarryNight reads all that NASA data and answers your questions, **always showing the NASA test that proves the answer**.
+If NASA never tested something, StarryNight says so: **"Insufficient validated experimental evidence."**
 
 ### 1.5 The one fact to remember
 NASA burned **263 solid materials in space**, all at **13.6–22.2 % oxygen**, at **~0 g** (weightless), at normal
@@ -39,13 +39,13 @@ cabin pressure. **Nobody has burned a cabin material at Moon/Mars air or Moon/Ma
 
 ---
 
-## Part 2 — How to use AstroFire (screen by screen)
+## Part 2 — How to use StarryNight (screen by screen)
 
 The menu is at the top. On every page there is an **Ask AI** button at the bottom right.
 
 | Screen | What you do there | Try this |
 |---|---|---|
-| **Home** `/` | See the headline gap, the closest real space flames to habitat air, and why it matters. Type a question in the **Ask AstroFire** box. | Click "Would Nomex burn at 30% oxygen and 71 kPa on the Moon?" |
+| **Home** `/` | See the headline gap, the closest real space flames to habitat air, and why it matters. Type a question in the **Ask StarryNight** box. | Click "Would Nomex burn at 30% oxygen and 71 kPa on the Moon?" |
 | **Scenario** `/scenario` | Pick a material and a place (ISS, Exploration, Moon, Mars) or move the sliders (oxygen, pressure, gravity, air flow). Or **type it in your own words**. Get a verdict and the proof. | Material Nomex, mission Mars |
 | **Compare** `/compare` | Put 2–4 scenarios side by side. | ISS vs Moon vs Mars for Nomex |
 | **Gaps** `/gaps` | A grid of gravity × oxygen × pressure: which boxes NASA tested, which have only flames of other fuels, which were never tested. | Find the Moon/Mars pins |
@@ -70,7 +70,7 @@ The menu is at the top. On every page there is an **Ask AI** button at the botto
 
 ---
 
-## Part 3 — How to read what AstroFire tells you
+## Part 3 — How to read what StarryNight tells you
 
 ### 3.1 The four verdicts (Scenario and AI)
 | Verdict | Meaning |
@@ -78,7 +78,7 @@ The menu is at the top. On every page there is an **Ask AI** button at the botto
 | **Evidence suggests it burns** | The closest NASA tests near your conditions mostly burned |
 | **Borderline in tested evidence** | Nearby tests are mixed |
 | **Evidence suggests it goes out** | Nearby tests mostly went out |
-| **Insufficient validated experimental evidence** | NASA never tested close enough to your conditions. AstroFire will not guess |
+| **Insufficient validated experimental evidence** | NASA never tested close enough to your conditions. StarryNight will not guess |
 
 The verdict comes from fixed rules (the "rule engine"), **never from the AI**. The AI only explains it.
 
@@ -97,14 +97,14 @@ The verdict comes from fixed rules (the "rule engine"), **never from the AI**. T
 Of 263 solid tests: 39 observed, 101 inferred, 123 not recorded.
 
 ### 3.5 Assumed pressure
-NASA's tables for the ISS/Cygnus solid tests do not record pressure. AstroFire uses the normal cabin pressure
+NASA's tables for the ISS/Cygnus solid tests do not record pressure. StarryNight uses the normal cabin pressure
 (~101.3 kPa) and marks it **assumed**. FLEX droplet tests have **measured** pressure.
 
 ### 3.6 Evidence and citations
 - A table row shows the NASA test id, material, oxygen, pressure, air flow, outcome and a **file#row** chip — the exact
   line in NASA's file — plus a link to the PSI page.
 - In AI answers, **[E1], [E2]…** are clickable: they open the evidence (record, file, row, link).
-- **NASA findings** = facts from NASA. **AstroFire interpretation** = our reading, clearly labelled. **Limits and gaps** =
+- **NASA findings** = facts from NASA. **StarryNight interpretation** = our reading, clearly labelled. **Limits and gaps** =
   what is missing or uncertain.
 
 ### 3.7 Colors
@@ -112,11 +112,11 @@ Burned = orange · went out = blue · blowoff = magenta · not recorded = grey �
 flags, borderline, inferred = amber · observed = green. Colors always come with an icon and text.
 
 ### 3.8 Moon/Mars gravity bounds
-NASA has no tests at Moon or Mars gravity. AstroFire shows the two ends it does have:
+NASA has no tests at Moon or Mars gravity. StarryNight shows the two ends it does have:
 - **0 g**: what happened in space (microgravity) for that material.
 - **1 g**: NASA's own normal-gravity comparison in Saffire-II (burn length on Earth vs in space).
 If both ends were measured at *your* oxygen and pressure, they **bracket** your case (the value in between is still
-untested). If not (e.g. Moon air), AstroFire says the bounds **do not cover** your scenario. **E-FIELD Flames** only
+untested). If not (e.g. Moon air), StarryNight says the bounds **do not cover** your scenario. **E-FIELD Flames** only
 *mimicked* partial gravity with an electric field (gas flames). **LUCI** and **FM2** are future partial-gravity data.
 
 ### 3.9 Ranking scores
@@ -258,7 +258,7 @@ python -m pipelines.orchestration.run_all      # rebuild data (≈30 s)
 4. Ask: "What did BASS-II not record?" Which factors are missing?
 5. Open the bounds card for SIBAL on the Moon at 21.5 % O₂ and 101 kPa. Do the bounds cover the case? Why?
 6. On Apply, download `solid_fire_tests.csv`. How many rows have `outcome_basis = observed`?
-7. Ask: "What is the probability Nomex burns on Mars?" What does AstroFire do, and why?
+7. Ask: "What is the probability Nomex burns on Mars?" What does StarryNight do, and why?
 
 (Answers: 1 — see the screen; 2 — gravity, oxygen, pressure; 3 — their oxygen/pressure ranges are closest to 34 % /
 56.5 kPa while all solid tests are at cabin air; 4 — see the profile's "not recorded"; 5 — yes, both ends exist at cabin

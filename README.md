@@ -1,30 +1,32 @@
-# AstroFire — Space Fire Evidence Engine
+# StarryNight — Space Fire Evidence Engine
 **NASA Space Apps Cairo 2026 · Challenge: Flame in Freefall · Team Starry Night**
 
 [![Live](https://img.shields.io/badge/live-astrofire.vercel.app-38D6F5)](https://astrofire.vercel.app)
 [![Data](https://img.shields.io/badge/data-NASA%20PSI%20(CC0)-EA6624)](https://psi.nasa.gov)
 [![CI](https://github.com/G3hamza/astrofire/actions/workflows/ci.yml/badge.svg)](https://github.com/G3hamza/astrofire/actions)
 
-AstroFire turns NASA's space combustion experiments into fire-safety answers for spacecraft, the ISS, Moon and Mars bases
+StarryNight turns NASA's space combustion experiments into fire-safety answers for spacecraft, the ISS, Moon and Mars bases
 and rovers: **Will it burn? What proves it? How sure are we?** Every answer links to the NASA test behind it, and when
 NASA never tested a case it says so: *"Insufficient validated experimental evidence."*
+
+_Formerly developed under the working name AstroFire, which is why the web and repository addresses still say "astrofire"._
 
 | | |
 |---|---|
 | **Project (live)** | https://astrofire.vercel.app · backup https://astrofire.vercel.app/lite/ · API https://astrofire.vercel.app/docs |
-| **Proposal** | [`docs/PROPOSAL.md`](docs/PROPOSAL.md) ([PDF](docs/AstroFire_Proposal.pdf)) |
+| **Proposal** | [`docs/PROPOSAL.md`](docs/PROPOSAL.md) ([PDF](docs/StarryNight_Proposal.pdf)) |
 | **About / judging criteria** | https://astrofire.vercel.app/about |
 | **Demo script** | [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md) |
-| **Handbook (beginners)** | [`docs/HANDBOOK.md`](docs/HANDBOOK.md) ([PDF](docs/AstroFire_Handbook.pdf)) |
+| **Handbook (beginners)** | [`docs/HANDBOOK.md`](docs/HANDBOOK.md) ([PDF](docs/StarryNight_Handbook.pdf)) |
 | **Full technical context** | [`docs/CONTEXT.md`](docs/CONTEXT.md) |
 
 ### The finding
 NASA's **263 solid-material space fire tests** all ran at **13.6–22.2 % oxygen, ~0 g** and normal cabin pressure.
 Moon/Mars habitats are planned at **~34 % oxygen and 56.5 kPa**. **No solid cabin material in NASA PSI has been burned
-at that atmosphere or at Moon/Mars gravity.** AstroFire shows what is known, what is not, and which experiments matter most.
+at that atmosphere or at Moon/Mars gravity.** StarryNight shows what is known, what is not, and which experiments matter most.
 
 ### How it meets the judging criteria
-| Criterion | In AstroFire |
+| Criterion | In StarryNight |
 |---|---|
 | **Impact** | Fire safety for Artemis-era habitats with high-oxygen atmospheres; helps engineers, researchers, equipment designers, students; Earth spinoffs |
 | **Creativity** | Refuses to guess at the edge of the evidence; gravity bounds from 0 g and 1 g NASA data; an AI that can only rewrite cited NASA evidence; habitat relevance ranking |

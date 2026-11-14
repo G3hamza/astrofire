@@ -1,6 +1,6 @@
 # 1. Domain knowledge: fire in space
 
-> Background science that explains *why* AstroFire exists and what its numbers mean. General combustion knowledge is marked
+> Background science that explains *why* StarryNight exists and what its numbers mean. General combustion knowledge is marked
 > as background; numbers that come from our data are marked with their source.
 
 ## 1.1 What a fire needs
@@ -24,7 +24,7 @@ itself of oxygen and go out, **or** it can keep burning slowly where you don't e
   that natural flow disappears, so the only airflow is what the spacecraft's **ventilation** provides (a few cm/s).
 - That's why NASA's space experiments control **air flow speed** (cm/s): it replaces buoyancy as the main driver.
 - **Low flow:** not enough oxygen arrives → the flame can go out (*quenching*). **High flow:** the flame can be **blown off**
-  (*blowoff*). In between, a material can burn steadily. Space flammability is a map of oxygen vs flow, which AstroFire draws
+  (*blowoff*). In between, a material can burn steadily. Space flammability is a map of oxygen vs flow, which StarryNight draws
   on the **Charts** page.
 - **Flow direction matters.** *Opposed flow*: air comes against the direction the flame spreads. *Concurrent flow*: air goes
   the same way as the flame, which usually makes flames spread faster.
@@ -39,7 +39,7 @@ itself of oxygen and go out, **or** it can keep burning slowly where you don't e
   higher oxygen.
 - **Total pressure (kPa)** also matters: lower pressure means fewer oxygen molecules per volume, which can make some flames weaker,
   but raised oxygen fraction can more than compensate.
-- **The exploration atmosphere** in AstroFire is **34% O₂ at 56.5 kPa (8.2 psia)** (`backend/engine.py → MISSIONS`).
+- **The exploration atmosphere** in StarryNight is **34% O₂ at 56.5 kPa (8.2 psia)** (`backend/engine.py → MISSIONS`).
   *Background:* NASA studied this atmosphere so astronauts can go on spacewalks with less pre-breathing time; the trade-off is a
   higher fire risk, which is exactly what this challenge is about.
 - **ISS cabin air**: about **21% O₂ at 101.3 kPa** (sea-level pressure).
@@ -50,10 +50,10 @@ itself of oxygen and go out, **or** it can keep burning slowly where you don't e
 only a little. Scientists suspect this "in-between" gravity can make some materials *more* flammable than on Earth or in orbit.
 
 **🛠️ Engineer version.**
-- AstroFire uses **0.166 g (Moon)** and **0.38 g (Mars)**.
+- StarryNight uses **0.166 g (Moon)** and **0.38 g (Mars)**.
 - Partial gravity gives weak buoyant flow: enough to feed a flame, not enough to cool it as strongly as on Earth.
 - **Data reality:** every combustion test in NASA's PSI repository ran at **~0 g** (ISS or the uncrewed Cygnus spacecraft).
-  Nothing in orbit runs at partial gravity. So for Moon and Mars, AstroFire correctly says *there is no test at this gravity*.
+  Nothing in orbit runs at partial gravity. So for Moon and Mars, StarryNight correctly says *there is no test at this gravity*.
 
 ## 1.5 How NASA approves materials today
 
@@ -68,7 +68,7 @@ upright, to see if the flame climbs. If it doesn't climb, the material passes.
 
 ## 1.6 The words you'll see for outcomes
 
-| Word in AstroFire | Meaning |
+| Word in StarryNight | Meaning |
 |---|---|
 | **Burned** | The flame kept going (or NASA's notes imply it did) |
 | **Went out / Extinction** | The flame died by itself |

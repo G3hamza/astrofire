@@ -3,7 +3,7 @@
 ## What the Cairo judges score (official guidelines)
 Five criteria. No weights are published → **[assumption] equal weight (20% each).**
 
-| Criterion | What judges look for | How AstroFire scores |
+| Criterion | What judges look for | How StarryNight scores |
 |---|---|---|
 | **Impact** | Real problem, clear beneficiaries, positive impact | Crew fire safety for Moon/Mars habitats; engineers, crews, NASA researchers |
 | **Creativity** | Original idea or fresh angle, inventive use of tech | Evidence-distance confidence score, hidden-risk finder, skeptic agent, next-experiment recommender |
