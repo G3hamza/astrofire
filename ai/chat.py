@@ -26,6 +26,20 @@ from .scenario_parse import extract
 from .tables import by_acronym, habitats, profiles
 
 MAX_Q, MAX_TURNS, MAX_TURN_CHARS = 1000, 6, 1500
+
+# Greetings and "what are you / what can you do / help" get an introduction, not the off-topic refusal.
+ABOUT = re.compile(r"^\s*(hi|hello|hey|salam|good (morning|evening|afternoon))\b|\b(what|who) are you\b|\bwhat (can|do) you do\b"
+                   r"|\bwhat is (this|astrofire)\b|\bhow (do|can) (i|you) (use|help)|^\s*help\s*[?!.]*\s*$|\bwhat can i ask\b|\bintroduce yourself\b", re.I)
+ABOUT_ANSWER = ("I'm AstroFire's evidence-grounded analyst. I answer questions about NASA's Physical Sciences Informatics (PSI) "
+                "combustion experiments (24 investigations flown on the ISS and the Cygnus spacecraft) for spacecraft, ISS, Moon "
+                "and Mars base fire safety. Every answer is built from NASA records through AstroFire's engines and cites its sources; "
+                "when NASA has not tested something, I say \"Insufficient validated experimental evidence\" instead of guessing.")
+ABOUT_FINDINGS = [
+    "Rank: which NASA investigations matter most for a spacecraft, the ISS, a Moon base, a lunar rover or a Mars base.",
+    "Scenarios in your own words: e.g. \"Would Nomex burn at 30% oxygen and 71 kPa on the Moon?\" (verdict from AstroFire's rule engine).",
+    "Summaries and comparisons: what BASS-II, Saffire, SAME/SAME-R, FLEX or ACME tested, and how two investigations differ.",
+    "Gaps and data: what has never been tested (e.g. solid materials at Moon/Mars conditions) and which NASA datasets you can download.",
+]
 INTENTS = ("ask", "scenario", "compare", "gaps", "summary", "rank", "datasets", "earth", "equipment", "out_of_scope")
 
 # Investigation names as people write them -> id. Longest first so BASS-II wins over BASS, SAME-R over SAME.
@@ -283,6 +297,11 @@ def analyze(question: str, habitat: str | None = None, history: list | None = No
         base["guardrails"].append("prompt_injection_ignored")
         base["limits"].append("Instructions inside the question that try to change AstroFire's rules or reveal configuration were ignored.")
     clean_q = G.sanitize(q) or q
+    if not injection and ABOUT.search(clean_q) and not G.OUT_OF_SCOPE.search(clean_q) and not G.DOMAIN.search(re.sub(r"\b(data|nasa|fire)\b", "", clean_q, flags=re.I)):
+        fu = ["Which investigations matter most for a Moon base?", "Would Nomex burn at 30% oxygen and 71 kPa on the Moon?",
+              "What does this research mean for next-generation smoke detectors?"]
+        return {**base, "intent": "about", "answer": ABOUT_ANSWER, "followups": fu, "suggested_followups": fu, "mode": "template",
+                "findings": ABOUT_FINDINGS, "latency_ms": int((time.time() - t0) * 1000)}
     if G.is_off_topic(clean_q, history_has_context=bool(ent["history_investigations"])) or (injection and not G.DOMAIN.search(clean_q)):
         fu = _followups("ask", ent, Registry())
         return {**base, "intent": "out_of_scope", "answer": G.OFF_TOPIC, "followups": fu, "suggested_followups": fu, "mode": "template",

@@ -340,3 +340,14 @@ def test_fallback_chain_order(monkeypatch):
 def test_llm_output_is_plain_text():
     from ai.llm import normalize
     assert normalize("The verdict is **Insufficient** for CFI‑G at 30 % O₂") == "The verdict is Insufficient for CFI-G at 30% O2"
+
+
+@pytest.mark.parametrize("q", ["what are you", "Hi", "hello!", "What can you do?", "help", "who are you?"])
+def test_greetings_get_an_introduction_not_a_refusal(q):
+    r = analyze(q)
+    assert r["intent"] == "about" and r["answer"] != G.OFF_TOPIC and "PSI" in r["answer"] and len(r["followups"]) == 3
+
+
+def test_real_off_topic_still_refused():
+    assert analyze("What is the best pizza in Cairo?")["answer"] == G.OFF_TOPIC
+    assert analyze("Help me design a solid rocket propellant")["intent"] == "out_of_scope"
