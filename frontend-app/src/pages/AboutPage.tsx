@@ -29,7 +29,7 @@ const CRITERIA: { key: string; title: string; question: string; points: { text: 
     points: [
       { text: "Verdicts come from fixed, inspectable rules (evidence distance to the closest NASA tests), never from the language model." },
       { text: "Every test row keeps its NASA source file and row number; outcomes are labelled observed, inferred or not recorded; ISS/Cygnus pressure is marked assumed.", to: "/data" },
-      { text: "139 automated tests (data rules, API, every screen, user journeys, security, AI guardrails) and a 26-question AI evaluation with 0 probability violations and 100% correct refusals.", href: `${REPO}/tree/main/tests` },
+      { text: "139 automated tests (data rules, API, every screen, user journeys, security, AI guardrails) and a 26-question AI evaluation that never states odds or chances and refuses 100% of off-topic questions.", href: `${REPO}/tree/main/tests` },
       { text: "Data pipeline Bronze → Silver → Gold with a quarantine table: nothing is deleted, every rejected row keeps its reason.", href: `${REPO}/blob/main/docs/PIPELINE_GUIDE.md` },
     ],
   },
