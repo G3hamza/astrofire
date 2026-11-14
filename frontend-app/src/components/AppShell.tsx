@@ -1,4 +1,4 @@
-import { ChartScatter, Wrench, MessageSquareText, Database, GitCompare, FlaskConical, Flame, Grid3x3, ShieldCheck, Home, Layers, ListOrdered, Palette, Rocket } from "lucide-react";
+import { ChartScatter, Wrench, MessageSquareText, Database, GitCompare, FlaskConical, Flame, Grid3x3, ShieldCheck, Home, Info, Layers, ListOrdered, Palette, Rocket } from "lucide-react";
 import type { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 import { AskPanel } from "./AskPanel";
@@ -17,6 +17,7 @@ const NAV = [
   { to: "/materials", label: "Materials", Icon: FlaskConical },
   { to: "/applications", label: "Apply", Icon: Wrench },
   { to: "/data", label: "Quality", Icon: ShieldCheck },
+  { to: "/about", label: "About", Icon: Info },
 ];
 
 export function AppShell({ children }: { children: ReactNode }) {

@@ -10,6 +10,7 @@ import "./index.css";
 
 // Heavier, less-visited pages load on demand (Recharts lives only in the charts chunk).
 const ChartsPage = lazy(() => import("./pages/ChartsPage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ComparePage = lazy(() => import("./pages/ComparePage"));
 const ExperimentsPage = lazy(() => import("./pages/ExperimentsPage"));
 const InvestigationsPage = lazy(() => import("./pages/InvestigationsPage"));
@@ -72,6 +73,7 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/materials" element={<MaterialsList />} />
             <Route path="/materials/:id" element={<MaterialDetail />} />
             <Route path="/data" element={<DataQualityPage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/style" element={<StylePage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

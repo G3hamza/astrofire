@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 c = TestClient(app)
 NOMEX = "Aramid fabric (Nomex)"
 SCREENS = ["/", "/scenario", "/compare", "/gaps", "/charts", "/experiments", "/investigations", "/rank", "/ask", "/applications",
-           "/materials", "/data", "/style"]
+           "/materials", "/data", "/about", "/style"]
 
 
 @pytest.fixture(autouse=True)

@@ -1,10 +1,44 @@
 # AstroFire — Space Fire Evidence Engine
-NASA Space Apps Cairo 2026 · Challenge: **Flame in Freefall** · Team Starry Night
+**NASA Space Apps Cairo 2026 · Challenge: Flame in Freefall · Team Starry Night**
 
-AstroFire answers, from **real NASA space fire tests**: **Will it burn? What proves it? How sure are we?** — and says plainly when NASA has no evidence.
+[![Live](https://img.shields.io/badge/live-astrofire.vercel.app-38D6F5)](https://astrofire.vercel.app)
+[![Data](https://img.shields.io/badge/data-NASA%20PSI%20(CC0)-EA6624)](https://psi.nasa.gov)
+[![CI](https://github.com/G3hamza/astrofire/actions/workflows/ci.yml/badge.svg)](https://github.com/G3hamza/astrofire/actions)
 
-**Live demo:** https://astrofire.vercel.app (backup: https://astrofire.vercel.app/lite/, API docs: https://astrofire.vercel.app/docs) · **Demo video:** _not recorded yet_ · **2-minute demo script:** [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md) · **Data & low-bandwidth guide:** [`docs/DATA_ACCESS.md`](docs/DATA_ACCESS.md)
+AstroFire turns NASA's space combustion experiments into fire-safety answers for spacecraft, the ISS, Moon and Mars bases
+and rovers: **Will it burn? What proves it? How sure are we?** Every answer links to the NASA test behind it, and when
+NASA never tested a case it says so: *"Insufficient validated experimental evidence."*
 
+| | |
+|---|---|
+| **Project (live)** | https://astrofire.vercel.app · backup https://astrofire.vercel.app/lite/ · API https://astrofire.vercel.app/docs |
+| **Proposal** | [`docs/PROPOSAL.md`](docs/PROPOSAL.md) ([PDF](docs/AstroFire_Proposal.pdf)) |
+| **About / judging criteria** | https://astrofire.vercel.app/about |
+| **Demo script** | [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md) |
+| **Handbook (beginners)** | [`docs/HANDBOOK.md`](docs/HANDBOOK.md) ([PDF](docs/AstroFire_Handbook.pdf)) |
+| **Full technical context** | [`docs/CONTEXT.md`](docs/CONTEXT.md) |
+
+### The finding
+NASA's **263 solid-material space fire tests** all ran at **13.6–22.2 % oxygen, ~0 g** and normal cabin pressure.
+Moon/Mars habitats are planned at **~34 % oxygen and 56.5 kPa**. **No solid cabin material in NASA PSI has been burned
+at that atmosphere or at Moon/Mars gravity.** AstroFire shows what is known, what is not, and which experiments matter most.
+
+### How it meets the judging criteria
+| Criterion | In AstroFire |
+|---|---|
+| **Impact** | Fire safety for Artemis-era habitats with high-oxygen atmospheres; helps engineers, researchers, equipment designers, students; Earth spinoffs |
+| **Creativity** | Refuses to guess at the edge of the evidence; gravity bounds from 0 g and 1 g NASA data; an AI that can only rewrite cited NASA evidence; habitat relevance ranking |
+| **Validity** | Deterministic verdict engine; every row traceable to NASA file + row; observed / inferred / not-recorded labels; 139 automated tests; 26-question AI evaluation (0 probability violations, 100 % correct refusals) |
+| **Relevance** | Built only on NASA PSI's 24 combustion investigations; covers every challenge objective: summarize / rank / interpret, most relevant investigations, data for modeling, equipment, Earth |
+| **Presentation** | Ask in plain English or Arabic on any page; every number clickable to its source; About page, handbook and demo script |
+
+### Use of AI (disclosure)
+The app uses an open-weight language model (openai/gpt-oss-120b on Groq, with fallbacks) only to write answer text from
+NASA evidence selected by deterministic code; guardrails block invented numbers, probabilities and changed verdicts, and
+each answer says whether it was AI-written or a template. The team used AI coding assistants (Anthropic Claude) during
+development. Details: [`docs/PROPOSAL.md` §10](docs/PROPOSAL.md#10-use-of-ai-disclosure).
+
+## Screens
 | Screen | Path | What it shows |
 |---|---|---|
 | Home | `/` | 263 solid tests vs the habitat atmosphere, closest real space flames, coverage per mission, "Why it matters" |
@@ -18,14 +52,17 @@ AstroFire answers, from **real NASA space fire tests**: **Will it burn? What pro
 | NASA experiments | `/experiments` | All 24 PSI combustion investigations, FLEX/CFI/ACME charts, smoke, logs, challenge resources |
 | Data and applications | `/applications` | Download 8 Gold datasets for flammability modeling (real columns, fill counts, caveats; CC0); NASA's own words on detection / suppression / material selection per pillar (interpretation labelled); Earth applications (challenge spinoffs + NASA Earth-benefit statements) |
 | Materials · Data quality | `/materials`, `/data` | Named vs unknown materials; observed / inferred / missing |
+| About | `/about` | The project by judging criteria, NASA data used, AI-use disclosure |
 | Lite backup | `/lite/` | No-build version of Home, Scenario, Gaps |
 
 **Data scope:** only NASA's PSI combustion repository and the pages on the Space Apps challenge resources tab. Features that needed
 other sources (NTRS papers: drop-tower margins, paper-reported tests) were removed; the AI analyst uses a PSI-only knowledge base. How it all works: [`docs/HOW_IT_WORKS.md`](docs/HOW_IT_WORKS.md) (short) and the full guide [`docs/guide/`](docs/guide/README.md).
 
 ## Deploy
-**Vercel (free, no card):** import the GitHub repo in Vercel; `vercel.json` builds the React app as static files and runs the FastAPI
-app (`api/index.py`) as a Python function for `/api/*`, `/ai/*`, `/docs`. Set `GROQ_API_KEY` (optional) in Vercel → Settings → Environment Variables.
+**Vercel (free, no card)** — production is https://astrofire.vercel.app. From the repo folder: `npx vercel@65.16.0 deploy --prod`.
+`vercel.json` builds the React app and runs the FastAPI app (`api/index.py`) as one Python function that serves the UI, `/api/*`,
+`/ai/*`, `/lite/` and `/docs`. AI keys go in Vercel → Settings → Environment Variables (`GROQ_API_KEY`, `LLM_PROVIDER`, `LLM_MODEL`,
+`LLM_FALLBACKS`); without a key the analyst runs in template mode.
 
 ## Deploy with Docker (Render, Railway, Azure Container Apps)
 The `Dockerfile` builds the React app, runs the pipeline and serves everything on `$PORT`. `render.yaml` is a ready Render Blueprint.
