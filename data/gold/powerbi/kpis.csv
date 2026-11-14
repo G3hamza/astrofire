@@ -1,0 +1,14 @@
+kpi,formula,value,unit,refreshed_at
+solid_flame_tests_total,count(gold/analytics/solid_fire_tests),263,tests,2026-11-14T00:38:38Z
+pct_tests_material_named,named / total * 100,66.9,%,2026-11-14T00:38:38Z
+pct_outcomes_observed,outcome_basis=='observed' / total * 100,14.8,%,2026-11-14T00:38:38Z
+pct_outcomes_inferred,outcome_basis=='inferred' / total * 100,38.4,%,2026-11-14T00:38:38Z
+o2_tested_min_pct,min(o2_initial_pct),13.6,%vol,2026-11-14T00:38:38Z
+o2_tested_max_pct,max(o2_initial_pct),22.2,%vol,2026-11-14T00:38:38Z
+space_tests_at_moon_mars_design_point,coverage.space_solid_tests_near for Lunar+Mars,0,tests,2026-11-14T00:38:38Z
+droplet_tests_total,count(FLEX),274,tests,2026-11-14T00:38:38Z
+droplet_pressure_range_kpa,min-max(pressure_kpa) FLEX,70.2-309.3,kPa,2026-11-14T00:38:38Z
+smoke_records_total,count(SAME + SAME-R),117,records,2026-11-14T00:38:38Z
+spice_unique_flame_conditions,count(SPICE excluding exact duplicates),435,conditions,2026-11-14T00:38:38Z
+materials_total,count(materials),36,materials,2026-11-14T00:38:38Z
+materials_unknown_identity,count(material_family=='Unknown'),5,materials,2026-11-14T00:38:38Z

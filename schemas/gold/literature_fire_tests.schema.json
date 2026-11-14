@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/gold/literature_fire_tests",
+  "title": "gold/literature_fire_tests",
+  "description": "Row schema for data/gold/analytics/literature_fire_tests.csv",
+  "type": "object",
+  "properties": {
+    "test_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "material_family": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "gravity_g": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1.1
+    },
+    "o2_pct": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "pressure_kpa": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 500
+    },
+    "flow_cm_s": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "outcome_class": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "test_id",
+    "material_family",
+    "gravity_g",
+    "outcome_class",
+    "source_url",
+    "source_location"
+  ]
+}

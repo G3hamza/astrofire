@@ -1,0 +1,2 @@
+Answer the QUESTION only from the EVIDENCE passages. Cite each claim with its id, e.g. [E2]. 2-6 sentences.
+If the evidence does not answer the question, reply exactly: No data in the NASA papers provided.

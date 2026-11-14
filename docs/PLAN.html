@@ -1,0 +1,202 @@
+<title>AstroFire Build Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one-page mission plan. Header strip, a single 1100px column; status uses a pill per item. Cyan = evidence/data, ember = fire/risk. */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --sunk:#e9edf2; --fg:#101826; --muted:#566173; --line:#d5dbe3;
+  --cyan:#0b7f92; --cyan-soft:#d9f0f3; --ember:#c8501d; --ember-soft:#fbe5d9;
+  --ok:#227a3b; --warn:#9a6700; --crit:#b42318;
+  --cond:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0b1119; --surface:#121a25; --sunk:#18212e; --fg:#e6ebf2; --muted:#97a3b4; --line:#26324a;
+  --cyan:#4fd0e2; --cyan-soft:#11303a; --ember:#ff8b4a; --ember-soft:#3a1e12;
+  --ok:#5fcf7d; --warn:#e6b84a; --crit:#ff6b5e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0b1119; --surface:#121a25; --sunk:#18212e; --fg:#e6ebf2; --muted:#97a3b4; --line:#26324a;
+  --cyan:#4fd0e2; --cyan-soft:#11303a; --ember:#ff8b4a; --ember-soft:#3a1e12;
+  --ok:#5fcf7d; --warn:#e6b84a; --crit:#ff6b5e; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1100px;margin:0 auto;padding-block:36px 64px;display:grid;gap:40px}
+h1,h2,h3{margin:0;text-wrap:balance;line-height:1.1}
+h1{font-family:var(--cond);font-weight:700;font-size:clamp(2.4rem,6vw,3.6rem);letter-spacing:.01em;text-transform:uppercase}
+h1 span{color:var(--ember)}
+h2{font-family:var(--cond);font-weight:700;font-size:1.9rem;text-transform:uppercase;letter-spacing:.01em}
+h3{font-size:1.05rem;font-weight:700}
+p{margin:0}
+.kick{font-family:var(--cond);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);font-size:.95rem;border-left:3px solid var(--cyan);padding-left:10px}
+.lead{font-size:1.2rem;color:var(--muted);max-width:62ch}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+section{display:grid;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:8px;min-width:0}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.pill{font-family:var(--mono);font-size:.72rem;padding:2px 8px;border-radius:999px;white-space:nowrap;justify-self:start}
+.done{background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)}
+.todo{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.risk{background:color-mix(in srgb,var(--crit) 14%,transparent);color:var(--crit)}
+.note{font-size:.9rem;color:var(--muted)}
+
+/* numbers */
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.num{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:2px}
+.num b{font-family:var(--cond);font-size:2.2rem;font-weight:700;line-height:1;color:var(--cyan)}
+.num span{font-size:.9rem;color:var(--muted)}
+
+/* flow */
+.flowbox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.flowbox svg{display:block;width:100%;min-width:760px;height:auto}
+svg text{font-family:var(--body)}
+
+/* features */
+.feat{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.feat .n{font-family:var(--cond);font-weight:700;font-size:1.7rem;color:var(--ember);line-height:1;width:34px}
+.feat p{font-size:.95rem;color:var(--muted)}
+.feat .ev{font-size:.85rem;background:var(--cyan-soft);border-radius:6px;padding:6px 9px;color:var(--fg)}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.93rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--sunk);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:700}
+
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:760px){.tl{grid-template-columns:1fr}}
+.day{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--cyan);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.day:last-child{border-top-color:var(--ember)}
+.day ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:.95rem}
+.find{border-left:4px solid var(--ember);background:var(--surface);border-radius:0 12px 12px 0;padding:14px 18px;display:grid;gap:6px}
+.find b{font-size:1.05rem}
+a{color:var(--cyan)}
+:focus-visible{outline:2px solid var(--ember);outline-offset:2px}
+</style>
+
+<div class="wrap">
+
+<header style="display:grid;gap:14px">
+  <div class="kick">NASA Space Apps Cairo 2026 · Flame in Freefall · Team Starry Night</div>
+  <h1>Astro<span>Fire</span> build plan</h1>
+  <p class="lead">A space fire evidence engine. Pick a mission and a material, and AstroFire answers from real NASA space tests: <b>will it burn, what proves it, how sure are we</b>, and what nobody has tested yet.</p>
+</header>
+
+<section>
+  <div class="kick">Done tonight</div>
+  <h2>The data is in and the engine runs</h2>
+  <div class="nums">
+    <div class="num"><b class="mono">271</b><span>NASA space fire tests in one clean table</span></div>
+    <div class="num"><b class="mono">133</b><span>real oxygen × airflow points for the flammability map</span></div>
+    <div class="num"><b class="mono">276</b><span>NASA papers, 13,022 searchable passages</span></div>
+    <div class="num"><b class="mono">24</b><span>NASA PSI combustion investigations catalogued</span></div>
+    <div class="num"><b class="mono">8</b><span>API endpoints working on real data</span></div>
+  </div>
+  <div class="g3">
+    <div class="card"><span class="pill done">done</span><h3>Downloaded</h3><p class="note">PSI experiment tables (BASS, BASS-II, SAFFIRE I–III, SAME, FLEX, ACME…), NTRS papers, NASA-STD-6001B, Task Book.</p></div>
+    <div class="card"><span class="pill done">done</span><h3>Cleaned</h3><p class="note">One schema: material, O₂, airflow, outcome, with NASA's original note kept on every row. Each outcome is marked <i>stated</i> or <i>inferred</i>.</p></div>
+    <div class="card"><span class="pill done">done</span><h3>Engine + API</h3><p class="note">Scenario verdict, confidence, gap grid, cited search and AI answers (works without an API key).</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="kick">The innovation</div>
+  <h2>Six things no chatbot does</h2>
+  <div class="g2">
+    <div class="card feat"><span class="n">1</span><div style="display:grid;gap:6px"><h3>A flammability map built from real space tests</h3><p>Oxygen vs airflow, each dot a NASA test that burned, went out, or blew off.</p><span class="ev">133 BASS-II and SAFFIRE points · engine ready</span></div></div>
+    <div class="card feat"><span class="n">2</span><div style="display:grid;gap:6px"><h3>Evidence distance</h3><p>How far your mission is from anything NASA actually tested. Far means low confidence, said first.</p><span class="ev">Scored on gravity, O₂, pressure, airflow, material · engine ready</span></div></div>
+    <div class="card feat"><span class="n">3</span><div style="display:grid;gap:6px"><h3>Mission gap radar</h3><p>A grid of gravity × oxygen × pressure showing where space data exists and where it doesn't.</p><span class="ev">Exploration, Moon and Mars design points: 0 space tests · engine ready</span></div></div>
+    <div class="card feat"><span class="n">4</span><div style="display:grid;gap:6px"><h3>Earth vs space, side by side</h3><p>The same sample burned on Earth and in space, compared.</p><span class="ev">SAFFIRE-II burn lengths, 1 g vs microgravity · data ready, needs a screen</span></div></div>
+    <div class="card feat"><span class="n">5</span><div style="display:grid;gap:6px"><h3>Cited research assistant</h3><p>Answers only from NASA passages, every sentence cited.</p><span class="ev">276 papers indexed · add API key for written answers</span></div></div>
+    <div class="card feat"><span class="n">6</span><div style="display:grid;gap:6px"><h3>Skeptic check</h3><p>Flags any sentence without a source, and any result NASA's note didn't state.</p><span class="ev">Uncited-sentence flag + stated/inferred tags · engine ready</span></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="kick">How it fits together</div>
+  <h2>From NASA files to an answer</h2>
+  <div class="flowbox">
+    <svg viewBox="0 0 1060 250" role="img" aria-label="NASA PSI tables and NTRS papers flow through our pipeline into the engine, the API and the dashboard">
+      <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
+      <g fill="var(--surface)" stroke="var(--line)" stroke-width="1.5">
+        <rect x="10" y="30" width="180" height="78" rx="10"/><rect x="10" y="140" width="180" height="78" rx="10"/>
+        <rect x="240" y="30" width="200" height="78" rx="10"/><rect x="240" y="140" width="200" height="78" rx="10"/>
+        <rect x="490" y="70" width="190" height="108" rx="10" stroke="var(--ember)" stroke-width="2"/>
+        <rect x="730" y="70" width="130" height="108" rx="10"/>
+        <rect x="900" y="30" width="150" height="78" rx="10"/><rect x="900" y="140" width="150" height="78" rx="10"/>
+      </g>
+      <g stroke="var(--muted)" stroke-width="1.6" fill="none">
+        <path d="M190 69H236" marker-end="url(#a)"/><path d="M190 179H236" marker-end="url(#a)"/>
+        <path d="M440 69C465 69 465 110 486 110" marker-end="url(#a)"/><path d="M440 179C465 179 465 140 486 140" marker-end="url(#a)"/>
+        <path d="M680 124H726" marker-end="url(#a)"/>
+        <path d="M860 110C880 110 880 69 896 69" marker-end="url(#a)"/><path d="M860 140C880 140 880 179 896 179" marker-end="url(#a)"/>
+      </g>
+      <g font-size="15" fill="var(--fg)">
+        <text x="100" y="62" text-anchor="middle" font-weight="700">NASA PSI</text><text x="100" y="84" text-anchor="middle" fill="var(--muted)" font-size="13">20 experiment tables</text>
+        <text x="100" y="172" text-anchor="middle" font-weight="700">NASA NTRS</text><text x="100" y="194" text-anchor="middle" fill="var(--muted)" font-size="13">276 papers</text>
+        <text x="340" y="62" text-anchor="middle" font-weight="700">build_solids.py</text><text x="340" y="84" text-anchor="middle" fill="var(--muted)" font-size="13">271 tests, one schema</text>
+        <text x="340" y="172" text-anchor="middle" font-weight="700">build_corpus.py</text><text x="340" y="194" text-anchor="middle" fill="var(--muted)" font-size="13">13,022 cited passages</text>
+        <text x="585" y="108" text-anchor="middle" font-weight="700">Engine</text><text x="585" y="130" text-anchor="middle" fill="var(--muted)" font-size="13">verdict · distance</text><text x="585" y="150" text-anchor="middle" fill="var(--muted)" font-size="13">gaps · search · skeptic</text>
+        <text x="795" y="120" text-anchor="middle" font-weight="700">FastAPI</text><text x="795" y="142" text-anchor="middle" fill="var(--muted)" font-size="13">8 endpoints</text>
+        <text x="975" y="62" text-anchor="middle" font-weight="700">Dashboard</text><text x="975" y="84" text-anchor="middle" fill="var(--muted)" font-size="13">UI developer</text>
+        <text x="975" y="172" text-anchor="middle" font-weight="700">AI assistant</text><text x="975" y="194" text-anchor="middle" fill="var(--muted)" font-size="13">LLM + citations</text>
+      </g>
+      <text x="10" y="18" font-size="12" fill="var(--muted)" font-weight="600">DONE</text>
+      <text x="730" y="58" font-size="12" fill="var(--muted)" font-weight="600">DONE</text>
+      <text x="900" y="18" font-size="12" fill="var(--ember)" font-weight="600">BUILD FRIDAY</text>
+    </svg>
+  </div>
+</section>
+
+<section>
+  <div class="kick">Real findings for the pitch</div>
+  <h2>What the NASA data already says</h2>
+  <div class="find"><b>The homes we're planning have never been fire-tested in space.</b><p class="note">Every solid-fuel space test in our data ran at 13.6–22.2% oxygen near ISS cabin pressure. NASA's exploration atmosphere (8.2 psia, 34% O₂) and the Moon and Mars habitat design points sit in cells with zero space tests.</p></div>
+  <div class="find"><b>Space isn't simply "safer" or "more dangerous". It depends on airflow and material.</b><p class="note">In SAFFIRE-II at 20 cm/s, two silicone samples that burned completely in Earth gravity barely burned in space, while the cotton-fiberglass fabric burned fully in both. That is why engineers need evidence for their exact conditions, not a rule of thumb.</p></div>
+  <div class="find"><b>Airflow decides whether a flame lives.</b><p class="note">BASS-II notes record 19 flames that went out as airflow was reduced or the fan was turned off, and 7 that blew off when airflow was raised. That's the basis for the fan advisor.</p></div>
+</section>
+
+<section>
+  <div class="kick">Who builds what</div>
+  <h2>Five lanes, one data contract</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Person</th><th>Builds</th><th>Done when</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td><b>Backend</b></td><td>Deploy the API (Render or Railway), keep the data pipeline running, add the Earth-vs-space endpoint</td><td>Public API URL answers <span class="mono">/api/stats</span></td><td><span class="pill todo">Fri 12:00</span></td></tr>
+      <tr><td><b>UI developer</b></td><td>Screens: mission picker · flammability map · evidence cards · gap radar · Earth vs space · ask panel</td><td>All screens call the live API</td><td><span class="pill todo">Fri 18:00</span></td></tr>
+      <tr><td><b>AI engineer</b></td><td>Plug in the LLM key, tune the prompt, upgrade search to embeddings if time allows, skeptic display</td><td>8 of 10 gold questions answered with correct citations</td><td><span class="pill todo">Fri 18:00</span></td></tr>
+      <tr><td><b>Yusuf</b></td><td>Check 20 inferred outcomes against the BASS-II papers, write the 10-question gold set, pull 3 numbers for slides</td><td>Checked rows marked in the CSV</td><td><span class="pill todo">Fri 15:00</span></td></tr>
+      <tr><td><b>Hamza</b></td><td>Story and pitch, mentor chats, 30-second video, proposal, submission form</td><td>All links open in a private window</td><td><span class="pill todo">Sat 12:00</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="kick">Timeline</div>
+  <h2>Three steps to the finish</h2>
+  <div class="tl">
+    <div class="day"><span class="pill done">tonight</span><h3>Thu 12 Nov</h3><ul><li>Share the repo zip with the team</li><li>Everyone runs it locally (5 min)</li><li>UI dev reads the API table in the README</li><li>Join the Cairo Discord</li></ul></div>
+    <div class="day"><span class="pill todo">build</span><h3>Fri 13 Nov</h3><ul><li>09:00 stand-up, lock the screens</li><li>12:00 API deployed</li><li>13:00 scope freeze</li><li>18:00 all screens live, gold set scored</li><li>20:00 record video and backup demo</li></ul></div>
+    <div class="day"><span class="pill todo">ship</span><h3>Sat 14 Nov</h3><ul><li>10:00 submission form arrives</li><li>Rehearse the 3-minute pitch twice</li><li>Submit; test every link</li></ul></div>
+  </div>
+</section>
+
+<section>
+  <div class="kick">Watch out</div>
+  <h2>Risks we already handled, and the ones left</h2>
+  <div class="g2">
+    <div class="card"><span class="pill done">handled</span><p>NASA sites blocked from our build machine → data pulled from a public mirror of the official files.</p></div>
+    <div class="card"><span class="pill done">handled</span><p>Demo depending on an API key → search and answers still work without one.</p></div>
+    <div class="card"><span class="pill risk">open</span><p>101 BASS-II outcomes are inferred. Say "inferred" on screen, and Yusuf checks 20 against the papers.</p></div>
+    <div class="card"><span class="pill risk">open</span><p>Pressure is assumed 101.3 kPa for the space tests. It's labelled in the data and must be labelled on screen.</p></div>
+  </div>
+  <p class="note">Full details: README.md, docs/DATA.md and docs/SOURCES.md inside the repo zip.</p>
+</section>
+
+</div>

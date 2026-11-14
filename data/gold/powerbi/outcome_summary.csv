@@ -1,0 +1,10 @@
+investigation,outcome_class,outcome_basis,tests
+BASS,Unknown,not_recorded,121
+BASS-II,Blowoff,observed,7
+BASS-II,Burned,inferred,101
+BASS-II,Extinction,observed,19
+BASS-II,No Ignition,observed,2
+SAFFIRE-I,Burned,observed,2
+SAFFIRE-II,Burned,observed,5
+SAFFIRE-II,Not Sustained,observed,4
+SAFFIRE-III,Unknown,not_recorded,2

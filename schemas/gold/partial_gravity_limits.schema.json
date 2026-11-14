@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/gold/partial_gravity_limits",
+  "title": "gold/partial_gravity_limits",
+  "description": "Row schema for data/gold/analytics/partial_gravity_limits.csv",
+  "type": "object",
+  "properties": {
+    "material": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "moon_margin_o2": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "mars_margin_o2": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "zero_g_margin_o2": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "source_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "material",
+    "source_url"
+  ]
+}

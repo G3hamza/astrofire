@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/gold/kpis",
+  "title": "gold/kpis",
+  "description": "Row schema for data/gold/powerbi/kpis.csv",
+  "type": "object",
+  "properties": {
+    "kpi": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "formula": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "value": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "unit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "kpi",
+    "formula",
+    "value"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/quarantine",
+  "title": "quarantine",
+  "description": "Row schema for data/quarantine/quarantine.csv",
+  "type": "object",
+  "properties": {
+    "original_record": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "investigation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "failure_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "validation_rule": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "processed_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "original_record",
+    "source_file",
+    "failure_reason",
+    "validation_rule",
+    "processed_at"
+  ]
+}

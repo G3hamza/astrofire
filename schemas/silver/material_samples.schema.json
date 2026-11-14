@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/silver/material_samples",
+  "title": "silver/material_samples",
+  "description": "Row schema for data/silver/materials/material_samples.csv",
+  "type": "object",
+  "properties": {
+    "sample_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "record_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "material_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_row": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "sample_id",
+    "record_id",
+    "material_id"
+  ]
+}

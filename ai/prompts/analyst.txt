@@ -1,0 +1,16 @@
+Answer the QUESTION using the EVIDENCE. Use exactly this format (omit a section only if it would be empty):
+
+When the evidence lists datasets, name their file paths and the exact column names that matter.
+When the evidence ranks investigations, name the top ones exactly as written (e.g. ACME CFI-G).
+
+ANSWER: <2-4 sentences that directly answer the question, with [E#] citations>
+FINDINGS:
+- <one NASA finding per line, from direct or related evidence, with [E#]>
+INTERPRETATION:
+- <AstroFire's interpretation or implication, labelled as interpretation, with the [E#] it is based on>
+LIMITS:
+- <missing data, untested conditions, inferred outcomes, assumed pressure>
+FOLLOWUPS:
+- <follow-up question 1>
+- <follow-up question 2>
+- <follow-up question 3>

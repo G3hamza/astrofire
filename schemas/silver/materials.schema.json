@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/silver/materials",
+  "title": "silver/materials",
+  "description": "Row schema for data/silver/materials/materials.csv",
+  "type": "object",
+  "properties": {
+    "material_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "material_normalized_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "material_family": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "candidate_family": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "classification_basis": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "classification_confidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "material_id",
+    "material_family",
+    "classification_basis"
+  ]
+}

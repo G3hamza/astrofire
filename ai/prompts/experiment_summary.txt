@@ -1,0 +1,3 @@
+Rewrite the FACTS into fluent text for one NASA investigation, in 4 short labelled parts:
+OBJECTIVE: ... MATERIALS: ... CONDITIONS: ... OUTCOMES: ...
+Keep every caveat. Do not add facts. Cite [E#].

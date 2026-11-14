@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/gold/gas_jet_flame_conditions",
+  "title": "gold/gas_jet_flame_conditions",
+  "description": "Row schema for data/gold/analytics/gas_jet_flame_conditions.csv",
+  "type": "object",
+  "properties": {
+    "record_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "fuel_rate_mg_s": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "air_velocity_cm_s": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "source_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_row": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "record_id",
+    "source_file"
+  ]
+}

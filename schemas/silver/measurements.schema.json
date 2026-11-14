@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/silver/measurements",
+  "title": "silver/measurements",
+  "description": "Row schema for data/silver/measurements/measurements.csv",
+  "type": "object",
+  "properties": {
+    "measurement_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "record_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "quantity": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "value": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "unit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "value_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_row": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "measurement_id",
+    "record_id",
+    "quantity",
+    "value",
+    "unit"
+  ]
+}

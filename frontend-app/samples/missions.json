@@ -1,0 +1,1 @@
+{"iss":{"name":"ISS cabin","gravity_g":0.0,"o2_pct":21.0,"pressure_kpa":101.3},"exploration":{"name":"Exploration atmosphere (8.2 psia / 34% O2)","gravity_g":0.0,"o2_pct":34.0,"pressure_kpa":56.5},"moon":{"name":"Lunar habitat","gravity_g":0.166,"o2_pct":34.0,"pressure_kpa":56.5},"mars":{"name":"Mars habitat","gravity_g":0.38,"o2_pct":34.0,"pressure_kpa":56.5}}

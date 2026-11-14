@@ -1,0 +1,13 @@
+.git
+.github
+.venv
+**/__pycache__
+.pytest_cache
+frontend-app/node_modules
+frontend-app/dist
+frontend-app/samples
+notebooks
+*.zip
+.env
+chroma_db
+models

@@ -1,0 +1,20 @@
+Task,Owner,Status,Due,Done when
+Read 01/08/10,All,To do,Thu 19:00,Seen by all
+BASS-II data spike,Backend,To do,Thu 20:30,Table loads in pandas
+Collect 5-10 NTRS papers,Yusuf,To do,Thu 21:00,PDFs in drive
+Deploy hello-world URL,Backend,To do,Thu 21:00,Public URL works
+Join Discord + team page,Hamza,To do,Thu 21:30,Links saved
+Lock schema + API contract,All,To do,Fri 09:30,Doc agreed
+Data library 3-5 investigations,Backend+Yusuf,To do,Fri 13:00,Scenario returns evidence
+/scenario endpoint,Backend,To do,Fri 13:00,Verdict + 3 rows
+RAG with citations,AI engineer,To do,Fri 13:00,Answer has [source]
+Wire dashboard to API,UI,To do,Fri 13:00,Overview uses real data
+3 mentor chats,Hamza,To do,Fri 11:00,3 quotes
+Watchlist screen,UI+Yusuf,To do,Fri 18:00,Shows hidden risks
+Gap map + next experiment,Yusuf,To do,Fri 18:00,Recommendation shown
+Skeptic check,AI engineer,To do,Fri 18:00,Unsourced sentence flagged
+Gold set 10 Qs,AI+Yusuf,To do,Fri 19:00,>=8/10
+Final deploy + phone test,Backend,To do,Fri 20:00,All links open
+30 s video + backup demo,Hamza+UI,To do,Fri 22:00,Uploaded public
+Pitch rehearsal x2,All,To do,Sat 11:00,Under 3 min
+Submit form,Hamza,To do,Sat deadline,Submitted + links checked

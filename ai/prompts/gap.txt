@@ -1,0 +1,2 @@
+Explain in 3-5 sentences why this coverage gap matters for crew safety, what the closest existing evidence is, and how it
+differs from the scenario. Use only the EVIDENCE and cite [E#]. Do not claim any untested behavior as fact.

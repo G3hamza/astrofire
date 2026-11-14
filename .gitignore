@@ -1,0 +1,22 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+node_modules/
+frontend-app/dist/
+
+# secrets
+.env
+.env.*
+!.env.example
+chroma_db/
+models/
+
+# Not PSI data: kept outside the public repo (see ../_private_archive)
+data/raw/ntrs/
+data/raw/standards/
+data/raw/taskbook/
+data/curated/
+data/processed/chunks.jsonl
+data/processed/papers.*

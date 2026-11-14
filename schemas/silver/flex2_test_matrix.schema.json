@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/silver/flex2_test_matrix",
+  "title": "silver/flex2_test_matrix",
+  "description": "Row schema for data/silver/investigations/flex2_test_matrix.csv",
+  "type": "object",
+  "properties": {
+    "record_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "investigation_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "investigation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_row": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "source_record": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "quality_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "quality_notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "o2_min_pct": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "o2_max_pct": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "pressure_min_kpa": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "pressure_max_kpa": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 600
+    }
+  },
+  "required": [
+    "record_id",
+    "fuel",
+    "row_type"
+  ]
+}

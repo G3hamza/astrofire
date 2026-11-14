@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/silver/material_properties",
+  "title": "silver/material_properties",
+  "description": "Row schema for data/silver/materials/material_properties.csv",
+  "type": "object",
+  "properties": {
+    "property_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sample_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "material_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "property": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "value": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "unit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "value_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "property_id",
+    "sample_id",
+    "property",
+    "value_status"
+  ]
+}

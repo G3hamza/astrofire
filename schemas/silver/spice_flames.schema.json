@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/silver/spice_flames",
+  "title": "silver/spice_flames",
+  "description": "Row schema for data/silver/investigations/spice_flames.csv",
+  "type": "object",
+  "properties": {
+    "record_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "investigation_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "investigation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_row": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "source_record": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "quality_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "quality_notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "material_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "nozzle_diameter_mm": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "fuel_rate_mg_s": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "air_velocity_cm_s": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 200
+    }
+  },
+  "required": [
+    "record_id",
+    "material_id",
+    "fuel"
+  ]
+}

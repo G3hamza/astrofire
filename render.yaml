@@ -1,0 +1,20 @@
+# Render Blueprint (https://render.com/docs/blueprint-spec). One Docker web service.
+# Data is NASA PSI (CC0). LLM keys are optional secrets set in the Render dashboard (sync: false = never stored in this file).
+# Without them the AI analyst answers in template mode.
+services:
+  - type: web
+    name: astrofire
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/stats
+    envVars:
+      - key: LLM_PROVIDER
+        value: groq
+      - key: LLM_MODEL
+        value: openai/gpt-oss-120b
+      - key: LLM_FALLBACKS
+        value: groq:qwen/qwen3.8-27b,groq:openai/gpt-oss-20b,anthropic:claude-haiku-5-5
+      - key: GROQ_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false

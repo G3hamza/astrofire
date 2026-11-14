@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AstroFire Team Brief</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: one reading column, tables scroll inside their own box. Mission-control palette, light + dark. */
+:root{
+  --bg:#f3f5f9; --panel:#ffffff; --ink:#0d1626; --muted:#4b5a72; --line:#d6dde8;
+  --signal:#0a7fa3; --burn:#c4501a; --danger:#c22b3a; --ok:#137a55; --caution:#9a6a00;
+  --display:"Space Grotesk","Segoe UI",system-ui,sans-serif; --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif; --mono:"IBM Plex Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#070b14; --panel:#0e1626; --ink:#e8eef8; --muted:#9cacc7; --line:#24324e;
+  --signal:#38d6f5; --burn:#ff8a4c; --danger:#f85e6a; --ok:#34d399; --caution:#fbbf24; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#070b14; --panel:#0e1626; --ink:#e8eef8; --muted:#9cacc7; --line:#24324e;
+  --signal:#38d6f5; --burn:#ff8a4c; --danger:#f85e6a; --ok:#34d399; --caution:#fbbf24; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 64px}
+main{max-width:980px;margin:0 auto;display:grid;gap:36px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.2}
+h1{font-size:clamp(28px,4vw,40px)} h2{font-size:22px} h3{font-size:16px}
+p{margin:0;max-width:68ch} a{color:var(--signal)}
+.eyebrow{font:600 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--muted);font:13px var(--mono)}
+section{display:grid;gap:14px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.callout{border-left:4px solid var(--danger);background:var(--panel);border-radius:8px;padding:16px 18px;display:grid;gap:8px}
+.callout.good{border-left-color:var(--ok)}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 12px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+.num{font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font:600 12px var(--mono);padding:2px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.yes{color:var(--ok)} .part{color:var(--caution)} .no{color:var(--danger)} .info{color:var(--muted)}
+ol.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:s}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:2.2rem 1fr;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+ol.steps li::before{content:counter(s);font:700 18px var(--display);color:var(--signal)}
+.who{font:600 12px var(--mono);color:var(--burn)}
+.done{color:var(--muted);font-size:13px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+code,pre{font-family:var(--mono);font-size:13px}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto;margin:0}
+ul.check{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+ul.check li::before{content:"☐ ";color:var(--signal)}
+</style>
+</head>
+<body>
+<main>
+<header style="display:grid;gap:10px">
+  <span class="eyebrow">NASA Space Apps Cairo 2026 · Flame in Freefall · Team Starry Night</span>
+  <h1>AstroFire: where we are and what's next</h1>
+  <div class="meta"><span>13 Nov 2026</span><span>repo: AstroFire-repo/astrofire · branch main · latest commit on main</span><span>39 automated tests passing</span></div>
+  <p>AstroFire answers <b>Will it burn? What proves it? How sure are we?</b> from real NASA fire tests, and says plainly when NASA has no evidence. This brief covers what works today, how we use each NASA dataset, and the steps before the professional (submission) phase.</p>
+</header>
+
+<section>
+  <h2>What works today</h2>
+  <div class="grid2">
+    <div class="panel"><h3>Screens (live NASA data)</h3><p>Home · Scenario check (incl. "describe your scenario" in words) · Compare (2–4 scenarios) · Gaps map · Evidence charts · Ask NASA · NASA experiments · Materials · Data quality · Design system.</p></div>
+    <div class="panel"><h3>Honesty built in</h3><p>No probabilities. Every test links to its NASA file + row or paper. Inferred outcomes are badged. Unknown materials are labelled. "Insufficient validated experimental evidence" is shown word for word.</p></div>
+    <div class="panel"><h3>Not done yet</h3><p>Public deployment, demo video, rehearsals, the live AI-answer test (needs an API key) and a Docker build test. The <code>/lite</code> backup app is ready at <code>/lite/</code>.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Are we using our NASA data?</h2>
+  <p>All seven investigations from the team's priority list are downloaded, cleaned and validated in the pipeline. Until now only the <b>solid-material</b> ones appeared on screens, because the main question is "will this cabin material burn" and the data rules forbid mixing droplets, smoke and gas jets into solid-material results. That left useful data hidden. <b>Fixed on 13 Nov:</b> each one now has its own place in the app (new Experiments page, Scenario and Gaps), still kept separate from solid-material results.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Investigation</th><th>Team priority</th><th>Rows in pipeline</th><th>On screen today</th><th>What it adds</th></tr></thead>
+    <tbody>
+      <tr><td><b>BASS-II</b> Burning and Suppression of Solids-II</td><td>Essential</td><td class="num">129 tests</td><td><span class="pill yes">Yes</span></td><td>Core evidence: Scenario, Gaps, flammability map, Materials.</td></tr>
+      <tr><td><b>FLEX</b> Flame Extinguishment Experiment</td><td>Essential</td><td class="num">274 droplet tests</td><td><span class="pill yes">Yes (new)</span></td><td>Fuel droplets burned in orbit at 12–34% O₂ and 70–309 kPa. <b>6 tests at 34% O₂ and ~72 kPa</b>: the closest any space flame has come to the habitat atmosphere. Liquid fuel, not a cabin material, so shown as atmosphere evidence: Scenario card, Gaps, Experiments chart.</td></tr>
+      <tr><td><b>SAME</b> Smoke Aerosol Measurement Experiment</td><td>Essential</td><td class="num">8 records</td><td><span class="pill yes">Yes (new)</span></td><td>Smoke particles from overheated Teflon, Kapton, silicone, lampwick, DBP. For smoke detection, not flammability. Shown on Experiments and material pages.</td></tr>
+      <tr><td><b>SAME-R</b> Reflight</td><td>Essential</td><td class="num">109 records</td><td><span class="pill yes">Yes (new)</span></td><td>Same as SAME with more runs (Kapton, silicone, lampwick, Pyrell, Teflon), at different flows and heater levels.</td></tr>
+      <tr><td><b>SAFFIRE-I</b> Spacecraft Fire Experiment-I</td><td>Important</td><td class="num">2 tests</td><td><span class="pill yes">Yes</span></td><td>Large-scale fire on uncrewed Cygnus; in Scenario and Gaps. SAFFIRE-II/III also used.</td></tr>
+      <tr><td><b>SPICE</b> Smoke Point in Co-flow</td><td>Important</td><td class="num">435 flame conditions</td><td><span class="pill yes">Yes (new)</span></td><td>Gas-jet flames and soot (smoke point) vs air flow. Context for smoke and soot, not material flammability. Shown on Experiments.</td></tr>
+      <tr><td><b>BASS Modeling</b> (PSI-62) Flamelet modeling vs BASS</td><td>Strong support</td><td class="num">0</td><td><span class="pill info">Papers only</span></td><td>NASA PSI holds only a 9.47 KB metadata file for it: no experimental or modeling table to load. Its value is in its publications, which Ask NASA can search.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>Why the app says "not enough data"</h2>
+  <div class="callout">
+    <p><b>The big PSI downloads don't add test conditions.</b> BASS-II's 255.8 GB is mostly videos and ISS photos of the same 130 tests (about 3.6 GB per test). BASS is 152.3 GB, SAFFIRE-III 32.8 GB. NASA's own page says BASS-II oxygen was "varied below 21% by adding nitrogen".</p>
+    <p><b>The gap is physical.</b> No lab in orbit runs at Moon or Mars gravity, and raised-oxygen fires are too risky with a crew aboard. So the habitat atmosphere (34% O₂, 56.5 kPa, 0.17 g / 0.38 g) has never been flown with a solid material.</p>
+  </div>
+  <div class="callout good">
+    <p><b>What we added:</b> 11 tests from NASA papers that are not in PSI: Saffire IV–VI on Cygnus (up to 31% O₂, down to 54 kPa; PMMA and cotton burned) and LUCI (burns in simulated lunar gravity, in air). Shown as supporting evidence; they never change a verdict. Details: <code>docs/DATA_ACCESS.md</code>.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Next steps, in order</h2>
+  <ol class="steps">
+    <li><div><h3>✔ Done: Show FLEX, SAME/SAME-R and SPICE in the app</h3><p>FLEX 34%-O₂ tests as "atmosphere evidence" in Scenario and on the Gaps map; smoke data on Materials; a new Experiments page explaining all ten investigations.</p><p class="who">Owner: Claude (today)</p><p class="done">Done when every dataset in the table above has a place on screen and tests pass.</p></div></li>
+    <li><div><h3>✔ Done: Build the /lite backup app</h3><p>Simple no-build page served at <code>/lite</code> in case the main app fails during judging.</p><p class="who">Owner: Claude (today)</p><p class="done">Done when /lite runs the demo flow on live data.</p></div></li>
+    <li><div><h3>Check the 11 paper-transcribed tests</h3><p>A second person opens each paper and checks every number in <code>data/curated/literature_fire_tests.csv</code>.</p><p class="who">Owner: data lead</p><p class="done">Done when each row is initialled in a review note.</p></div></li>
+    <li><div><h3>Plug in the chatbot</h3><p>It sends text to <code>POST /api/scenario/parse</code> (or returns the same JSON itself) and then calls <code>POST /api/scenario</code>. The contract is at the top of <code>backend/scenario_parse.py</code>.</p><p class="who">Owner: chatbot teammate</p><p class="done">Done when the chatbot fills the Scenario page and shows what it understood.</p></div></li>
+    <li><div><h3>Team review and feedback</h3><p>Everyone runs the app, follows <code>docs/DEMO_SCRIPT.md</code>, and writes issues in <code>docs/GATE2_FEEDBACK.md</code>. Include one outsider: can they explain Home in 10 seconds?</p><p class="who">Owner: everyone</p></div></li>
+    <li><div><h3>Turn on AI answers and test them</h3><p>Set <code>ANTHROPIC_API_KEY</code>, run <code>python -m scripts.eval_ask</code>; target 9/10 answers citing a relevant NASA source.</p><p class="who">Owner: team lead</p></div></li>
+    <li><div><h3>GitHub + CI</h3><p>Create a <b>private</b> repo, push, confirm the GitHub Actions run is green (pipeline, tests, frontend build).</p><p class="who">Owner: team lead</p></div></li>
+  </ol>
+</section>
+
+<section>
+  <h2>Before the professional phase (exit checklist)</h2>
+  <div class="panel"><ul class="check">
+    <li>Steps 1–7 above are done</li>
+    <li>Licence check for NTRS paper text before any public URL</li>
+    <li>Deployed (Render blueprint ready: <code>render.yaml</code>), API key stored as a secret</li>
+    <li>Demo script runs 3 times in a row without a problem</li>
+    <li>2-minute demo video recorded; backups ready: local run, /lite, video</li>
+    <li>Submission text, deck and repo link ready before the deadline</li>
+  </ul></div>
+</section>
+
+<section>
+  <h2>Run it on your laptop</h2>
+<pre>pip install -r requirements.txt
+python -m pipelines.orchestration.run_all     # rebuild + validate data (~30 s)
+pytest -q                                     # 39 tests
+cd frontend-app &amp;&amp; npm install --legacy-peer-deps &amp;&amp; npm run build &amp;&amp; cd ..
+uvicorn backend.app:app                       # open http://127.0.0.1:8000/</pre>
+  <p class="done">No big downloads needed: the repo already contains all the data the app uses (about 44 MB of raw NASA files).</p>
+</section>
+</main>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/silver/acme_bre_sessions",
+  "title": "silver/acme_bre_sessions",
+  "description": "Row schema for data/silver/investigations/acme_bre_sessions.csv",
+  "type": "object",
+  "properties": {
+    "record_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "investigation_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "investigation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_row": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "source_record": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "quality_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "quality_notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "o2_max_pct": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "flames_ignited": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "record_id",
+    "row_type",
+    "fuel"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/gold/ml_solid_outcome_features",
+  "title": "gold/ml_solid_outcome_features",
+  "description": "Row schema for data/gold/ml/solid_outcome_features.csv",
+  "type": "object",
+  "properties": {
+    "test_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "o2_initial_pct": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "flow_min_cm_s": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "target_burned": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "split": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "test_id",
+    "target_burned",
+    "split",
+    "label_source"
+  ]
+}

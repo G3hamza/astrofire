@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/gold/cool_flame_tests",
+  "title": "gold/cool_flame_tests",
+  "description": "Row schema for data/gold/analytics/cool_flame_tests.csv",
+  "type": "object",
+  "properties": {
+    "test_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pressure_kpa": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 600
+    },
+    "o2_pct": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "outcome_class": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "outcome_basis": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "test_id",
+    "fuel",
+    "source_file",
+    "source_row"
+  ]
+}

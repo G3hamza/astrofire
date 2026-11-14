@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/gold/solid_fire_tests",
+  "title": "gold/solid_fire_tests",
+  "description": "Row schema for data/gold/analytics/solid_fire_tests.csv",
+  "type": "object",
+  "properties": {
+    "test_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "material_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "o2_initial_pct": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "flow_min_cm_s": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "pressure_kpa": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "outcome_class": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "outcome_basis": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "label_reliable": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_row": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "test_id",
+    "material_id",
+    "outcome_class",
+    "outcome_basis",
+    "source_file",
+    "source_row"
+  ]
+}

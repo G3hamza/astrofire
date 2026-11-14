@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---- Design tokens (RGB channels). Dark only: projector + high contrast (NFR5). ---- */
+:root {
+  --space: 6 10 19;        /* #060A13 */
+  --surface: 13 20 35;     /* #0D1423 */
+  --raised: 21 31 52;      /* #151F34 */
+  --line: 36 50 78;        /* #24324E */
+
+  --ink: 232 238 248;      /* #E8EEF8  contrast 16:1 on space */
+  --muted: 156 172 199;    /* #9CACC7  7.9:1 */
+  --faint: 110 126 155;    /* #6E7E9B  4.6:1 */
+
+  --signal: 56 214 245;    /* #38D6F5 mission cyan */
+
+  --burn: 234 102 36;      /* #EA6624 flame orange (CVD-validated set) */
+  --out: 75 143 247;       /* #4B8FF7 cold blue */
+  --blow: 233 71 154;      /* #E9479A magenta */
+  --unknown: 148 163 184;  /* #94A3B8 slate */
+
+  --danger: 248 94 106;    /* #F85E6A */
+  --caution: 251 191 36;   /* #FBBF24 */
+  --ok: 52 211 153;        /* #34D399 */
+
+  color-scheme: dark;
+}
+
+@layer base {
+  html { background: rgb(var(--space)); }
+  body {
+    @apply bg-space text-ink font-sans text-base antialiased;
+    background-image:
+      radial-gradient(1200px 600px at 85% -10%, rgb(var(--signal) / 0.07), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgb(var(--burn) / 0.05), transparent 60%);
+    background-attachment: fixed;
+  }
+  :focus-visible { outline: 2px solid rgb(var(--signal)); outline-offset: 2px; border-radius: 6px; }
+  ::selection { background: rgb(var(--signal) / 0.3); }
+  a { @apply text-signal underline-offset-2 hover:underline; }
+}
+
+@layer components {
+  .eyebrow { @apply font-mono text-label uppercase text-muted; }
+  .tnum { font-variant-numeric: tabular-nums; }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgb(var(--line) / 0.35) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--line) / 0.35) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .skeleton {
+    @apply rounded-md bg-raised;
+    background-image: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.06), transparent);
+    background-size: 400px 100%;
+    background-repeat: no-repeat;
+    animation: shimmer 1.4s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

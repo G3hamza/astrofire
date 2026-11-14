@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/silver/saffire2_tests",
+  "title": "silver/saffire2_tests",
+  "description": "Row schema for data/silver/investigations/saffire2_tests.csv",
+  "type": "object",
+  "properties": {
+    "record_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "investigation_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "investigation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_row": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "source_record": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "quality_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "quality_notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "material_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "o2_initial_pct": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "flow_cm_s": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "thickness_mm": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "outcome_class": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "outcome_basis": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "record_id",
+    "material_id"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/gold/droplet_extinction_tests",
+  "title": "gold/droplet_extinction_tests",
+  "description": "Row schema for data/gold/analytics/droplet_extinction_tests.csv",
+  "type": "object",
+  "properties": {
+    "test_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pressure_kpa": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "o2_pct": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "outcome_class": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_row": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "test_id",
+    "source_file",
+    "source_row"
+  ]
+}

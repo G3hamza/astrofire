@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/silver/bass2_tests",
+  "title": "silver/bass2_tests",
+  "description": "Row schema for data/silver/investigations/bass2_tests.csv",
+  "type": "object",
+  "properties": {
+    "record_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "investigation_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "investigation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_row": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "source_record": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "quality_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "quality_notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "material_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "o2_initial_pct": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "o2_final_pct": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "flow_start_cm_s": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "flow_min_cm_s": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "pressure_kpa": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 500
+    },
+    "thickness_mm": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "diameter_mm": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "outcome_class": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "outcome_basis": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "record_id",
+    "material_id",
+    "outcome_class",
+    "outcome_basis"
+  ]
+}

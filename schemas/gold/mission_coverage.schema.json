@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astrofire/gold/mission_coverage",
+  "title": "gold/mission_coverage",
+  "description": "Row schema for data/gold/analytics/mission_coverage.csv",
+  "type": "object",
+  "properties": {
+    "mission": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "space_solid_tests_near": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "mission"
+  ]
+}

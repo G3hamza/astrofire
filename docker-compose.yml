@@ -1,0 +1,8 @@
+# Minimal: API + UI. Prometheus/Grafana/cAdvisor/MinIO are NOT included (see docs/TARGET_ARCHITECTURE.md).
+services:
+  api:
+    build: .
+    ports: ["8000:8000"]
+    env_file:
+      - path: .env          # LLM_PROVIDER, LLM_MODEL, GROQ_API_KEY ... (see .env.example)
+        required: false     # no .env -> AI analyst runs in template mode

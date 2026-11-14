@@ -1,0 +1,39 @@
+:root{--bg:#060a13;--panel:#0d1423;--raised:#151f34;--line:#24324e;--ink:#e8eef8;--muted:#9cacc7;--faint:#6e7e9b;
+  --signal:#38d6f5;--burn:#ea6624;--out:#4b8ff7;--danger:#f85e6a;--caution:#fbbf24;--ok:#34d399;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 "Segoe UI",system-ui,sans-serif}
+a{color:var(--signal)}
+.top{display:flex;align-items:center;gap:20px;padding:12px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5;flex-wrap:wrap}
+.brand{font-weight:700;font-size:18px;color:var(--ink);text-decoration:none}.brand span{color:var(--burn)}.brand small{color:var(--faint);font-weight:400}
+nav{display:flex;gap:4px;flex-wrap:wrap}nav a{padding:6px 12px;border-radius:8px;color:var(--muted);text-decoration:none}
+nav a.on{background:rgba(56,214,245,.15);color:var(--signal)}.full{margin-left:auto;font-size:14px}
+main{max-width:1100px;margin:0 auto;padding:24px 20px 48px;display:grid;gap:20px}
+footer{text-align:center;color:var(--faint);font-size:13px;padding:20px}
+h1{font-size:30px;margin:0}h2{font-size:20px;margin:0}p{margin:0}
+.eyebrow{font:600 12px/1 Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:10px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.kpi b{font-size:30px;display:block}.kpi.danger{border-color:var(--danger)}.kpi.danger b{color:var(--danger)}
+.hero{display:flex;gap:24px;align-items:center;flex-wrap:wrap}.hero .zero{font-size:96px;font-weight:800;color:var(--danger);line-height:1}
+.btns{display:flex;gap:10px;flex-wrap:wrap}.btn{background:var(--signal);color:#04121a;border:0;border-radius:8px;padding:10px 16px;font-weight:600;text-decoration:none;cursor:pointer}
+.btn.sec{background:var(--raised);color:var(--ink);border:1px solid var(--line)}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-items:end}
+label{display:grid;gap:4px;font-size:13px;color:var(--muted)}
+select,input{background:var(--raised);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}
+:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.verdict{border-radius:12px;padding:16px 18px;border:1px solid}.verdict b{font-size:22px;display:block}
+.v-danger{border-color:var(--danger);color:var(--danger);background:rgba(248,94,106,.08)}
+.v-burn{border-color:var(--burn);color:var(--burn)}.v-out{border-color:var(--out);color:var(--out)}.v-caution{border-color:var(--caution);color:var(--caution)}
+.note{color:var(--muted);font-size:14px}.blockers li{color:var(--ink)}.blockers{border-left:3px solid var(--danger);padding:8px 8px 8px 28px;margin:0}
+.flags{border-left:3px solid var(--caution);padding:8px 8px 8px 28px;margin:0}
+.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;min-width:640px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-size:12px;text-transform:uppercase}
+.tag{display:inline-block;padding:1px 8px;border-radius:999px;border:1px solid currentColor;font-size:12px;white-space:nowrap}
+.burned{color:var(--burn)}.wentout{color:var(--out)}.blowoff{color:#e9479a}.unknown{color:var(--faint)}
+.observed{color:var(--ok)}.inferred{color:var(--caution);border-style:dashed}.assumed{color:var(--muted);border-style:dotted}
+.grid{display:grid;gap:4px;grid-template-columns:110px repeat(5,minmax(0,1fr))}.cell{border-radius:6px;padding:8px 4px;text-align:center;font-size:13px;min-height:52px}
+.cell.t{background:rgba(56,214,245,.35)}.cell.n{background:repeating-linear-gradient(135deg,rgba(248,94,106,.15) 0 6px,transparent 6px 12px);color:var(--danger);border:1px solid rgba(248,94,106,.35)}
+.cell.p{border:2px dashed var(--signal);color:var(--signal)}.cell.e{border:1px solid var(--line);color:var(--faint)}.cell .pin{display:block;font-size:11px;font-weight:700}
+.banner{background:rgba(248,94,106,.12);border-bottom:1px solid var(--danger);color:var(--ink);padding:10px 20px;text-align:center}
+blockquote{margin:0;border-left:2px solid var(--line);padding-left:12px;color:var(--muted)}
+.mono{font-family:Consolas,monospace}
