@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource/ibm-plex-mono": "5.1.1",
     "@fontsource/ibm-plex-sans": "5.1.1",
+    "@radix-ui/react-slider": "1.2.2",
     "@radix-ui/react-tabs": "1.1.2",
     "@radix-ui/react-tooltip": "1.1.6",
     "@visx/axis": "3.12.0",

@@ -4,6 +4,7 @@ import { Button, Card, CardHeader, cx, ErrorState, Skeleton } from "../component
 import { useQuery } from "../lib/api";
 import { client, type InvestigationCompare, type InvestigationProfile, type ProfileCondition } from "../lib/client";
 
+import { heroTitle, PageHero } from "../components/PageHero";
 /* Basic, functional UI on purpose: the logic lives in /api/investigations/* so a later redesign keeps it. */
 
 const PILLARS = ["all", "prevention", "detection", "suppression", "fundamental"] as const;
@@ -32,10 +33,26 @@ function Chip({ children, tone }: { children: React.ReactNode; tone?: "ok" | "mu
   );
 }
 
+/** Only where the photo shows that investigation's own hardware: Saffire flights and the ACME chamber. */
+function hardwarePhoto(p: InvestigationProfile) {
+  const a = `${p.acronym} ${p.hardware_family}`.toUpperCase();
+  if (a.includes("SAFFIRE")) return { src: "/img/saffire-cygnus.jpg", credit: "Saffire-II in Cygnus · NASA ISS051E039882" };
+  if (a.includes("ACME")) return { src: "/img/acme-chamber.jpg", credit: "ACME chamber insert · NASA GRC-2016-C-05051" };
+  return null;
+}
+
 function Profile({ p, selected, onToggle }: { p: InvestigationProfile; selected: boolean; onToggle: () => void }) {
   const [open, setOpen] = useState(false);
+  const photo = hardwarePhoto(p);
   return (
-    <Card as="article">
+    <Card as="article" className="overflow-hidden">
+      {photo && (
+        <figure className="relative h-36 bg-black">
+          <img src={photo.src} alt={`${p.acronym} hardware`} loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-80" />
+          <span className="absolute inset-0 bg-gradient-to-t from-surface to-transparent" aria-hidden />
+          <figcaption className="absolute bottom-2 left-5 font-mono text-[0.62rem] text-ink/70">{photo.credit}</figcaption>
+        </figure>
+      )}
       <CardHeader eyebrow={`${p.investigation_id} · ${p.hardware_family}`} title={`${p.acronym} — ${p.title}`}
         right={<label className="flex items-center gap-2 text-sm text-muted">
           <input type="checkbox" checked={selected} onChange={onToggle} aria-label={`Select ${p.acronym} to compare`} /> Compare
@@ -127,12 +144,12 @@ export default function InvestigationsPage() {
 
   return (
     <div className="space-y-6">
-      <header className="space-y-2">
-        <p className="eyebrow">NASA PSI combustion investigations</p>
-        <h1 className="text-h1 text-ink">Investigations</h1>
+      <PageHero photo="acme">
+        <p className="kicker">NASA PSI combustion investigations</p>
+        <h1 className={heroTitle}>Investigations</h1>
         <p className="max-w-3xl text-muted">All 24 investigations: what NASA set out to learn, the fuels and conditions, what varied between tests,
           the sensors used, and the data files. Grouped by fire-safety pillar: prevention, detection, suppression.</p>
-      </header>
+      </PageHero>
       <div className="flex flex-wrap gap-4">
         <label className="text-sm">Pillar{" "}
           <select className="rounded border border-line bg-raised px-2 py-1" value={pillar} onChange={(e) => setPillar(e.target.value as typeof pillar)}>

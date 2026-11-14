@@ -7,6 +7,7 @@ import { useQuery } from "../lib/api";
 import { client, PSI_PORTAL } from "../lib/client";
 import type { GapCell } from "../lib/types";
 
+import { heroTitle, PageHero } from "../components/PageHero";
 const GRAVITY_ROWS = [
   { g: 1.0, label: "Earth", sub: "1 g", Icon: Globe },
   { g: 0.38, label: "Mars", sub: "0.38 g", Icon: Sparkles },
@@ -40,10 +41,10 @@ export default function GapsPage() {
 
   return (
     <div className="space-y-6">
-      <header className="flex flex-wrap items-end justify-between gap-4">
+      <PageHero photo="orion" variant="band">
         <div className="space-y-1">
-          <p className="eyebrow">Gaps map</p>
-          <h1 className="text-h1">Where NASA has tested, and where it never has</h1>
+          <p className="kicker">Gaps map</p>
+          <h1 className={heroTitle}>Where NASA has tested, and where it never has</h1>
           <p className="max-w-3xl text-lg text-muted">
             Each cell counts NASA solid-material fire tests run in space at that gravity, oxygen and pressure.
             {q.data && <> Only <b className="tnum text-ink">{summary.tested} of {summary.total}</b> space condition cells have a test in NASA's PSI tables
@@ -51,7 +52,7 @@ export default function GapsPage() {
           </p>
         </div>
         <Legend />
-      </header>
+      </PageHero>
 
       {!q.data ? <div className="grid gap-6 xl:grid-cols-2"><Skeleton className="h-96 rounded-card" /><Skeleton className="h-96 rounded-card" /></div> : (
         <div className="grid gap-6 xl:grid-cols-2">

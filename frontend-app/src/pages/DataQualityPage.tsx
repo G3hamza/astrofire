@@ -6,6 +6,7 @@ import { useQuery } from "../lib/api";
 import { client } from "../lib/client";
 import { basisKind, type BasisKind } from "../lib/domain";
 
+import { heroTitle, PageHero } from "../components/PageHero";
 const BASIS_ORDER: BasisKind[] = ["observed", "inferred", "not_recorded"];
 const BASIS_FILL: Record<string, string> = {
   observed: "bg-ok", inferred: "bg-caution", not_recorded: "bg-unknown/40",
@@ -38,11 +39,11 @@ export default function DataQualityPage() {
 
   return (
     <div className="space-y-6">
-      <header className="space-y-1">
-        <p className="eyebrow">Data quality</p>
-        <h1 className="text-h1">How much of this is observed, inferred or missing</h1>
+      <PageHero>
+        <p className="kicker">Data quality</p>
+        <h1 className={heroTitle}>How much of this is observed, inferred or missing</h1>
         <p className="max-w-3xl text-lg text-muted">StarryNight never hides weak data. Inferred values are always badged, and rejected rows are kept in quarantine, never deleted.</p>
-      </header>
+      </PageHero>
 
       {ov.error ? <ErrorState message={ov.error} onRetry={ov.reload} /> : (
         <Card>

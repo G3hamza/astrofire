@@ -14,6 +14,7 @@ const CASES = [
     ours: "Oxygen-rich air plus cabin materials is the core risk. StarryNight flags every condition above the oxygen NASA tested, and shows smoke data, because the gases killed the crew.",
     link: "/scenario?material=PMMA+%28acrylic%29&mission=exploration&flow=5", linkText: "Check a raised-oxygen scenario",
     url: "https://sma.nasa.gov/sma-disciplines/accllp/apollo-1", label: "NASA · Apollo 1",
+    img: "/img/incident-apollo1.jpg", alt: "The fire-scorched exterior of the Apollo 1 command module (Spacecraft 012) on Pad 34 after the fire.", credit: "Apollo 1 command module after the fire · NASA S67-21295",
   },
   {
     when: "24 Feb 1997 · space station Mir", title: "Mir fire", Icon: Wind,
@@ -22,6 +23,7 @@ const CASES = [
     ours: "Fires happen in orbit, inside a crewed station. How a flame behaves at ~0 g and how smoke spreads is exactly what BASS, SAFFIRE and SAME measured.",
     link: "/experiments", linkText: "See the NASA experiments",
     url: "https://www.nasa.gov/history/25-years-ago-fire-aboard-space-station-mir/", label: "NASA · Mir fire",
+    img: "/img/incident-mir.jpg", alt: "The Mir space station in orbit, photographed by the Space Shuttle crew in 1997.", credit: "Mir in 1997, the year of the fire · NASA STS086-720-007",
   },
   {
     when: "1970 · on the way to the Moon", title: "Apollo 13", Icon: Rocket,
@@ -30,6 +32,7 @@ const CASES = [
     ours: "Oxygen systems are a hazard in their own right, and fixes from one accident protect the next mission. StarryNight shows where today's evidence stops, so the gaps get tested before a crew depends on them.",
     link: "/gaps", linkText: "See what was never tested",
     url: "https://sma.nasa.gov/sma-disciplines/accllp/apollo-13", label: "NASA · Apollo 13",
+    img: "/img/incident-apollo13.jpg", alt: "The damaged Apollo 13 Service Module, photographed by the crew after it was jettisoned.", credit: "Damaged Apollo 13 Service Module · NASA AS13-59-8500",
   },
 ];
 
@@ -43,20 +46,26 @@ export function WhyItMatters({ bare }: { bare?: boolean } = {}) {
       </div>}
       <div className="grid gap-4 lg:grid-cols-3">
         {CASES.map((c) => (
-          <Card key={c.title} as="article" className="flex flex-col gap-3 p-5">
-            <div className="flex items-center gap-2">
-              <c.Icon size={18} className="text-burn" aria-hidden />
-              <h3 className="text-h3">{c.title}</h3>
-              <span className="ml-auto text-sm text-faint">{c.when}</span>
-            </div>
-            <p className="text-ink/90">{c.facts}</p>
-            <p className="text-sm text-muted"><b className="text-ink">What NASA changed:</b> {c.lesson}</p>
-            <p className="rounded-lg border border-dashed border-signal/50 bg-signal/5 p-3 text-sm text-ink/90">
-              <span className="eyebrow mb-1 block text-signal">What it means for StarryNight (our reading)</span>{c.ours}
-            </p>
-            <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-1">
-              <SourceChip href={c.url} label={c.label} />
-              <Link to={c.link} className="inline-flex items-center gap-1 text-sm">{c.linkText} <ArrowRight size={13} aria-hidden /></Link>
+          <Card key={c.title} as="article" className="flex flex-col overflow-hidden">
+            <figure className="relative aspect-[4/3] bg-black">
+              <img src={c.img} alt={c.alt} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent" aria-hidden />
+              <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-ink/20 bg-black/60 px-2.5 py-1 font-mono text-[0.68rem] text-ink">
+                <c.Icon size={12} className="text-burn" aria-hidden /> {c.when}
+              </span>
+              <h3 className="absolute bottom-9 left-4 text-[1.6rem] font-semibold tracking-tight text-ink">{c.title}</h3>
+              <figcaption className="absolute bottom-3 left-4 right-4 truncate font-mono text-[0.64rem] text-ink/70">{c.credit}</figcaption>
+            </figure>
+            <div className="flex flex-1 flex-col gap-3 p-5">
+              <p className="text-ink/90">{c.facts}</p>
+              <p className="text-sm text-muted"><b className="text-ink">What NASA changed:</b> {c.lesson}</p>
+              <p className="rounded-lg border border-dashed border-signal/50 bg-signal/5 p-3 text-sm text-ink/90">
+                <span className="eyebrow mb-1 block text-signal">What it means for StarryNight (our reading)</span>{c.ours}
+              </p>
+              <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-1">
+                <SourceChip href={c.url} label={c.label} />
+                <Link to={c.link} className="inline-flex items-center gap-1 text-sm">{c.linkText} <ArrowRight size={13} aria-hidden /></Link>
+              </div>
             </div>
           </Card>
         ))}

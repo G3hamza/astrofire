@@ -7,6 +7,7 @@ import { useQuery } from "../lib/api";
 import { client } from "../lib/client";
 import type { MaterialOverview } from "../lib/types";
 
+import { heroTitle, PageHero } from "../components/PageHero";
 const isUnknown = (basis: string | null | undefined) => (basis ?? "") !== "explicit_name";
 const split = (s: string | null | undefined) => (s ?? "").split("|").map((x) => x.trim()).filter(Boolean);
 
@@ -37,10 +38,10 @@ export function MaterialsList() {
 
   return (
     <div className="space-y-6">
-      <header className="flex flex-wrap items-end justify-between gap-4">
+      <PageHero photo="candle">
         <div className="space-y-1">
-          <p className="eyebrow">Materials</p>
-          <h1 className="text-h1">What NASA actually burned</h1>
+          <p className="kicker">Materials</p>
+          <h1 className={heroTitle}>What NASA actually burned</h1>
           <p className="max-w-3xl text-lg text-muted">
             {q.data ? <><b className="tnum text-ink">{q.data.length}</b> materials in the NASA tables. <b className="tnum text-caution">{unknown}</b> were never named by NASA, only described by shape or color.</> : "Loading…"}
           </p>
@@ -49,7 +50,7 @@ export function MaterialsList() {
           <input type="checkbox" checked={solidOnly} onChange={(e) => setSolidOnly(e.target.checked)} className="h-4 w-4 accent-[rgb(var(--signal))]" />
           Only solids with space fire tests
         </label>
-      </header>
+      </PageHero>
 
       {q.error ? <ErrorState message={q.error} onRetry={q.reload} /> : !q.data ? <Skeleton className="h-96 rounded-card" /> : (
         <Card>

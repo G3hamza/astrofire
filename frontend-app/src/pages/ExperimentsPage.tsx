@@ -8,6 +8,7 @@ import { useQuery } from "../lib/api";
 import { client, PSI_PORTAL } from "../lib/client";
 import type { CsvRow } from "../lib/types";
 
+import { heroTitle, PageHero } from "../components/PageHero";
 /* Every NASA investigation in the dataset, what it measured, and how StarryNight uses it.
    Droplets, smoke and gas jets are different experiment kinds and are never mixed into solid-material results. */
 
@@ -42,14 +43,14 @@ export default function ExperimentsPage() {
   const inv = useQuery("investigations", client.investigations);
   return (
     <div className="space-y-8">
-      <header className="space-y-1">
-        <p className="eyebrow">NASA experiments</p>
-        <h1 className="text-h1">Every investigation, and what it can tell us</h1>
+      <PageHero photo="saffire" variant="band">
+        <p className="kicker">NASA experiments</p>
+        <h1 className={heroTitle}>Every investigation, and what it can tell us</h1>
         <p className="max-w-3xl text-lg text-muted">
           All 24 combustion investigations in NASA's PSI repository are loaded, cleaned and validated. Solid-material burns answer
           "will it burn". Droplets, gas flames and smoke measure other things, so they get their own place and are never counted as material tests.
         </p>
-      </header>
+      </PageHero>
 
       {inv.error ? <ErrorState message={inv.error} onRetry={inv.reload} /> : !inv.data ? <Skeleton className="h-64 rounded-card" /> : (
         <div className="grid gap-3 md:grid-cols-2">

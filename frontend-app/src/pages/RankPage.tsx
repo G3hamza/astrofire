@@ -5,6 +5,7 @@ import { Card, CardHeader, ErrorState, Skeleton } from "../components/ui";
 import { useQuery } from "../lib/api";
 import { client, type RankResult, type RankRow } from "../lib/client";
 
+import { heroTitle, PageHero } from "../components/PageHero";
 /* Basic, functional UI on purpose: ranking logic and explanations live in /api/rank so a redesign keeps them. */
 
 const ORDER = ["spacecraft", "iss", "exploration", "moon", "rover", "mars"];
@@ -52,12 +53,12 @@ export default function RankPage() {
 
   return (
     <div className="space-y-6">
-      <header className="space-y-2">
-        <p className="eyebrow">Habitat relevance</p>
-        <h1 className="text-h1 text-ink">Which NASA investigations matter for my habitat?</h1>
+      <PageHero photo="moon">
+        <p className="kicker">Habitat relevance</p>
+        <h1 className={heroTitle}>Which NASA investigations matter for my habitat?</h1>
         <p className="max-w-3xl text-muted">Pick a crew environment. All 24 PSI investigations are ranked by how close their tested conditions are,
           how directly they address fire safety, whether they burned cabin-type solids, and how much usable test data they have.</p>
-      </header>
+      </PageHero>
       <div className="flex flex-wrap gap-4">
         <label className="text-sm">Habitat{" "}
           <select className="rounded border border-line bg-raised px-2 py-1" value={habitat} onChange={(e) => set("habitat", e.target.value)}>

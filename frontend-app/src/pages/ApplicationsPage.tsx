@@ -3,6 +3,7 @@ import { SourceChip } from "../components/SourceChip";
 import { Card, CardHeader, ErrorState, Skeleton } from "../components/ui";
 import { api, useQuery } from "../lib/api";
 
+import { heroTitle, PageHero } from "../components/PageHero";
 /* Basic, functional UI on purpose: content comes from /api/datasets, /api/equipment-insights, /api/earth-applications. */
 
 type Dataset = { name: string; file: string; description: string; rows: number; columns: { name: string; filled: number }[];
@@ -23,12 +24,12 @@ export default function ApplicationsPage() {
 
   return (
     <div className="space-y-8">
-      <header className="space-y-2">
-        <p className="eyebrow">From research to use</p>
-        <h1 className="text-h1 text-ink">Data, equipment and Earth applications</h1>
+      <PageHero photo="earth" variant="band">
+        <p className="kicker">From research to use</p>
+        <h1 className={heroTitle}>Data, equipment and Earth applications</h1>
         <p className="max-w-3xl text-muted">Download the cleaned NASA data for modeling, see what NASA says its research means for fire detection,
           suppression and material selection, and where it already helps on Earth. NASA's words are quoted with their source; StarryNight's reading is labelled.</p>
-      </header>
+      </PageHero>
 
       <section className="space-y-3" aria-labelledby="data-h">
         <h2 id="data-h" className="text-h2">Data for flammability modeling</h2>

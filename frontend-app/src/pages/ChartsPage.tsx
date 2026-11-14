@@ -1,9 +1,9 @@
+import { AxisBottom, AxisLeft } from "@visx/axis";
+import { GridRows } from "@visx/grid";
+import { Group as VGroup } from "@visx/group";
+import { scaleLinear } from "@visx/scale";
 import { ChevronDown, Table2 } from "lucide-react";
-import { useMemo, useState } from "react";
-import {
-  CartesianGrid, ReferenceArea, ReferenceLine, ResponsiveContainer,
-  Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis,
-} from "recharts";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { BasisBadge, OutcomeTag } from "../components/badges";
 import { FileRowChip, SourceChip } from "../components/SourceChip";
 import { Card, CardHeader, EmptyState, ErrorState, Skeleton } from "../components/ui";
@@ -19,15 +19,13 @@ const C = {
   grid: "rgb(var(--line) / 0.5)", axis: "rgb(var(--faint))", surface: "rgb(var(--surface))",
   danger: "rgb(var(--danger))", signal: "rgb(var(--signal))", muted: "rgb(var(--muted))",
 };
-const OUTCOME_ORDER: Exclude<OutcomeKind, "unknown">[] = ["burned", "out", "blowoff"];
-const tick = { fill: C.axis, fontSize: 12 };
 
 export default function ChartsPage() {
   return (
     <div className="space-y-8">
-      <header className="space-y-1">
-        <p className="eyebrow">Evidence charts</p>
-        <h1 className="text-h1">What NASA's fire data actually covers</h1>
+      <header className="max-w-3xl space-y-3">
+        <p className="kicker">Evidence charts</p>
+        <h1 className="text-[2.2rem] font-semibold leading-tight tracking-tight text-ink sm:text-[2.6rem]">What NASA's fire data actually covers.</h1>
         <p className="max-w-3xl text-lg text-muted">Every point is a NASA space test from the PSI repository. Nothing here is modeled.</p>
       </header>
       <FlammabilityMap />
@@ -80,7 +78,7 @@ function FlammabilityMap() {
           <div className="relative">
             <label htmlFor="mat" className="sr-only">Material</label>
             <select id="mat" value={material} onChange={(e) => setMaterial(e.target.value)}
-              className="h-9 appearance-none rounded-lg border border-line bg-raised pl-3 pr-8 text-sm text-ink focus:border-signal">
+              className="h-9 max-w-[11rem] appearance-none truncate rounded-full border border-line bg-raised pl-4 pr-8 text-sm text-ink focus:border-signal sm:max-w-none">
               <option value="">All materials ({all.data?.length ?? "…"})</option>
               {materials.map(([m, c]) => <option key={m} value={m}>{m} ({c})</option>)}
             </select>
@@ -93,42 +91,13 @@ function FlammabilityMap() {
           : !all.data ? <Skeleton className="h-[420px]" />
           : !groups.length ? <EmptyState title="No tests with oxygen + flow for this material" />
           : (
-            <div className="h-[440px]" role="img" aria-label={`Scatter of ${n} NASA space tests: oxygen versus air flow, colored and shaped by outcome`}>
-              <ResponsiveContainer>
-                <ScatterChart margin={{ top: 16, right: 24, bottom: 28, left: 8 }}>
-                  <CartesianGrid stroke={C.grid} strokeDasharray="0" vertical={false} />
-                  {/* The untested region up to the habitat design point */}
-                  <ReferenceArea y1={Math.ceil(maxO2 * 2) / 2} y2={yTop} fill="url(#hatch)" stroke="none" ifOverflow="extendDomain" />
-                  {habitat && <ReferenceLine y={habitat} stroke={C.danger} strokeDasharray="6 4" strokeWidth={2}
-                    label={{ value: `Moon/Mars habitat ${habitat}% O₂ · 0 tests`, fill: C.danger, fontSize: 12, position: "insideTopLeft" }} />}
-                  {iss && <ReferenceLine y={iss} stroke={C.muted} strokeDasharray="2 4"
-                    label={{ value: `ISS air ${iss}%`, fill: C.muted, fontSize: 12, position: "insideBottomRight" }} />}
-                  <XAxis type="number" dataKey="flow" name="Air flow" unit=" cm/s" tick={tick} stroke={C.grid} domain={[0, "dataMax + 2"]}
-                    label={{ value: "Air flow (cm/s)", fill: C.axis, fontSize: 12, position: "bottom", offset: 10 }} />
-                  <YAxis type="number" dataKey="o2" name="Oxygen" unit="%" tick={tick} stroke={C.grid} domain={[12, yTop]} width={52}
-                    label={{ value: "Oxygen (%)", fill: C.axis, fontSize: 12, angle: -90, position: "insideLeft", offset: 12 }} />
-                  <ZAxis type="number" dataKey="size" range={[60, 380]} />
-                  <Tooltip cursor={{ stroke: C.grid }} content={<MapTip />} />
-                  {OUTCOME_ORDER.map((k) => (
-                    <Scatter key={k} name={OUTCOME_LABEL[k]} isAnimationActive={false}
-                      data={groups.filter((g) => g.kind === k).map((g) => ({ ...g, size: g.tests.length }))}
-                      shape={(p: unknown) => <Marker {...(p as MarkerProps)} />} />
-                  ))}
-                  <defs>
-                    <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-                      <rect width="10" height="10" fill="rgb(var(--danger) / 0.04)" />
-                      <line x1="0" y1="0" x2="0" y2="10" stroke="rgb(var(--danger) / 0.25)" strokeWidth="2" />
-                    </pattern>
-                  </defs>
-                </ScatterChart>
-              </ResponsiveContainer>
-            </div>
+            <VisxMap groups={groups} habitat={habitat} iss={iss} maxO2={maxO2} yTop={yTop} n={n} />
           )}
         <div className="mt-2 flex flex-wrap items-center justify-between gap-3 text-sm text-faint">
           <p>{n} tests with both oxygen and flow recorded. Hatched band: oxygen never tested in space. Filled = outcome written by NASA; hollow = inferred from notes.</p>
           <div className="flex gap-2">
             <SourceChip href={`${PSI_PORTAL}/PSI-25`} label="NASA PSI · BASS-II" />
-            <button onClick={() => setTable(!table)} className="inline-flex h-7 items-center gap-1.5 rounded-md border border-line bg-raised px-2 text-[12px] text-muted hover:text-ink">
+            <button onClick={() => setTable(!table)} className="inline-flex h-8 items-center gap-1.5 rounded-full border border-line px-3 text-[12px] text-muted hover:text-ink">
               <Table2 size={13} aria-hidden /> {table ? "Hide table" : "Show as table"}
             </button>
           </div>
@@ -159,9 +128,7 @@ function Marker({ cx: x, cy: y, payload }: MarkerProps) {
   return <g><circle cx={x} cy={y} r={r} {...ring} /><circle cx={x} cy={y} r={r} {...mark} /></g>;
 }
 
-function MapTip({ active, payload }: { active?: boolean; payload?: { payload: Group }[] }) {
-  if (!active || !payload?.length) return null;
-  const g = payload[0].payload;
+function MapTip({ g }: { g: Group }) {
   return (
     <div className="max-w-xs rounded-lg border border-line bg-surface p-3 text-sm shadow-card">
       <p className="tnum font-semibold text-ink">{g.o2}% O₂ · {g.flow} cm/s</p>
@@ -207,5 +174,67 @@ function Legend() {
       <li className="flex items-center gap-2 text-muted"><span className="h-3 w-3 rounded-full border-2 border-muted" />inferred</li>
       <li className="flex items-center gap-2 text-muted">bigger = more tests at the same point</li>
     </ul>
+  );
+}
+
+/* visx scatter: oxygen (y) vs air flow (x). Hatched band = oxygen never tested in space; habitat and ISS lines labelled. */
+function VisxMap({ groups, habitat, iss, maxO2, yTop, n }: { groups: Group[]; habitat?: number; iss?: number; maxO2: number; yTop: number; n: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [w, setW] = useState(0);
+  const [hover, setHover] = useState<Group | null>(null);
+  useLayoutEffect(() => {
+    const el = ref.current; if (!el) return;
+    const m = () => setW(Math.floor(el.getBoundingClientRect().width)); m();
+    const ro = new ResizeObserver(m); ro.observe(el); return () => ro.disconnect();
+  }, []);
+  const h = 440, mg = { top: 16, right: 20, bottom: 48, left: 56 };
+  const iw = Math.max(10, w - mg.left - mg.right), ih = h - mg.top - mg.bottom;
+  const maxFlow = Math.max(4, ...groups.map((g) => g.flow)) + 2;
+  const x = scaleLinear<number>({ domain: [0, maxFlow], range: [0, iw], nice: true });
+  const y = scaleLinear<number>({ domain: [12, yTop], range: [ih, 0] });
+  const band = Math.ceil(maxO2 * 2) / 2;
+  const order = [...groups].sort((a, b) => b.tests.length - a.tests.length);
+  return (
+    <div ref={ref} className="relative w-full" role="img" aria-label={`Scatter of ${n} NASA space tests: oxygen versus air flow, shaped by outcome`}>
+      {w > 0 && (
+        <svg width={w} height={h}>
+          <defs>
+            <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <rect width="10" height="10" style={{ fill: "rgb(var(--danger) / 0.04)" }} />
+              <line x1="0" y1="0" x2="0" y2="10" style={{ stroke: "rgb(var(--danger) / 0.25)" }} strokeWidth="2" />
+            </pattern>
+          </defs>
+          <VGroup left={mg.left} top={mg.top}>
+            <GridRows scale={y} width={iw} stroke="rgb(var(--line))" strokeOpacity={0.5} strokeDasharray="2 4" />
+            <rect x={0} y={y(yTop)} width={iw} height={Math.max(0, y(band) - y(yTop))} fill="url(#hatch)" />
+            <text x={iw - 6} y={y(yTop) + 16} textAnchor="end" className="fill-danger font-mono" fontSize={11}>NEVER TESTED IN SPACE ABOVE {band}% O₂</text>
+            {habitat != null && <>
+              <line x1={0} x2={iw} y1={y(habitat)} y2={y(habitat)} stroke="rgb(var(--flare))" strokeDasharray="6 4" strokeWidth={1.5} />
+              <text x={6} y={y(habitat) - 6} className="fill-flare font-mono" fontSize={11}>MOON / MARS HABITAT {habitat}% O₂ · 0 TESTS</text>
+            </>}
+            {iss != null && <>
+              <line x1={0} x2={iw} y1={y(iss)} y2={y(iss)} stroke="rgb(var(--muted))" strokeDasharray="2 4" />
+              <text x={iw - 6} y={y(iss) - 6} textAnchor="end" className="fill-muted font-mono" fontSize={11}>ISS AIR {iss}%</text>
+            </>}
+            {order.map((g, i) => (
+              <g key={i} onMouseEnter={() => setHover(g)} onMouseLeave={() => setHover(null)} style={{ cursor: "pointer" }}>
+                <Marker cx={x(g.flow)} cy={y(g.o2)} payload={g} />
+              </g>
+            ))}
+            <AxisBottom top={ih} scale={x} stroke="rgb(var(--line))" tickStroke="rgb(var(--line))" numTicks={w < 520 ? 5 : 10}
+              tickLabelProps={{ fill: "rgb(var(--muted))", fontSize: 11, fontFamily: "IBM Plex Mono", textAnchor: "middle" }}
+              label="Air flow past the sample (cm/s)" labelProps={{ fill: "rgb(var(--muted))", fontSize: 12, textAnchor: "middle", fontFamily: "IBM Plex Sans" }} />
+            <AxisLeft scale={y} stroke="rgb(var(--line))" tickStroke="rgb(var(--line))" numTicks={6} tickFormat={(v) => `${v}%`}
+              tickLabelProps={{ fill: "rgb(var(--muted))", fontSize: 11, fontFamily: "IBM Plex Mono", textAnchor: "end", dx: -4, dy: 3 }}
+              label="Oxygen" labelProps={{ fill: "rgb(var(--muted))", fontSize: 12, textAnchor: "middle", fontFamily: "IBM Plex Sans" }} />
+          </VGroup>
+        </svg>
+      )}
+      {hover && (
+        <div className="pointer-events-none absolute z-10" style={{ left: Math.min(w - 300, mg.left + x(hover.flow) + 14), top: Math.max(0, mg.top + y(hover.o2) - 90) }}>
+          <MapTip g={hover} />
+        </div>
+      )}
+    </div>
   );
 }

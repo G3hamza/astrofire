@@ -56,7 +56,7 @@ export function AtmosphereEvidenceCard({ rows }: { rows: AtmosphereTest[] }) {
                 : t.kind === "gas flame"
                   ? <>{t.investigation}: <b className="text-ink">{t.test_end_raw === "SE" ? "self-extinguished" : t.test_end_raw === "FT" ? "burned until flow stopped" : t.outcome.toLowerCase()}</b>{t.burn_time_s != null ? ` after ${t.burn_time_s} s` : ""}</>
                   : <>test ended by: <b className="text-ink">{t.outcome === "Burned" ? "completion" : t.outcome.toLowerCase()}</b>{t.burn_time_s != null ? ` after ${t.burn_time_s} s` : ""}</>}</span>
-              <span className="ml-auto flex gap-2"><SourceChip href={t.psi_url} /><FileRowChip file={t.source_file} row={t.source_row} /></span>
+              <span className="ml-auto flex min-w-0 max-w-full flex-wrap gap-2 [&>*]:max-w-full"><SourceChip href={t.psi_url} /><FileRowChip file={t.source_file} row={t.source_row} /></span>
             </li>
           ))}
         </ul>
@@ -76,7 +76,7 @@ export function GravityBoundsCard({ b }: { b: GravityBounds | null | undefined }
     <Card>
       <CardHeader eyebrow={`Bounding ${b.requested_gravity_g} g between 0 g and 1 g`} title="What NASA measured at each end of the gravity range"
         right={<Orbit className="text-muted" size={22} aria-hidden />} />
-      <div className="grid gap-4 px-5 py-4 text-sm md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 px-5 py-4 text-sm md:grid-cols-2 [&_li]:break-words">
         <div className="space-y-1">
           <p className="eyebrow">0 g: microgravity (ISS / Cygnus)</p>
           {lo.tests ? <p>{lo.tests} tests · outcomes {Object.entries(lo.outcomes).map(([k, v]) => `${k} ${v}`).join(", ")}

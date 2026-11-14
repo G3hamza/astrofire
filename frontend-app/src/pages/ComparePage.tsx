@@ -2,7 +2,9 @@ import { ArrowRight, GitCompare, Plus, X } from "lucide-react";
 import { useMemo, type ReactNode } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { ConfidenceBadge, EvidenceStatusBadge } from "../components/badges";
+import { OutcomeBars } from "../components/charts/OutcomeBars";
 import { SourceChip } from "../components/SourceChip";
+import { MISSION_MEDIA } from "../lib/missionMedia";
 import { Card, cx, ErrorState, Skeleton } from "../components/ui";
 import { useQuery } from "../lib/api";
 import { client } from "../lib/client";
@@ -48,15 +50,16 @@ export default function ComparePage() {
   const update = (i: number, patch: Partial<ScenarioRequest>) => setCols(cols.map((c, j) => (j === i ? { ...c, ...patch } : c)));
 
   return (
-    <div className="space-y-6">
-      <header className="space-y-2">
-        <p className="eyebrow">Compare scenarios</p>
-        <h1 className="text-h1">Side by side: what changes, and why</h1>
+    <div className="space-y-8">
+      <header className="max-w-3xl space-y-3">
+        <p className="kicker">Compare scenarios</p>
+        <h1 className="text-[2.2rem] font-semibold leading-tight tracking-tight text-ink sm:text-[2.6rem]">Side by side: what changes, and why.</h1>
+        <p className="text-lg text-muted">Up to four scenarios. Rows that differ are highlighted; every verdict links to its full evidence.</p>
         <div className="flex flex-wrap items-center gap-2 pt-1">
-          <span className="text-sm text-faint">Start from:</span>
+          <span className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-faint">Start from</span>
           {PRESETS.map((p) => (
             <button key={p.label} onClick={() => setCols(p.cols.map((x) => ({ o2_pct: 21, pressure_kpa: 101.3, gravity_g: 0, ...x })))}
-              className="rounded-full border border-line bg-raised px-3 py-1 text-sm text-muted hover:text-ink">{p.label}</button>
+              className="rounded-full border border-line px-3.5 py-1.5 text-sm text-muted transition-colors hover:border-ink/40 hover:text-ink">{p.label}</button>
           ))}
         </div>
       </header>
@@ -69,7 +72,7 @@ export default function ComparePage() {
           ))}
           {cols.length < 4 && (
             <button onClick={() => setCols([...cols, { ...cols[cols.length - 1] }])} aria-label="Add a scenario"
-              className="grid place-items-center rounded-card border border-dashed border-line text-muted hover:border-signal/60 hover:text-signal">
+              className="grid place-items-center rounded-card border border-dashed border-line text-muted hover:border-flare/60 hover:text-flare">
               <Plus size={20} />
             </button>
           )}
@@ -85,13 +88,18 @@ function ColumnEditor({ i, c, materials, onChange, onRemove }:
   { i: number; c: ScenarioRequest; materials: string[]; onChange: (p: Partial<ScenarioRequest>) => void; onRemove?: () => void }) {
   const opts = materials.includes(c.material) ? materials : [...materials, c.material];
   return (
-    <Card className="space-y-3 p-4">
-      <div className="flex items-center justify-between">
-        <span className="eyebrow">Scenario {String.fromCharCode(65 + i)}</span>
-        {onRemove && <button onClick={onRemove} aria-label={`Remove scenario ${String.fromCharCode(65 + i)}`} className="text-faint hover:text-ink"><X size={16} /></button>}
+    <Card className="overflow-hidden">
+      <div className="relative h-28 bg-raised">
+        {c.mission ? <img src={MISSION_MEDIA[c.mission].img} alt="" className="absolute inset-0 h-full w-full object-cover opacity-85" />
+          : <div className="grid-bg absolute inset-0 opacity-60" aria-hidden />}
+        <span className="absolute inset-0 bg-gradient-to-t from-surface via-surface/30 to-transparent" aria-hidden />
+        <span className="absolute left-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-flare font-semibold text-space">{String.fromCharCode(65 + i)}</span>
+        {onRemove && <button onClick={onRemove} aria-label={`Remove scenario ${String.fromCharCode(65 + i)}`} className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-black/60 text-ink hover:bg-black/80"><X size={15} /></button>}
+        <span className="absolute bottom-2 left-3 text-lg font-semibold text-ink">{SHORT[c.mission ?? "custom"]}</span>
       </div>
+      <div className="space-y-3 p-4">
       <select aria-label="Material" value={c.material} onChange={(e) => onChange({ material: e.target.value })}
-        className="h-9 w-full rounded-lg border border-line bg-raised px-2 text-sm text-ink">
+        className="h-10 w-full rounded-full border border-line bg-raised px-3 text-sm text-ink">
         {opts.map((m) => <option key={m} value={m}>{m}</option>)}
       </select>
       <div className="flex flex-wrap gap-1" role="radiogroup" aria-label="Mission">
@@ -99,7 +107,7 @@ function ColumnEditor({ i, c, materials, onChange, onRemove }:
           const on = (c.mission ?? "custom") === m;
           return (
             <button key={m} role="radio" aria-checked={on} onClick={() => onChange({ mission: m === "custom" ? null : (m as MissionKey) })}
-              className={cx("rounded-md border px-2 py-1 text-[12px] font-medium", on ? "border-signal bg-signal/15 text-signal" : "border-line text-muted hover:text-ink")}>
+              className={cx("rounded-full border px-2.5 py-1 text-[12px] font-medium", on ? "border-ink/30 bg-ink/10 text-ink" : "border-line text-muted hover:text-ink")}>
               {SHORT[m]}
             </button>
           );
@@ -113,6 +121,7 @@ function ColumnEditor({ i, c, materials, onChange, onRemove }:
         </div>
       )}
       <Num label="Air flow cm/s" v={c.flow_cm_s!} onChange={(v) => onChange({ flow_cm_s: v })} />
+      </div>
     </Card>
   );
 }
@@ -167,6 +176,11 @@ function Results({ cols }: { cols: ScenarioRequest[] }) {
   return (
     <div className="space-y-4">
       <ChangeSummary cols={cols} rs={rs} />
+      <Card className="p-5 sm:p-6">
+        <p className="kicker">Evidence profile</p>
+        <p className="mb-4 mt-1 text-h3 text-ink">How the closest NASA tests ended, per scenario</p>
+        <OutcomeBars rows={rs.map((r, i) => ({ name: `${String.fromCharCode(65 + i)} · ${SHORT[cols[i].mission ?? "custom"]}`, outcomes: r.evidence.map((e) => e.outcome) }))} />
+      </Card>
       <Card>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[720px] text-left text-sm">
@@ -175,6 +189,7 @@ function Results({ cols }: { cols: ScenarioRequest[] }) {
                 <th scope="col" className="eyebrow w-44 px-4 py-3 font-medium">Compare</th>
                 {cols.map((c, i) => (
                   <th key={i} scope="col" className="px-4 py-3 align-top">
+                    {c.mission && <img src={MISSION_MEDIA[c.mission].img} alt="" className="mb-2 h-14 w-full rounded-lg object-cover opacity-80" />}
                     <span className="eyebrow">Scenario {String.fromCharCode(65 + i)}</span>
                     <div className="font-semibold text-ink">{c.material}</div>
                     <div className="text-muted">{SHORT[c.mission ?? "custom"]}</div>
@@ -187,9 +202,9 @@ function Results({ cols }: { cols: ScenarioRequest[] }) {
               {rows.map((row) => {
                 const differs = new Set(rs.map(row.key)).size > 1;
                 return (
-                  <tr key={row.label} className={cx("border-b border-line/40 align-top", differs && "bg-signal/[0.04]")}>
+                  <tr key={row.label} className={cx("border-b border-line/40 align-top", differs && "bg-flare/[0.04]")}>
                     <th scope="row" className="px-4 py-3 font-medium text-muted">
-                      {row.label}{differs && <span className="ml-1.5 rounded bg-signal/15 px-1 text-[10px] font-semibold uppercase text-signal" title="Differs between scenarios">differs</span>}
+                      {row.label}{differs && <span className="ml-1.5 rounded-full bg-flare/15 px-1.5 text-[10px] font-semibold uppercase text-flare" title="Differs between scenarios">differs</span>}
                     </th>
                     {rs.map((r, i) => <td key={i} className="px-4 py-3">{row.cell(r)}</td>)}
                   </tr>

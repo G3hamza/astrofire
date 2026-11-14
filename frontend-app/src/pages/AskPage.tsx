@@ -3,6 +3,7 @@ import { Button, Card, CardHeader, cx, ErrorState } from "../components/ui";
 import { useSearchParams } from "react-router-dom";
 import { api } from "../lib/api";
 
+import { heroTitle, PageHero } from "../components/PageHero";
 /* Basic, functional UI on purpose: all logic lives in POST /api/ask so a later redesign keeps it. */
 
 type Evidence = { id: string; kind: string; text: string; acronym?: string; investigation_id?: string; source_file?: string;
@@ -117,12 +118,12 @@ export default function AskPage() {
   const [sp] = useSearchParams();
   return (
     <div className="space-y-6">
-      <header className="space-y-2">
-        <p className="eyebrow">Evidence-grounded analyst</p>
-        <h1 className="text-h1 text-ink">Ask NASA's fire data</h1>
+      <PageHero photo="iss" variant="band">
+        <p className="kicker">Evidence-grounded analyst</p>
+        <h1 className={heroTitle}>Ask NASA's fire data</h1>
         <p className="max-w-3xl text-muted">Every answer is built from NASA PSI records through StarryNight's engines. Click an [E#] citation to see the record,
           file and row. Verdicts come from the rule engine; the AI only explains them.</p>
-      </header>
+      </PageHero>
       <AskChat initialQuestion={sp.get("q")} />
     </div>
   );

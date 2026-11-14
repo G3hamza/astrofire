@@ -34,7 +34,7 @@ export function EvidenceDrawer({ row, onClose }: { row: EvidenceRow | null; onCl
   const keys = rec ? [...FIRST.filter((k) => k in rec), ...Object.keys(rec).filter((k) => !FIRST.includes(k) && !HIDE.has(k))] : [];
 
   return (
-    <div className={cx("fixed inset-0 z-50 transition", row ? "pointer-events-auto" : "pointer-events-none")} aria-hidden={!row}>
+    <div className={cx("fixed inset-0 z-50 overflow-hidden transition", row ? "pointer-events-auto" : "pointer-events-none")} aria-hidden={!row}>
       <div onClick={onClose} className={cx("absolute inset-0 bg-space/70 backdrop-blur-sm transition-opacity", row ? "opacity-100" : "opacity-0")} />
       <aside role="dialog" aria-modal="true" aria-labelledby="drawer-title"
         className={cx("absolute right-0 top-0 flex h-full w-full max-w-xl flex-col border-l border-line bg-surface shadow-2xl transition-transform duration-200",

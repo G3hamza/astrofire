@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Card, CardHeader } from "../components/ui";
 
+import { heroTitle, PageHero } from "../components/PageHero";
 /* The project at a glance, organised by the five Space Apps judging criteria, plus the AI-use disclosure.
    Every claim here is checkable in the app (links) or the repo (tests, eval report). */
 
@@ -65,13 +66,13 @@ function Point({ p }: { p: { text: string; to?: string; href?: string } }) {
 export default function AboutPage() {
   return (
     <div className="space-y-8">
-      <header className="space-y-2">
-        <p className="eyebrow">NASA Space Apps Cairo 2026 · Flame in Freefall · Team Starry Night</p>
-        <h1 className="text-h1 text-ink">About StarryNight</h1>
+      <PageHero photo="flame0g">
+        <p className="kicker">NASA Space Apps Cairo 2026 · Flame in Freefall · Team Starry Night</p>
+        <h1 className={heroTitle}>About StarryNight</h1>
         <p className="max-w-3xl text-muted">StarryNight turns NASA's space combustion experiments into fire-safety answers for spacecraft, the ISS,
           Moon and Mars bases and rovers. It answers three questions from real NASA tests: will it burn, what proves it, and how sure are we,
           and it says plainly when NASA has no evidence.</p>
-      </header>
+      </PageHero>
 
       <div className="grid gap-4 lg:grid-cols-2">
         {CRITERIA.map((c) => (

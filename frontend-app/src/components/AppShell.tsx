@@ -134,7 +134,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main id="main" className="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6">{children}</main>
+      <main id="main" className="mx-auto w-full max-w-7xl flex-1 overflow-x-clip px-4 py-8 sm:px-6">{children}</main>
       <AskPanel />
 
       <footer className="mt-16 border-t border-line/60">
