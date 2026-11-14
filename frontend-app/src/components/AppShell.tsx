@@ -1,6 +1,7 @@
 import { ChartScatter, Wrench, MessageSquareText, Database, GitCompare, FlaskConical, Flame, Grid3x3, ShieldCheck, Home, Layers, ListOrdered, Palette, Rocket } from "lucide-react";
 import type { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
+import { AskPanel } from "./AskPanel";
 import { cx } from "./ui";
 
 const NAV = [
@@ -56,6 +57,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
       </header>
       <main id="main" className="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6">{children}</main>
+      <AskPanel />
       <footer className="border-t border-line/60 py-5 text-center text-sm text-faint">
         AstroFire · NASA Space Apps Cairo 2026 · Flame in Freefall · Team Starry Night ·{" "}
         <a href="/lite/">Lite version</a>

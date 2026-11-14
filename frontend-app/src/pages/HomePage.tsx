@@ -1,5 +1,6 @@
-import { ArrowRight, Droplets, Flame, Grid3x3, Orbit, Rocket, GitCompare } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ArrowRight, Droplets, Flame, Grid3x3, MessageSquareText, Orbit, Rocket, GitCompare } from "lucide-react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { KpiTile } from "../components/KpiTile";
 import { SourceChip } from "../components/SourceChip";
 import { cx, ErrorState, Skeleton } from "../components/ui";
@@ -70,6 +71,7 @@ export default function HomePage() {
           <CTA to="/compare" Icon={GitCompare}>Compare missions</CTA>
           <CTA to="/gaps" Icon={Grid3x3}>See the gaps</CTA>
         </div>
+        <AskBox />
       </section>
 
       {/* ---------- Closest real space data to habitat air ---------- */}
@@ -155,5 +157,28 @@ function CTA({ to, children, Icon, primary }: { to: string; children: string; Ic
     )}>
       <Icon size={18} aria-hidden /> {children}
     </Link>
+  );
+}
+
+
+/** "Ask AstroFire" on Home: type a question (or a scenario in your own words) and get a cited answer on /ask. */
+function AskBox() {
+  const [q, setQ] = useState("");
+  const nav = useNavigate();
+  const go = (text: string) => { const t = text.trim(); if (t) nav(`/ask?q=${encodeURIComponent(t)}`); };
+  const examples = ["Would Nomex burn at 30% oxygen and 71 kPa on the Moon?", "Which investigations matter most for a Mars base?"];
+  return (
+    <div className="relative mt-6 max-w-3xl space-y-2">
+      <form className="flex flex-wrap gap-2 rounded-card border border-signal/40 bg-surface/90 p-2 shadow-glow" onSubmit={(e) => { e.preventDefault(); go(q); }}>
+        <MessageSquareText size={20} className="ml-2 self-center text-signal" aria-hidden />
+        <input aria-label="Ask AstroFire a question" maxLength={1000} value={q} onChange={(e) => setQ(e.target.value)}
+          placeholder="Ask AstroFire anything, or describe a scenario in your own words…"
+          className="min-w-0 flex-1 bg-transparent px-2 py-2 text-base text-ink placeholder:text-faint focus:outline-none" />
+        <button type="submit" disabled={!q.trim()} className="rounded-lg bg-signal px-4 py-2 font-semibold text-space disabled:opacity-50">Ask</button>
+      </form>
+      <p className="text-sm text-muted">Try:{" "}
+        {examples.map((e, i) => <span key={e}>{i > 0 && " · "}<button type="button" className="text-signal underline-offset-2 hover:underline" onClick={() => go(e)}>{e}</button></span>)}
+      </p>
+    </div>
   );
 }

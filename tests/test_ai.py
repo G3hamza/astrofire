@@ -335,3 +335,8 @@ def test_fallback_chain_order(monkeypatch):
     assert config.fallbacks() == [("groq", "qwen/qwen3.8-27b"), ("anthropic", "claude-haiku-5-5")]   # duplicates removed
     monkeypatch.setenv("ANTHROPIC_API_KEY", "")
     assert config.fallbacks() == [("groq", "qwen/qwen3.8-27b")]                                     # no key -> skipped
+
+
+def test_llm_output_is_plain_text():
+    from ai.llm import normalize
+    assert normalize("The verdict is **Insufficient** for CFI‑G at 30 % O₂") == "The verdict is Insufficient for CFI-G at 30% O2"

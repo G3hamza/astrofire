@@ -111,9 +111,9 @@ export default function ScenarioPage() {
             <p className="text-[12px] text-faint">Moving oxygen, pressure or gravity switches the preset to custom conditions.</p>
           </div>
 
-          <details className="group border-t border-line/60 pt-4">
+          <details open className="group border-t border-line/60 pt-4">
             <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium text-signal">
-              <MessageSquareText size={15} aria-hidden /> Or describe it in words
+              <MessageSquareText size={15} aria-hidden /> Describe it in your own words
               <ChevronDown size={14} className="ml-auto transition group-open:rotate-180" aria-hidden />
             </summary>
             <div className="mt-3">

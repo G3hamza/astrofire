@@ -28,6 +28,7 @@ _TYPO = str.maketrans({"‐": "-", "‑": "-", "‒": "-", "–": "-", "−": "-
 def normalize(text: str) -> str:
     """Plain ASCII hyphens/spaces/subscripts so names (CFI-G, SAME-R, O2) stay searchable and consistent; '30 %' -> '30%'."""
     t = (text or "").translate(_TYPO)
+    t = re.sub(r"\*\*(.+?)\*\*|__(.+?)__", lambda m: m.group(1) or m.group(2), t)   # the UI shows plain text: drop markdown bold
     return re.sub(r"(\d)\s+%", lambda m: m.group(1) + "%", t)
 
 

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Button, Card, CardHeader, cx, ErrorState } from "../components/ui";
+import { useSearchParams } from "react-router-dom";
 import { api } from "../lib/api";
 
 /* Basic, functional UI on purpose: all logic lives in POST /api/ask so a later redesign keeps it. */
@@ -54,15 +55,17 @@ function Answer({ r, onAsk }: { r: AskResult; onAsk: (q: string) => void }) {
   );
 }
 
-export default function AskPage() {
+/** The chat itself: used full-size on /ask and compact in the "Ask AI" side panel on every page. */
+export function AskChat({ compact = false, initialQuestion }: { compact?: boolean; initialQuestion?: string | null }) {
   const [turns, setTurns] = useState<Turn[]>([]);
   const [q, setQ] = useState("");
   const [habitat, setHabitat] = useState("");
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState<Status | null>(null);
   const end = useRef<HTMLDivElement>(null);
+  const asked = useRef(false);
   useEffect(() => { api<Status>("/api/ask/status").then(setStatus).catch(() => setStatus(null)); }, []);
-  useEffect(() => { end.current?.scrollIntoView({ behavior: "smooth" }); }, [turns]);
+  useEffect(() => { if (turns.length) end.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }); }, [turns]);
 
   const ask = async (question: string) => {
     const text = question.trim();
@@ -76,7 +79,42 @@ export default function AskPage() {
       setTurns((t) => t.map((x, i) => i === t.length - 1 ? { ...x, error: (e as Error).message } : x));
     } finally { setBusy(false); }
   };
+  useEffect(() => {  // question handed over from the Home page box (/ask?q=...)
+    if (initialQuestion && !asked.current) { asked.current = true; ask(initialQuestion); }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialQuestion]);
 
+  return (
+    <div className="space-y-4">
+      {status && <p className="text-xs text-muted">{status.ai_enabled ? `AI: ${status.provider} / ${status.model}` : "AI off: template answers (no API key)"} ·
+        retrieval {status.retrieval} over {status.knowledge_base_chunks} PSI passages</p>}
+      {turns.length === 0 && <div className="flex flex-wrap gap-2">{(compact ? STARTERS.slice(0, 4) : STARTERS).map((s) =>
+        <Button key={s} variant="secondary" className={compact ? "text-xs" : undefined} onClick={() => ask(s)}>{s}</Button>)}</div>}
+      <div className="space-y-4">
+        {turns.map((t, i) => (
+          <Card key={i}>
+            <CardHeader eyebrow="Question" title={t.q} />
+            <div className={compact ? "px-4 py-3" : "px-5 py-4"}>
+              {t.r ? <Answer r={t.r} onAsk={ask} /> : t.error ? <ErrorState message={t.error} onRetry={() => ask(t.q)} />
+                : <p className="text-sm text-muted" aria-live="polite">Retrieving NASA evidence and checking it…</p>}
+            </div>
+          </Card>))}
+        <div ref={end} />
+      </div>
+      <form className="sticky bottom-0 flex flex-wrap gap-2 rounded-card border border-line bg-surface p-3 shadow-card" onSubmit={(e) => { e.preventDefault(); ask(q); }}>
+        <select aria-label="Habitat" className="rounded border border-line bg-raised px-2 py-1 text-sm" value={habitat} onChange={(e) => setHabitat(e.target.value)}>
+          {HABITATS.map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+        </select>
+        <input aria-label="Question" className="min-w-0 flex-1 rounded border border-line bg-raised px-3 py-2 text-sm" maxLength={1000}
+          placeholder="Ask about NASA fire tests, a habitat, a material…" value={q} onChange={(e) => setQ(e.target.value)} />
+        <Button type="submit" disabled={busy || !q.trim()}>{busy ? "Working…" : "Ask"}</Button>
+      </form>
+    </div>
+  );
+}
+
+export default function AskPage() {
+  const [sp] = useSearchParams();
   return (
     <div className="space-y-6">
       <header className="space-y-2">
@@ -84,29 +122,8 @@ export default function AskPage() {
         <h1 className="text-h1 text-ink">Ask NASA's fire data</h1>
         <p className="max-w-3xl text-muted">Every answer is built from NASA PSI records through AstroFire's engines. Click an [E#] citation to see the record,
           file and row. Verdicts come from the rule engine; the AI only explains them.</p>
-        {status && <p className="text-xs text-muted">{status.ai_enabled ? `AI: ${status.provider} / ${status.model}` : "AI off: template answers (no API key)"} ·
-          retrieval {status.retrieval} over {status.knowledge_base_chunks} PSI passages</p>}
       </header>
-      {turns.length === 0 && <div className="flex flex-wrap gap-2">{STARTERS.map((s) => <Button key={s} variant="secondary" onClick={() => ask(s)}>{s}</Button>)}</div>}
-      <div className="space-y-4">
-        {turns.map((t, i) => (
-          <Card key={i}>
-            <CardHeader eyebrow="Question" title={t.q} />
-            <div className="px-5 py-4">
-              {t.r ? <Answer r={t.r} onAsk={ask} /> : t.error ? <ErrorState message={t.error} onRetry={() => ask(t.q)} />
-                : <p className="text-sm text-muted" aria-live="polite">Retrieving NASA evidence and checking it…</p>}
-            </div>
-          </Card>))}
-        <div ref={end} />
-      </div>
-      <form className="sticky bottom-4 flex flex-wrap gap-2 rounded-card border border-line bg-surface p-3" onSubmit={(e) => { e.preventDefault(); ask(q); }}>
-        <select aria-label="Habitat" className="rounded border border-line bg-raised px-2 py-1 text-sm" value={habitat} onChange={(e) => setHabitat(e.target.value)}>
-          {HABITATS.map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-        </select>
-        <input aria-label="Question" className="min-w-0 flex-1 rounded border border-line bg-raised px-3 py-2 text-sm" maxLength={1000}
-          placeholder="Ask about PSI combustion investigations, a habitat, a material…" value={q} onChange={(e) => setQ(e.target.value)} />
-        <Button type="submit" disabled={busy || !q.trim()}>{busy ? "Working…" : "Ask"}</Button>
-      </form>
+      <AskChat initialQuestion={sp.get("q")} />
     </div>
   );
 }
