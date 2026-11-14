@@ -23,7 +23,11 @@ AstroFire answers, from **real NASA space fire tests**: **Will it burn? What pro
 **Data scope:** only NASA's PSI combustion repository and the pages on the Space Apps challenge resources tab. Features that needed
 other sources (NTRS papers: drop-tower margins, paper-reported tests) were removed; the AI analyst uses a PSI-only knowledge base. How it all works: [`docs/HOW_IT_WORKS.md`](docs/HOW_IT_WORKS.md) (short) and the full guide [`docs/guide/`](docs/guide/README.md).
 
-## Deploy (Docker: Render, Railway, Hugging Face Spaces)
+## Deploy
+**Vercel (free, no card):** import the GitHub repo in Vercel; `vercel.json` builds the React app as static files and runs the FastAPI
+app (`api/index.py`) as a Python function for `/api/*`, `/ai/*`, `/docs`. Set `GROQ_API_KEY` (optional) in Vercel → Settings → Environment Variables.
+
+## Deploy with Docker (Render, Railway, Azure Container Apps)
 The `Dockerfile` builds the React app, runs the pipeline and serves everything on `$PORT`. `render.yaml` is a ready Render Blueprint.
 No API key is needed (the AI analyst runs in template mode; add a key in `.env` for AI-written answers, see `.env.example`). PSI data is CC0.
 

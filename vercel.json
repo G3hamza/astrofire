@@ -1,0 +1,20 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "echo \"dependencies are installed in buildCommand\"",
+  "buildCommand": "cd frontend-app && npm ci --legacy-peer-deps --no-audit --no-fund && npm run build && mkdir -p dist/lite && cp -r ../frontend/. dist/lite/",
+  "outputDirectory": "frontend-app/dist",
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 60,
+      "excludeFiles": "{data/raw/**,frontend-app/**,frontend/**,docs/**,tests/**,notebooks/**,schemas/**,scripts/**,**/*.parquet}"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index" },
+    { "source": "/ai/(.*)", "destination": "/api/index" },
+    { "source": "/docs", "destination": "/api/index" },
+    { "source": "/openapi.json", "destination": "/api/index" },
+    { "source": "/lite", "destination": "/lite/index.html" },
+    { "source": "/((?!assets/|lite/|api/).*)", "destination": "/index.html" }
+  ]
+}
