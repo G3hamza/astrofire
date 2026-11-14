@@ -351,3 +351,12 @@ def test_greetings_get_an_introduction_not_a_refusal(q):
 def test_real_off_topic_still_refused():
     assert analyze("What is the best pizza in Cairo?")["answer"] == G.OFF_TOPIC
     assert analyze("Help me design a solid rocket propellant")["intent"] == "out_of_scope"
+
+
+def test_arabic_and_vague_questions_are_answered():
+    r = analyze("هل النومكس يحترق على القمر عند ٣٤٪ أكسجين و ٥٦.٥ كيلو باسكال؟")
+    assert r["intent"] == "scenario" and r["answer"].startswith("Insufficient validated experimental evidence")
+    assert analyze("ايه أهم تجارب ناسا لقاعدة على المريخ؟")["intent"] == "rank"
+    for q in ("ازيك", "how does it work", "explain the results"):
+        assert analyze(q)["intent"] == "about", q
+    assert analyze("What is the best pizza in Cairo?")["answer"] == G.OFF_TOPIC

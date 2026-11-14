@@ -29,7 +29,42 @@ MAX_Q, MAX_TURNS, MAX_TURN_CHARS = 1000, 6, 1500
 
 # Greetings and "what are you / what can you do / help" get an introduction, not the off-topic refusal.
 ABOUT = re.compile(r"^\s*(hi|hello|hey|salam|good (morning|evening|afternoon))\b|\b(what|who) are you\b|\bwhat (can|do) you do\b"
-                   r"|\bwhat is (this|astrofire)\b|\bhow (do|can) (i|you) (use|help)|^\s*help\s*[?!.]*\s*$|\bwhat can i ask\b|\bintroduce yourself\b", re.I)
+                   r"|\bwhat is (this|astrofire)\b|\bhow (do|can) (i|you) (use|help)|^\s*help\s*[?!.]*\s*$|\bwhat can i ask\b|\bintroduce yourself\b"
+                   r"|\bhow (does|do) (it|this|you|that) work\b|\bexplain (the |these |this |my |your )?(results?|answers?|verdicts?|output|screen|page)\b"
+                   r"|\bwhat (does|do) (this|it|that|these) mean\b|\bhow (do|should|can) i read\b|\bwhere (do|should) i start\b"
+                   r"|\bwhat should i (ask|do)\b|\bwhat (now|next)\s*\??\s*$|\bshow me (around|how)\b", re.I)
+
+# Arabic (incl. Egyptian) questions: map known words to English hints so routing and the engines understand them.
+_AR_CHARS = re.compile(r"[؀-ۿ]")
+_AR_DIGITS = str.maketrans("٠١٢٣٤٥٦٧٨٩٫", "0123456789.")
+_AR_TERMS = [
+    (r"(^|\s)(هل|ممكن|يا ترى)\s", "does"), (r"(هيحصل|يحصل|بيحصل|حيحصل) (ايه|إيه)|(ايه|إيه) (اللي )?(هيحصل|يحصل|حيحصل)|ماذا يحدث", "what happens to"),
+    (r"نومكس|نوميكس", "Nomex"), (r"أكريليك|اكريليك|بليكسي", "acrylic PMMA"), (r"سيليكون|سليكون", "silicone"),
+    (r"قطن", "cotton"), (r"قماش|نسيج", "fabric"), (r"بلاستيك", "plastic"), (r"مادة|مواد|خامة|خامات|ماتريال", "material"),
+    (r"القمر|قمر", "Moon"), (r"المريخ|مريخ", "Mars"), (r"محطة الفضاء|المحطة الدولية|المحطة الفضائية", "ISS"),
+    (r"مركبة|سفينة فضاء|كبسولة", "spacecraft"), (r"روفر|عربة", "rover"), (r"قاعدة|مستعمرة|سكن|مسكن|موطن", "habitat"),
+    (r"فضاء", "space"), (r"حريق|حرائق|نار|النار", "fire"), (r"يحترق|تحترق|احتراق|يولع|تولع|بتولع|هيولع|هتولع|يشتعل|اشتعال", "burn"),
+    (r"لهب|شعلة", "flame"), (r"دخان", "smoke"), (r"أكسجين|اكسجين|الاكسجين|الأكسجين|أوكسجين|اوكسجين", "oxygen"),
+    (r"ضغط", "pressure"), (r"جاذبية|الجاذبية", "gravity"), (r"ناسا", "NASA"), (r"تجربة|تجارب|اختبار|اختبارات", "experiment test"),
+    (r"بيانات|داتا", "data"), (r"إطفاء|اطفاء|يطفي|تطفي|طفاية", "extinguish suppression"), (r"كاشف|حساس|سنسور", "detector"),
+    (r"رواد|رائد|طاقم", "crew"), (r"فجوة|فجوات|متجربش|ما اتجربش|لم يختبر|لم تختبر", "gap never tested"),
+    (r"قارن|مقارنة|الفرق بين", "compare"), (r"رتب|ترتيب|أهم|اهم", "rank which most relevant"), (r"لخص|ملخص|تلخيص", "summarize"),
+    (r"كيلو ?باسكال", "kPa"), (r"الأرض|الارض", "Earth"),
+]
+_AR_GREETING = re.compile(r"مرحب|اهلا|أهلا|السلام|ازيك|إزيك|انت مين|إنت مين|أنت مين|من أنت|من انت|بتعمل ايه|بتعمل إيه|تقدر تعمل|"
+                          r"تعمل ايه|ساعدني|اسأل ايه|أسأل ايه|ازاي استخدم|إزاي أستخدم|بيشتغل ازاي|بيشتغل إزاي")
+
+
+def _from_arabic(q: str) -> str:
+    """Arabic question -> the same text plus English hints ("[Nomex Moon burn]"); numbers and % normalised."""
+    if not _AR_CHARS.search(q):
+        return q
+    q = q.translate(_AR_DIGITS).replace("٪", "%")
+    q = re.sub(r"(\d+(?:\.\d+)?)\s*(?:في|ف|بال)\s*الم[يئ]ة", r"\1%", q)
+    hints = [en for ar, en in _AR_TERMS if re.search(ar, q)]
+    if not hints and _AR_GREETING.search(q):
+        hints = ["who are you"]
+    return f"{q} [{' '.join(hints)}]" if hints else q
 ABOUT_ANSWER = ("I'm AstroFire's evidence-grounded analyst. I answer questions about NASA's Physical Sciences Informatics (PSI) "
                 "combustion experiments (24 investigations flown on the ISS and the Cygnus spacecraft) for spacecraft, ISS, Moon "
                 "and Mars base fire safety. Every answer is built from NASA records through AstroFire's engines and cites its sources; "
@@ -280,7 +315,7 @@ def _template(intent: str, msg: str, ent: dict, reg: Registry, ctx: dict) -> dic
 def analyze(question: str, habitat: str | None = None, history: list | None = None) -> dict:
     t0 = time.time()
     rid = uuid.uuid4().hex[:12]
-    q = (question or "").strip()
+    q = _from_arabic((question or "").strip())
     status = llm_status()
     base = {"request_id": rid, "tools_used": [], "evidence": [], "sources": [], "findings": [], "interpretation": [], "limits": [],
             "insufficient_evidence": False, "guardrails": [], "model": status["model"]}
