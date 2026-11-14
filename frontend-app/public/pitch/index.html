@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>StarryNight Pitch</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@600;700&display=swap">
+<style>
+/* Layout: 16:9 stage (1280x720) scaled to fit. Every slide: a mono top line (section + number), a headline, one clear visual.
+   Single dark theme by choice: it is presented on a projector and matches the StarryNight product. */
+:root{
+  --void:#05070d; --panel:#0b0f1a; --raised:#121828; --line:#222c44;
+  --ink:#ecf1f8; --muted:#a0adc4; --faint:#74819a;
+  --signal:#5ce1e6; --flare:#ffb84d; --burn:#ea6624; --danger:#f85e6a; --ok:#34d399; --out:#4b8ff7;
+  --display:"IBM Plex Sans Condensed","IBM Plex Sans","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",Consolas,ui-monospace,monospace;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--void);color:var(--ink);font-family:var(--body);overflow:hidden;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+#sky{position:fixed;inset:0;width:100%;height:100%;display:block}
+.viewport{position:fixed;inset:0 0 calc(64px + env(safe-area-inset-bottom,0px));display:grid;place-items:center}
+.stage{width:1280px;height:720px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);transform-origin:center center}
+.slide{position:absolute;inset:0;display:grid;grid-template-rows:auto auto 1fr;gap:16px;padding:40px 64px 44px;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s}
+.slide.on{opacity:1;visibility:visible}
+.top{display:flex;justify-content:space-between;align-items:center;font:500 14px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--signal)}
+.top .brand{display:flex;align-items:center;gap:10px;color:var(--muted);letter-spacing:.08em}
+.star{width:18px;height:18px}
+h1,h2,h3{margin:0;line-height:1.04;text-wrap:balance}
+h2{font-family:var(--display);font-size:54px;font-weight:700;letter-spacing:-.01em;max-width:22ch}
+h2 em{font-style:normal;color:var(--flare)}
+.sub{font-size:22px;line-height:1.45;color:var(--muted);max-width:60ch}
+p{margin:0}
+.body{min-height:0;display:grid}
+.mono{font-family:var(--mono)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.label{font:500 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+img{display:block;max-width:100%}
+.shot{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#000;box-shadow:0 24px 60px -24px rgba(0,0,0,.8)}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top left}
+.credit{font:400 11px var(--mono);color:var(--faint)}
+
+/* 1 title */
+.title{grid-template-rows:1fr;padding:0 64px}
+.title .wrap{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:24px;height:100%}
+.title h1{font-family:var(--display);font-size:118px;font-weight:700;letter-spacing:-.02em}
+.title h1 span{color:var(--signal)}
+.title .tag{font-size:32px;line-height:1.25;font-weight:600;max-width:20ch;margin-top:16px}
+.title .tag em{font-style:normal;color:var(--flare)}
+.title .who{margin-top:30px;display:grid;gap:6px;font:400 16px var(--mono);color:var(--muted)}
+.title .who b{color:var(--ink);font-weight:500}
+canvas.fl{width:440px;height:520px;display:block;justify-self:center}
+
+/* 2 problem */
+.split{display:grid;grid-template-columns:1fr 500px;gap:36px;align-items:center}
+.facts{display:grid;gap:14px}
+.fact{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:center;padding:16px 20px}
+.fact.hot{border-color:var(--flare)}
+.ico{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;background:var(--raised)}
+.ico svg{width:28px;height:28px;stroke:var(--signal);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fact.hot .ico svg{stroke:var(--flare)}
+.fact h3{font-size:22px;font-weight:600}
+.fact p{font-size:17px;color:var(--muted);line-height:1.4;margin-top:2px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.duo figure{margin:0;padding:12px 10px 14px;display:grid;justify-items:center;gap:8px}
+.duo canvas{width:220px;height:290px}
+.duo figcaption{font-size:19px;font-weight:600;text-align:center}
+.duo figcaption span{display:block;font:400 14px var(--mono);color:var(--faint)}
+
+/* 3 why */
+.inc{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-content:center}
+.inc article{overflow:hidden;display:grid;grid-template-rows:200px auto}
+.inc .ph{position:relative;background:#000}
+.inc .ph img{width:100%;height:100%;object-fit:cover}
+.inc .ph b{position:absolute;left:16px;bottom:12px;font:700 30px var(--display);text-shadow:0 2px 12px #000}
+.inc .ph i{position:absolute;left:14px;top:12px;font:500 12px var(--mono);font-style:normal;background:rgba(0,0,0,.65);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:4px 10px}
+.inc .tx{padding:16px 18px 18px;display:grid;gap:8px}
+.inc .tx p{font-size:17px;line-height:1.42;color:var(--ink)}
+.inc .tx p+p{color:var(--muted);font-size:15px}
+
+/* 4 gap */
+.gapg{display:grid;grid-template-columns:420px 1fr;gap:36px;align-items:center}
+.big{font:700 150px/0.9 var(--display);color:var(--ink);letter-spacing:-.03em}
+.big small{display:block;font:500 16px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+.bars{padding:26px 28px;display:grid;gap:18px}
+.bar{display:grid;grid-template-columns:200px 1fr 120px;gap:14px;align-items:center;font-size:17px}
+.bar .tr{position:relative;height:30px;background:var(--raised);border-radius:8px}
+.bar .tr span{position:absolute;top:0;bottom:0;border-radius:8px}
+.bar .v{font:500 16px var(--mono);text-align:right}
+.axis{display:grid;grid-template-columns:200px 1fr 120px;gap:14px;font:400 12px var(--mono);color:var(--faint)}
+.axis div{display:flex;justify-content:space-between}
+.zero{color:var(--danger)}
+
+/* 5 platform */
+.plat{display:grid;grid-template-columns:600px 1fr;gap:30px;align-items:center}
+.plat .shot{height:420px}
+.caps{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cap{padding:16px 18px;display:grid;gap:4px}
+.cap h3{font-size:19px;font-weight:600}
+.cap p{font-size:15px;color:var(--muted);line-height:1.38}
+.cap .label{color:var(--signal)}
+
+/* 6 scenario */
+.scen{display:grid;grid-template-columns:1fr 440px;gap:28px;align-items:center}
+.scen .shot{height:430px}
+.verd{display:grid;gap:14px}
+.vcard{padding:18px 20px;display:grid;gap:6px}
+.vcard .label{color:var(--muted)}
+.vcard h3{font:700 26px var(--display)}
+.vcard.mid{border-color:rgba(251,191,36,.6)} .vcard.mid h3{color:#fbbf24}
+.vcard.no{border-color:rgba(248,94,106,.7);box-shadow:0 0 30px -10px rgba(248,94,106,.6)} .vcard.no h3{color:var(--danger)}
+.vcard ul{margin:4px 0 0;padding-left:20px;font-size:15px;color:var(--muted);line-height:1.45}
+
+/* 7 how */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;align-content:center;position:relative}
+.step{padding:22px 20px;margin:0 8px;display:grid;gap:10px;align-content:start;min-height:300px}
+.step .n{font:500 13px var(--mono);color:var(--signal);letter-spacing:.14em}
+.step h3{font:700 26px var(--display)}
+.step p{font-size:16px;color:var(--muted);line-height:1.45}
+.step .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.step .tags span{font:400 12px var(--mono);border:1px solid var(--line);border-radius:999px;padding:3px 9px;color:var(--ink)}
+.step.hot{border-color:var(--flare)}
+.arrowrow{display:grid;grid-template-columns:repeat(4,1fr);margin-top:14px;font:400 13px var(--mono);color:var(--faint);text-align:center}
+
+/* 8 AI */
+.aig{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.rules{display:grid;gap:10px}
+.rule{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;padding:14px 16px;font-size:17px;line-height:1.4}
+.rule b{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--raised);color:var(--signal);font:500 14px var(--mono)}
+.evals{padding:24px;display:grid;gap:16px}
+.ev{display:grid;grid-template-columns:1fr 90px;gap:12px;align-items:center}
+.ev .tr{height:12px;background:var(--raised);border-radius:6px;overflow:hidden;margin-top:6px}
+.ev .tr span{display:block;height:100%;background:var(--signal)}
+.ev .v{font:500 26px var(--mono);text-align:right}
+.ev p{font-size:16px}
+
+/* 9 rank + apply */
+.rk{display:grid;grid-template-columns:620px 1fr;gap:28px;align-items:center}
+.rk .shot{height:400px}
+.uses{display:grid;gap:12px}
+.use{padding:16px 18px;display:grid;gap:4px}
+.use h3{font-size:20px;font-weight:600}
+.use p{font-size:15px;color:var(--muted);line-height:1.4}
+
+/* 10 changed */
+.chg{display:grid;gap:10px;align-content:center}
+.chg .row{display:grid;grid-template-columns:240px 1fr 1fr;gap:16px;align-items:start;padding:12px 18px}
+.chg .row.h{background:none;border:none;padding:0 18px}
+.chg .row.h div{font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.chg .row div:first-child{font-weight:600;font-size:17px}
+.chg .was{font-size:16px;color:var(--muted);line-height:1.4}
+.chg .now{font-size:16px;line-height:1.4}
+.chg .now b{color:var(--signal);font-weight:600}
+
+/* 11 validity */
+.val{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-content:start}
+.kpi{padding:20px;display:grid;gap:6px}
+.kpi .v{font:700 54px/1 var(--display)}
+.kpi p{font-size:15px;color:var(--muted);line-height:1.4}
+.next{grid-column:1/-1;padding:20px 22px;display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start}
+.next ol{margin:0;padding-left:20px;display:grid;grid-template-columns:1fr 1fr;gap:8px 28px;font-size:17px;line-height:1.4}
+
+/* 12 close */
+.close{grid-template-rows:1fr;padding:0}
+.close .bg{position:absolute;inset:0;background:#000 center/cover no-repeat}
+.close .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--void) 30%,rgba(5,7,13,.75) 60%,rgba(5,7,13,.2))}
+.close .in{position:relative;padding:0 64px;display:grid;align-content:center;gap:22px}
+.close h2{font-size:72px;max-width:14ch}
+.close .links{display:grid;gap:8px;font:400 18px var(--mono);color:var(--muted)}
+.close .links b{color:var(--ink);font-weight:500}
+
+/* nav */
+.nav{position:fixed;left:0;right:0;bottom:0;height:64px;padding-bottom:env(safe-area-inset-bottom,0px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;justify-content:center;align-items:center;gap:16px;z-index:5}
+.nav button{background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:8px 18px;font:600 14px var(--body);cursor:pointer}
+.nav button:hover{border-color:var(--signal)}
+.nav button:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.nav button:disabled{opacity:.35;cursor:default}
+.dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.dots button{width:9px;height:9px;padding:0;border-radius:50%;background:var(--line);border:none}
+.dots button[aria-current="true"]{background:var(--flare)}
+@media (prefers-reduced-motion:reduce){.slide{transition:none}}
+/* 7-slide layouts */
+.prob{display:grid;grid-template-columns:1fr 470px;gap:28px;align-items:center}
+.incs{display:grid;gap:10px}
+.incs figure{margin:0;display:grid;grid-template-columns:150px 1fr;overflow:hidden;align-items:center}
+.incs img{width:150px;height:96px;object-fit:cover}
+.incs figcaption{padding:10px 14px;display:grid;gap:3px}
+.incs figcaption b{font:700 20px var(--display)}
+.incs figcaption span{font:400 12px var(--mono);color:var(--faint)}
+.data{display:grid;grid-template-rows:auto auto;gap:18px;align-content:center}
+.srcs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.src{padding:18px 22px;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:20px;align-items:center}
+.src .label{grid-column:1/-1;margin-bottom:6px}
+.srcbig{font:700 64px/1 var(--display);color:var(--signal)}
+.src p:last-child{font-size:17px;color:var(--muted);line-height:1.4}
+.flow4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.f{padding:18px;display:grid;gap:8px;align-content:start}
+.f .n{font:500 13px var(--mono);color:var(--signal)}
+.f h3{font:700 24px var(--display)}
+.f p{font-size:16px;color:var(--muted);line-height:1.4}
+.f.hot{border-color:var(--flare)}
+.prog{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;gap:16px}
+.col{padding:20px 22px}
+.col ul{margin:12px 0 0;padding-left:20px;display:grid;gap:10px;font-size:17px;line-height:1.4}
+.col b{color:var(--ink)}
+.aiuse{grid-column:1/-1;font-size:15px;color:var(--muted);line-height:1.45;border-top:1px solid var(--line);padding-top:12px}
+.aiuse b{color:var(--ink)}
+.valg{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1000px}
+.vv{padding:18px 20px;background:rgba(11,15,26,.88)}
+.vv ul{margin:10px 0 0;padding-left:20px;display:grid;gap:6px;font-size:17px;line-height:1.4}
+#members{color:var(--flare)}
+@media print{
+  @page{size:1280px 720px;margin:0}
+  html,body{height:auto;overflow:visible;padding:0}
+  #sky,.nav{display:none}
+  .viewport{position:static;display:block}
+  .stage{transform:none!important;width:auto;height:auto;position:static}
+  .slide{position:relative;opacity:1;visibility:visible;width:1280px;height:720px;break-after:page;background:var(--void);box-sizing:border-box}
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="viewport"><div class="stage" id="stage">
+
+<!-- 1 Introduce -->
+<section class="slide title" aria-label="StarryNight">
+  <div class="wrap">
+    <div>
+      <div class="top" style="justify-content:flex-start;gap:12px"><span>NASA Space Apps Cairo 2026</span><span style="color:var(--faint)">·</span><span>Challenge: Flame in Freefall</span></div>
+      <h1 style="margin-top:18px">Starry<span>Night</span></h1>
+      <p class="tag">Space fire safety answers, <em>built only on NASA evidence.</em></p>
+      <div class="who">
+        <span>Team · <b>Starry Night</b></span>
+        <span>Members · <b id="members">[Add team member names]</b></span>
+        <span>Live project · <b>astrofire.vercel.app</b></span>
+      </div>
+    </div>
+    <figure style="margin:0;display:grid;justify-items:center;gap:6px">
+      <canvas class="fl" id="hero" aria-label="Animated illustration: a flame changing from an Earth flame to a microgravity flame"></canvas>
+      <figcaption class="credit">Animated illustration (drawn in code, not footage)</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 2 Problem -->
+<section class="slide" aria-label="The problem">
+  <div class="top"><span>The problem</span><span class="brand">2 / 7</span></div>
+  <h2>Moon and Mars habitats will breathe air <em>NASA never burned a cabin material in.</em></h2>
+  <div class="body prob">
+    <div class="facts">
+      <div class="fact panel"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 10l7-7 7 7"/></svg></div><div><h3>Fire behaves differently in space</h3><p>Hot gas does not rise. Flames feed on slow diffusion or a fan.</p></div></div>
+      <div class="fact panel hot"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><div><h3>Habitats plan 34% oxygen at 56.5 kPa</h3><p>NASA's 263 solid-material space tests all ran at 13.6–22.2% oxygen and about 0 g.</p></div></div>
+      <div class="fact panel"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M16 11h5M18.5 8.5v5"/></svg></div><div><h3>Who needs help</h3><p>Habitat engineers choosing cabin materials, and researchers planning the next fire tests.</p></div></div>
+    </div>
+    <div class="incs">
+      <figure class="panel"><img src="img/incident-apollo1.jpg" alt="Scorched Apollo 1 command module"><figcaption><b>Apollo 1 · 1967</b><span>Cabin fire in 100% oxygen · NASA S67-21295</span></figcaption></figure>
+      <figure class="panel"><img src="img/incident-mir.jpg" alt="Mir space station in 1997"><figcaption><b>Mir · 1997</b><span>Oxygen-generator fire · NASA STS086-720-007</span></figcaption></figure>
+      <figure class="panel"><img src="img/incident-apollo13.jpg" alt="Damaged Apollo 13 service module"><figcaption><b>Apollo 13 · 1970</b><span>Oxygen tank explosion · NASA AS13-59-8500</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 3 Solution -->
+<section class="slide" aria-label="The solution">
+  <div class="top"><span>The solution</span><span class="brand">3 / 7</span></div>
+  <h2>A web app that answers: <em>will it burn, what proves it, how sure are we?</em></h2>
+  <div class="body plat">
+    <figure style="margin:0;display:grid;gap:6px"><div class="shot"><img src="img/shot-home.webp" alt="StarryNight home page"></div><figcaption class="credit">Screenshot of the live app. Hero photo: NASA Glenn C-1998-485.</figcaption></figure>
+    <div class="caps">
+      <div class="cap panel"><span class="label">Scenario</span><h3>Verdict with proof</h3><p>Pick a material and a place, or type it in your own words.</p></div>
+      <div class="cap panel"><span class="label">Ask AI</span><h3>Cited analyst</h3><p>Answers only from NASA records. Every fact links to its source.</p></div>
+      <div class="cap panel"><span class="label">Rank</span><h3>What matters for my habitat</h3><p>24 NASA investigations scored 0–100, with reasons.</p></div>
+      <div class="cap panel"><span class="label">Gaps · Apply</span><h3>Where research stops</h3><p>Untested conditions, 8 clean datasets, equipment and Earth uses.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 Show it working -->
+<section class="slide" aria-label="Show it working">
+  <div class="top"><span>Show it working</span><span class="brand">4 / 7</span></div>
+  <h2>Same fabric. Different place. <em>Different answer.</em></h2>
+  <div class="body scen">
+    <figure style="margin:0;display:grid;gap:6px"><div class="shot"><img src="img/shot-scenario.webp" alt="StarryNight scenario page with ISS, Exploration, Moon and Mars mission cards"></div><figcaption class="credit">Screenshot of the live Scenario page. Mission photos: NASA, NASA/JPL-Caltech.</figcaption></figure>
+    <div class="verd">
+      <div class="vcard panel mid"><span class="label">Nomex · ISS cabin · 21% O₂ · 101.3 kPa · 0 g</span><h3>Borderline in tested evidence</h3><p style="font-size:15px;color:var(--muted)">5 closest NASA tests shown, each with its file and row.</p></div>
+      <div class="vcard panel no"><span class="label">Nomex · Mars habitat · 34% O₂ · 56.5 kPa · 0.38 g</span><h3>Insufficient validated experimental evidence</h3>
+        <ul><li>No solid-material test at 0.38 g</li><li>34% oxygen is outside 13.6–22.2%</li><li>No solid test at 56.5 kPa</li></ul></div>
+      <p style="font-size:16px;color:var(--muted);line-height:1.4">It does not guess. It shows the closest evidence and NASA's 0 g and 1 g results that bound partial gravity.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 Data -->
+<section class="slide" aria-label="NASA data">
+  <div class="top"><span>The data</span><span class="brand">5 / 7</span></div>
+  <h2>Built on NASA's Physical Sciences Informatics <em>combustion data.</em></h2>
+  <div class="body data">
+    <div class="srcs">
+      <div class="panel src"><p class="label">Source</p><p class="srcbig">24</p><p>NASA PSI combustion investigations flown on the ISS and Cygnus (public domain, CC0): BASS, Saffire, SAME, FLEX, ACME and more.</p></div>
+      <div class="panel src"><p class="label">Tests used</p><p class="srcbig">1,276</p><p>space flame tests: 263 solid materials, 353 fuel droplets, 660 gas flames.</p></div>
+    </div>
+    <div class="flow4">
+      <div class="panel f"><span class="n">1</span><h3>Keep</h3><p>Original NASA files, fingerprinted, never edited.</p></div>
+      <div class="panel f"><span class="n">2</span><h3>Clean</h3><p>Every row keeps its NASA file and row number. Outcomes marked observed, inferred or not recorded.</p></div>
+      <div class="panel f hot"><span class="n">3</span><h3>Compare</h3><p>Fixed rules find the NASA tests closest to your scenario and what was never tested.</p></div>
+      <div class="panel f"><span class="n">4</span><h3>Explain</h3><p>The AI writes only from that NASA evidence, with a citation on every fact.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 Progress -->
+<section class="slide" aria-label="Progress and limits">
+  <div class="top"><span>Progress</span><span class="brand">6 / 7</span></div>
+  <h2>What works now, <em>and its limits.</em></h2>
+  <div class="body prog">
+    <div class="panel col"><p class="label" style="color:var(--ok)">Works now · live at astrofire.vercel.app</p>
+      <ul><li>All screens online: Scenario, Ask AI, Rank, Gaps, Investigations, Compare, Charts, Apply</li>
+        <li><b>139 automated tests</b> pass: data rules, API, every screen, security, AI checks</li>
+        <li>AI check on 26 questions: <b>100%</b> off-topic refusals, <b>96%</b> valid citations, <b>0</b> probability claims</li>
+        <li>Questions accepted in English or Arabic</li></ul></div>
+    <div class="panel col"><p class="label" style="color:var(--caution)">Limits</p>
+      <ul><li>NASA has <b>no partial-gravity</b> fire data, so Moon and Mars cases return "insufficient evidence"</li>
+        <li>Solid-test pressure is not recorded by NASA; we mark it as assumed</li>
+        <li>Many outcomes are inferred from NASA notes and are labelled as such</li>
+        <li>AI answers are written in English</li></ul></div>
+    <p class="aiuse"><b>Use of AI:</b> an open-weight model (gpt-oss-120b via Groq) writes answer text from NASA evidence chosen by our code; verdicts and numbers come from fixed rules. The team used AI coding assistants (Claude) during development. No AI-generated images are used.</p>
+  </div>
+</section>
+
+<!-- 7 Value -->
+<section class="slide close" aria-label="Value and next steps">
+  <div class="bg" style="background-image:url('img/earth-limb-iss.jpg')"></div>
+  <div class="in">
+    <div class="top" style="justify-content:space-between"><span>The value</span><span class="brand">7 / 7</span></div>
+    <h2 style="font-size:52px;max-width:20ch">Safer materials and better experiments for <em>Moon and Mars habitats.</em></h2>
+    <div class="valg">
+      <div class="panel vv"><p class="label">Who it helps</p><ul><li>Habitat and spacecraft engineers choosing materials</li><li>Researchers deciding which fire tests to run next</li><li>Fire-safety equipment designers and students</li></ul></div>
+      <div class="panel vv"><p class="label" style="color:var(--flare)">Next steps (planned, not built yet)</p><ul><li>Add NASA partial-gravity results (LUCI, FM2) when published</li><li>Material shortlist and exportable evidence reports</li><li>Validation with combustion researchers</li></ul></div>
+    </div>
+    <div class="links"><span>Try it · <b>astrofire.vercel.app</b></span><span>Code · <b>github.com/G3hamza/astrofire</b></span></div>
+    <p class="credit">Background photo: NASA, ISS040-E-062704</p>
+  </div>
+</section>
+
+</div></div>
+<div class="nav">
+  <button type="button" id="prev" aria-label="Previous slide">← Prev</button>
+  <div class="dots" id="dots" aria-label="Slides"></div>
+  <button type="button" id="next" aria-label="Next slide">Next →</button>
+</div>
+
+<script>
+(function(){
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const slides=[...document.querySelectorAll('.slide')],stage=document.getElementById('stage');
+let i=0,enteredAt=performance.now();
+function scale(){const s=Math.min((innerWidth-32)/1280,(innerHeight-80)/720);stage.style.transform=`translate(-50%,-50%) scale(${s})`;}
+addEventListener('resize',scale);scale();
+const dots=document.getElementById('dots');
+slides.forEach((s,k)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Slide '+(k+1)+': '+s.getAttribute('aria-label'));b.onclick=()=>go(k);dots.append(b);});
+function go(k){i=Math.max(0,Math.min(slides.length-1,k));slides.forEach((s,n)=>{s.classList.toggle('on',n===i);s.setAttribute('aria-hidden',String(n!==i));});
+  [...dots.children].forEach((d,n)=>d.setAttribute('aria-current',String(n===i)));
+  document.getElementById('prev').disabled=i===0;document.getElementById('next').disabled=i===slides.length-1;
+  enteredAt=performance.now();try{history.replaceState(null,'','#s'+(i+1));}catch(e){}}
+document.getElementById('prev').onclick=()=>go(i-1);document.getElementById('next').onclick=()=>go(i+1);
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1);}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1);}if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1);});
+let tx=null;addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+addEventListener('touchend',e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50)go(i+(d<0?1:-1));tx=null;});
+addEventListener('hashchange',()=>{const m=location.hash.match(/^#s(\d+)$/);if(m&&+m[1]-1!==i)go(+m[1]-1);});
+const h=location.hash.match(/^#s(\d+)$/);go(h?+h[1]-1:0);
+
+function fit(c){const d=(devicePixelRatio||1)*1.5,w=c.offsetWidth,hh=c.offsetHeight;c.width=w*d;c.height=hh*d;const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);return {x,w,h:hh};}
+/* g = gravity blend: 1 = Earth teardrop that flickers, 0 = calm blue microgravity sphere */
+function flame(ctx,w,h,g,t,feed){
+  ctx.clearRect(0,0,w,h);
+  const cx=w/2,base=h*(0.52+0.2*g),r=Math.min(w,h)*0.16,st=1+2.3*g;
+  const fl=reduce?0:(Math.sin(t*8)*0.05+Math.sin(t*21)*0.025)*g;
+  const breathe=reduce?1:1+(1-g)*0.04*Math.sin(t*1.6);
+  const lean=feed*r*0.35;
+  const glow=ctx.createRadialGradient(cx,base-r*st*0.5,0,cx,base-r*st*0.5,r*3.4*breathe);
+  glow.addColorStop(0,g>0.5?'rgba(255,150,60,.30)':'rgba(92,225,230,.20)');glow.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=glow;ctx.fillRect(0,0,w,h);
+  ctx.fillStyle='#3a4256';ctx.fillRect(cx-2,base-2,4,h-base);
+  const mix=(a,b)=>a.map((v,k)=>v+(b[k]-v)*g);
+  [{s:1.35,o:[80,130,255,.22],e:[255,120,40,.3]},{s:1,o:[230,120,200,.38],e:[255,175,50,.92]},{s:.62,o:[110,160,255,.85],e:[255,236,160,.97]}].forEach(l=>{
+    const c=mix(l.o,l.e),rx=r*l.s*(1.15-0.15*g)*breathe,ry=r*l.s*st*(1+fl)*breathe,cy=base-ry*0.78*g;
+    ctx.beginPath();for(let a=0;a<=Math.PI*2+.01;a+=.07){const up=Math.max(0,-Math.sin(a));
+      const x=cx+Math.cos(a)*rx*(1-.55*up*Math.min(1,g*1.2))+lean*up*l.s;
+      const y=cy+Math.sin(a)*ry*(a>Math.PI?1:(1-.44*g));a?ctx.lineTo(x,y):ctx.moveTo(x,y);}
+    ctx.closePath();ctx.fillStyle=`rgba(${c[0]|0},${c[1]|0},${c[2]|0},${c[3]})`;ctx.fill();});
+}
+function arrows(ctx,w,h,t){ctx.strokeStyle='rgba(92,225,230,.55)';ctx.lineWidth=2;
+  for(let k=0;k<3;k++){const y=h*0.4+k*h*0.08,off=reduce?0:((t*36+k*24)%44);ctx.beginPath();ctx.moveTo(10+off,y);ctx.lineTo(44+off,y);ctx.lineTo(38+off,y-5);ctx.moveTo(44+off,y);ctx.lineTo(38+off,y+5);ctx.stroke();}}
+const C={hero:document.getElementById('hero')};
+let F={};function refit(){for(const k in C)F[k]=fit(C[k]);}refit();addEventListener('resize',refit);
+const sky=document.getElementById('sky');let S;const stars=[];
+function fitSky(){const d=devicePixelRatio||1;sky.width=innerWidth*d;sky.height=innerHeight*d;const x=sky.getContext('2d');x.setTransform(d,0,0,d,0,0);S={x,w:innerWidth,h:innerHeight};
+  stars.length=0;let seed=11;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+  for(let k=0;k<220;k++)stars.push({x:rnd()*S.w,y:rnd()*S.h,r:rnd()*1.1+.2,a:rnd()*.5+.1,p:rnd()*6});}
+fitSky();addEventListener('resize',fitSky);
+function frame(ts){const t=ts/1000,x=S.x;x.fillStyle='#05070d';x.fillRect(0,0,S.w,S.h);
+  stars.forEach(s=>{x.globalAlpha=s.a*(reduce?1:(.75+.25*Math.sin(t*.6+s.p)));x.fillStyle='#ecf1f8';x.beginPath();x.arc(s.x,s.y,s.r,0,7);x.fill();});x.globalAlpha=1;
+  if(i===0){const e=(performance.now()-enteredAt)/1000;let g=0;if(!reduce){g=e<1.4?1:e<3.6?1-((e-1.4)/2.2):0;g=g*g*(3-2*g);}flame(F.hero.x,F.hero.w,F.hero.h,g,t,0);}
+  requestAnimationFrame(frame);}
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
