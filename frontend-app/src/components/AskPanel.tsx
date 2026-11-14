@@ -27,7 +27,7 @@ export function AskPanel() {
         </button>
       )}
       <aside aria-label="AstroFire AI analyst" aria-hidden={!open}
-        className={`fixed inset-y-0 right-0 z-50 flex w-full max-w-[480px] flex-col border-l border-line bg-space shadow-card transition-transform duration-200 ${open ? "translate-x-0" : "translate-x-full"}`}>
+        className={`fixed inset-y-0 right-0 z-50 w-full max-w-[480px] flex-col border-l border-line bg-space shadow-card ${open ? "flex" : "hidden"}`}>
         <header className="flex items-center gap-3 border-b border-line px-4 py-3">
           <MessageSquareText size={18} className="text-signal" aria-hidden />
           <div className="min-w-0 flex-1">

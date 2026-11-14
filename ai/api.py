@@ -40,7 +40,9 @@ CACHE_SIZE = 256
 
 
 def _client(request: Request) -> str:
-    return request.client.host if request.client else "unknown"
+    """The visitor's IP. Behind Vercel / Render proxies the first X-Forwarded-For entry is the visitor; otherwise the socket."""
+    fwd = (request.headers.get("x-forwarded-for") or request.headers.get("x-real-ip") or "").split(",")[0].strip()
+    return fwd or (request.client.host if request.client else "unknown")
 
 
 def guard(request: Request, x_api_key: str | None = Header(None)):

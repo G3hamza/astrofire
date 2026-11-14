@@ -110,3 +110,11 @@ def test_no_secrets_in_responses_or_repo(monkeypatch):
         assert "gsk_SHOULD" not in c.get(path).text
     assert (ROOT / ".gitignore").read_text().count(".env") >= 1
     assert ".env" in (ROOT / ".dockerignore").read_text()
+
+
+def test_rate_limit_is_per_visitor_behind_proxy():
+    A._hits.clear()
+    for i in range(A.RATE):
+        assert c.post("/ai/ask", json={"question": f"FLEX {i}"}, headers={"X-Forwarded-For": "1.1.1.1"}).status_code == 200
+    assert c.post("/ai/ask", json={"question": "FLEX x"}, headers={"X-Forwarded-For": "1.1.1.1"}).status_code == 429
+    assert c.post("/ai/ask", json={"question": "FLEX y"}, headers={"X-Forwarded-For": "2.2.2.2, 10.0.0.1"}).status_code == 200
