@@ -23,7 +23,7 @@ class Evidence:
     title: str | None = None
     year: str | None = None
     chunk_id: str | None = None
-    level: str = "direct"          # direct (NASA record/text) | related (indirect relevance) | analysis (AstroFire computed)
+    level: str = "direct"          # direct (NASA record/text) | related (indirect relevance) | analysis (StarryNight computed)
     extra: dict = field(default_factory=dict)
 
     def public(self) -> dict:

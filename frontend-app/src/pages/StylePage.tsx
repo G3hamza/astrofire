@@ -67,7 +67,7 @@ export default function StylePage() {
     <div className="space-y-14">
       <header className="space-y-3">
         <p className="eyebrow">G2-P1 · Design system</p>
-        <h1 className="text-h1">AstroFire mission-control UI kit</h1>
+        <h1 className="text-h1">StarryNight mission-control UI kit</h1>
         <p className="max-w-3xl text-lg text-muted">
           Every component the product uses, on one page. Every number on this page comes live from <code className="font-mono text-ink">/api/*</code>.
           Outcomes and evidence quality always use an icon and a word, not just a color.
@@ -101,7 +101,7 @@ export default function StylePage() {
             ["h1 · 36", "text-h1", "Will it burn on Mars?"],
             ["h2 · 26", "text-h2", "Insufficient validated experimental evidence"],
             ["h3 · 20", "text-h3", "Closest NASA tests"],
-            ["lg · 18", "text-lg", "AstroFire shows NASA where to test next."],
+            ["lg · 18", "text-lg", "StarryNight shows NASA where to test next."],
             ["base · 15", "text-base", "Body text for reasons, notes and notes from NASA test tables."],
             ["sm · 13", "text-sm text-muted", "Captions and table cells."],
             ["eyebrow · 12 mono", "eyebrow", "Section label"],
@@ -204,7 +204,7 @@ export default function StylePage() {
             <Skeleton className="h-6 w-2/3" /><Skeleton className="h-4" /><Skeleton className="h-4 w-5/6" /><Skeleton className="h-4 w-1/2" />
           </Card>
           <EmptyState title="Never tested" hint="No NASA space test exists for these conditions. That gap is the finding." />
-          <ErrorState message="The AstroFire API is not reachable. Is the server running?" onRetry={() => undefined} />
+          <ErrorState message="The StarryNight API is not reachable. Is the server running?" onRetry={() => undefined} />
         </div>
       </Section>
 

@@ -1,4 +1,4 @@
-"""AstroFire engine: answers from real NASA tests, never invented numbers.
+"""StarryNight engine: answers from real NASA tests, never invented numbers.
 
 - scenario(): finds the NASA space tests closest to your mission conditions ("evidence distance"),
   reads what actually happened in them, and says how confident we can be.

@@ -39,7 +39,7 @@ function Answer({ r, onAsk }: { r: AskResult; onAsk: (q: string) => void }) {
     <div className="space-y-3 text-sm">
       <p className={cx("text-base", r.insufficient_evidence && "text-caution")}><Cited text={r.answer} ev={ev} onPick={setPick} /></p>
       <Section title="NASA findings" items={r.findings} />
-      <Section title="AstroFire interpretation" items={r.interpretation} tone="text-signal" />
+      <Section title="StarryNight interpretation" items={r.interpretation} tone="text-signal" />
       <Section title="Limits and gaps" items={r.limits} tone="text-caution" />
       {pick && (
         <div className="rounded border border-signal/40 bg-raised p-3">
@@ -120,7 +120,7 @@ export default function AskPage() {
       <header className="space-y-2">
         <p className="eyebrow">Evidence-grounded analyst</p>
         <h1 className="text-h1 text-ink">Ask NASA's fire data</h1>
-        <p className="max-w-3xl text-muted">Every answer is built from NASA PSI records through AstroFire's engines. Click an [E#] citation to see the record,
+        <p className="max-w-3xl text-muted">Every answer is built from NASA PSI records through StarryNight's engines. Click an [E#] citation to see the record,
           file and row. Verdicts come from the rule engine; the AI only explains them.</p>
       </header>
       <AskChat initialQuestion={sp.get("q")} />

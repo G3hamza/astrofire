@@ -20,7 +20,8 @@ export default {
         muted: v("muted"),        // secondary text
         faint: v("faint"),        // captions, disabled
         // brand / UI
-        signal: v("signal"),      // primary accent (mission cyan)
+        signal: v("signal"),      // scientific cyan
+        flare: v("flare"),        // the one action accent
         // outcomes (always paired with icon + text, NFR6)
         burn: v("burn"),          // burned
         out: v("out"),            // went out / extinction
@@ -32,8 +33,8 @@ export default {
         ok: v("ok"),              // observed
       },
       fontFamily: {
-        sans: ["Inter", "Segoe UI Variable", "Segoe UI", "system-ui", "-apple-system", "Roboto", "sans-serif"],
-        mono: ["JetBrains Mono", "Cascadia Code", "Consolas", "ui-monospace", "monospace"],
+        sans: ["IBM Plex Sans", "Segoe UI Variable", "Segoe UI", "system-ui", "-apple-system", "Roboto", "sans-serif"],
+        mono: ["IBM Plex Mono", "Cascadia Code", "Consolas", "ui-monospace", "monospace"],
       },
       fontSize: {
         // type scale (rem, line-height) — tuned for 1366x768 + projector

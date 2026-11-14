@@ -59,14 +59,14 @@ def parse(text: str, known_materials: list[str] | None = None) -> dict:
     if material is None and (m := _find(UNTESTED_NAMES, t)):
         material = m.group(1).strip().capitalize()
         understood.append({"field": "material", "value": material, "text": m.group(0).strip()})
-        warnings.append(f"NASA has no solid space fire test of '{material}' in these tables; AstroFire will show the closest tests of other materials.")
+        warnings.append(f"NASA has no solid space fire test of '{material}' in these tables; StarryNight will show the closest tests of other materials.")
     if material is None:
         m = (_find(r"\b(?:sample|piece|sheet|panel|cover|made) of ([a-z][a-z\-]{2,25})\b", t)
              or _find(r"\bmaterial\s*(?:is|:)?\s*([a-z][a-z\-]{2,25})\b", t))
         if m:
             material = m.group(1).strip()
             understood.append({"field": "material", "value": material, "text": m.group(0).strip()})
-            warnings.append(f"'{material}' is not a material in the NASA space fire tables; AstroFire will show the closest tests of other materials.")
+            warnings.append(f"'{material}' is not a material in the NASA space fire tables; StarryNight will show the closest tests of other materials.")
         else:
             material = "PMMA (acrylic)"
             defaulted.append({"field": "material", "value": material, "reason": "no material named; PMMA is NASA's reference material"})

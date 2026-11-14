@@ -7,7 +7,7 @@ ANSWER: <2-4 sentences that directly answer the question, with [E#] citations>
 FINDINGS:
 - <one NASA finding per line, from direct or related evidence, with [E#]>
 INTERPRETATION:
-- <AstroFire's interpretation or implication, labelled as interpretation, with the [E#] it is based on>
+- <StarryNight's interpretation or implication, labelled as interpretation, with the [E#] it is based on>
 LIMITS:
 - <missing data, untested conditions, inferred outcomes, assumed pressure>
 FOLLOWUPS:

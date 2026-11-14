@@ -50,7 +50,7 @@ LITE = ROOT / "frontend"
 def test_lite_backup_app_is_served():
     for path in ("/lite/", "/lite/app.js", "/lite/style.css"):
         assert c.get(path).status_code == 200, path
-    assert "AstroFire Lite" in c.get("/lite/").text
+    assert "StarryNight Lite" in c.get("/lite/").text
 
 
 def test_lite_has_no_probability_wording_and_no_external_scripts():

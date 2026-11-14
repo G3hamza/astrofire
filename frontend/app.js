@@ -1,4 +1,4 @@
-/* AstroFire Lite: backup UI. Same /api/* and the same honesty rules as the main app:
+/* StarryNight Lite: backup UI. Same /api/* and the same honesty rules as the main app:
    verdicts shown verbatim, results never shown as odds, every test linked to NASA, missing values say "not available". */
 "use strict";
 
@@ -15,7 +15,7 @@ async function api(path, body) {
   try {
     res = await fetch(path, body ? { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) } : undefined);
   } catch {
-    throw new Error("The AstroFire API is not reachable. Is the server running?");
+    throw new Error("The StarryNight API is not reachable. Is the server running?");
   }
   if (!res.ok) throw new Error(`API ${res.status}: ${res.statusText}`);
   const data = await res.json();
@@ -146,7 +146,7 @@ async function route() {
   const [name, qs] = (location.hash.slice(1) || "home").split("?");
   const fn = ROUTES[name] || home;
   document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("on", a.getAttribute("href") === `#${name || "home"}`));
-  document.title = `${{ home: "Home", scenario: "Scenario", gaps: "Gaps" }[name] || "Home"} · AstroFire Lite`;
+  document.title = `${{ home: "Home", scenario: "Scenario", gaps: "Gaps" }[name] || "Home"} · StarryNight Lite`;
   banner.hidden = true;
   view.innerHTML = '<p class="note">Loading NASA data…</p>';
   try { await fn(new URLSearchParams(qs || "")); } catch (e) { showError(e); view.innerHTML = '<p class="note">Could not load this screen. Check that the server is running, then reload.</p>'; }

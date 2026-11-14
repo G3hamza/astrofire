@@ -107,7 +107,7 @@ export function ComingNextCard({ items }: { items: { name: string; status: strin
       <CardHeader eyebrow="Coming next to PSI" title="Partial-gravity fire data on the way" />
       <ul className="space-y-1 px-5 py-4 text-sm">
         {items.map((i) => <li key={i.name}><b className="text-ink">{i.name}</b> · {i.status}</li>)}
-        <li className="text-xs text-muted">Not in PSI yet, so AstroFire does not use it as evidence. Background: NASA Combustion Science{" "}
+        <li className="text-xs text-muted">Not in PSI yet, so StarryNight does not use it as evidence. Background: NASA Combustion Science{" "}
           <SourceChip href="https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/combustion-science/" label="nasa.gov" /></li>
       </ul>
     </Card>

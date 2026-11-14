@@ -18,7 +18,7 @@ const CRITERIA: { key: string; title: string; question: string; points: { text: 
   {
     key: "creativity", title: "Creativity", question: "What makes it different?",
     points: [
-      { text: "Evidence-first, not guess-first: when NASA never tested a case, AstroFire says \"Insufficient validated experimental evidence\" and names the blockers instead of inventing an answer.", to: "/scenario" },
+      { text: "Evidence-first, not guess-first: when NASA never tested a case, StarryNight says \"Insufficient validated experimental evidence\" and names the blockers instead of inventing an answer.", to: "/scenario" },
       { text: "Gravity bounds: uses NASA's own 0 g tests and Saffire-II's 1 g comparison as the two ends around Moon/Mars gravity, and says when they do not cover a case.", to: "/scenario" },
       { text: "An AI analyst that can only use NASA evidence: every sentence is cited [E#], numbers are checked against the evidence, verdicts cannot be changed by the AI.", to: "/ask" },
       { text: "Habitat ranking: all 24 investigations scored 0-100 for a spacecraft, the ISS, a Moon base, a rover or a Mars base, with every score part explained.", to: "/rank" },
@@ -67,8 +67,8 @@ export default function AboutPage() {
     <div className="space-y-8">
       <header className="space-y-2">
         <p className="eyebrow">NASA Space Apps Cairo 2026 · Flame in Freefall · Team Starry Night</p>
-        <h1 className="text-h1 text-ink">About AstroFire</h1>
-        <p className="max-w-3xl text-muted">AstroFire turns NASA's space combustion experiments into fire-safety answers for spacecraft, the ISS,
+        <h1 className="text-h1 text-ink">About StarryNight</h1>
+        <p className="max-w-3xl text-muted">StarryNight turns NASA's space combustion experiments into fire-safety answers for spacecraft, the ISS,
           Moon and Mars bases and rovers. It answers three questions from real NASA tests: will it burn, what proves it, and how sure are we,
           and it says plainly when NASA has no evidence.</p>
       </header>
@@ -85,7 +85,7 @@ export default function AboutPage() {
           <CardHeader eyebrow="Disclosure" title="How AI was used" />
           <ul className="space-y-2 px-5 py-4 pl-10 text-ink/90">
             <li className="list-disc marker:text-faint">In the product: an open-weight language model (openai/gpt-oss-120b on Groq, with smaller fallbacks)
-              rewrites answers from NASA evidence that AstroFire's own code selects. It cannot add facts, numbers or verdicts; if it fails the checks,
+              rewrites answers from NASA evidence that StarryNight's own code selects. It cannot add facts, numbers or verdicts; if it fails the checks,
               a template answer built from the same NASA records is shown, and every answer says which one you got.</li>
             <li className="list-disc marker:text-faint">In development: the team used AI coding assistants (Claude) to help write and review code,
               tests and documentation. Design decisions, data rules and the final review were the team's.</li>

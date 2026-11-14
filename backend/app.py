@@ -1,4 +1,4 @@
-"""AstroFire API.  Run:  uvicorn backend.app:app --reload   (from the project root)
+"""StarryNight API.  Run:  uvicorn backend.app:app --reload   (from the project root)
 
 Data: only NASA's PSI combustion repository (the Space Apps 2026 challenge resources). No API key needed.
 """
@@ -23,7 +23,7 @@ async def lifespan(_app):
     yield
 
 
-app = FastAPI(title="AstroFire API", version="0.3", lifespan=lifespan)
+app = FastAPI(title="StarryNight API", version="0.3", lifespan=lifespan)
 # Read-only public data API: any origin may read it; only GET/POST are used.
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["GET", "POST"], allow_headers=["content-type", "x-api-key"])
 
@@ -397,7 +397,7 @@ def spa(full_path: str):
         raise HTTPException(404, f"Unknown API route '/{full_path}'. See /docs.")
     index = APP_DIST / "index.html"
     if not index.is_file():
-        return HTMLResponse("<h1>AstroFire</h1><p>Frontend not built. Run <code>cd frontend-app && npm install && npm run build</code>. "
+        return HTMLResponse("<h1>StarryNight</h1><p>Frontend not built. Run <code>cd frontend-app && npm install && npm run build</code>. "
                             "API docs: <a href='/docs'>/docs</a></p>", status_code=503)
     target = (APP_DIST / full_path).resolve()
     if full_path and target.is_file() and APP_DIST.resolve() in target.parents:

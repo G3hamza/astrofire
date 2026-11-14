@@ -110,7 +110,7 @@ class ModelChain:
                 msg = model.invoke(messages, **kw)
             except Exception as e:  # rate limit, no credits, timeout, provider down ...
                 skipped.append(f"{name}:{type(e).__name__}")
-                log.warning("AstroFire AI: %s failed (%s) - trying the next model.", name, type(e).__name__)
+                log.warning("StarryNight AI: %s failed (%s) - trying the next model.", name, type(e).__name__)
                 continue
             meta = dict(getattr(msg, "response_metadata", None) or {})
             meta.setdefault("model_name", name)
@@ -131,14 +131,14 @@ def get_llm():
     prov, model = provider(), model_name()
     order = ([(prov, model)] if has_key(prov) else []) + fallbacks()
     if not order:
-        log.warning("AstroFire AI: %s is not set - answers use deterministic templates (no LLM).", KEY_VARS.get(prov, "API key"))
+        log.warning("StarryNight AI: %s is not set - answers use deterministic templates (no LLM).", KEY_VARS.get(prov, "API key"))
         return None
     links = []
     for i, (p, m) in enumerate(order):
         try:  # every link but the last fails fast (no client retries) so failover takes about a second
             links.append((m, _build(p, m, max_retries=0 if i < len(order) - 1 else 1)))
         except Exception as e:  # missing provider package, bad model id ...
-            log.warning("AstroFire AI: could not start %s/%s (%s) - skipped.", p, m, type(e).__name__)
+            log.warning("StarryNight AI: could not start %s/%s (%s) - skipped.", p, m, type(e).__name__)
     return ModelChain(links) if links else None
 
 
@@ -165,7 +165,7 @@ def get_embeddings():
     """Offline-first embeddings or None. Never downloads automatically; one warning when unavailable."""
     b = embeddings_backend()
     if b == "none":
-        log.warning("AstroFire AI: embeddings unavailable - BM25-only retrieval (nothing to ingest).")
+        log.warning("StarryNight AI: embeddings unavailable - BM25-only retrieval (nothing to ingest).")
         return None
     try:
         if b == "local_folder":
@@ -180,5 +180,5 @@ def get_embeddings():
             from langchain_community.embeddings import FastEmbedEmbeddings
             return FastEmbedEmbeddings()
     except Exception as e:
-        log.warning("AstroFire AI: embeddings backend '%s' unavailable (%s) - BM25-only retrieval.", b, type(e).__name__)
+        log.warning("StarryNight AI: embeddings backend '%s' unavailable (%s) - BM25-only retrieval.", b, type(e).__name__)
     return None

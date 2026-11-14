@@ -41,7 +41,7 @@ export default function DataQualityPage() {
       <header className="space-y-1">
         <p className="eyebrow">Data quality</p>
         <h1 className="text-h1">How much of this is observed, inferred or missing</h1>
-        <p className="max-w-3xl text-lg text-muted">AstroFire never hides weak data. Inferred values are always badged, and rejected rows are kept in quarantine, never deleted.</p>
+        <p className="max-w-3xl text-lg text-muted">StarryNight never hides weak data. Inferred values are always badged, and rejected rows are kept in quarantine, never deleted.</p>
       </header>
 
       {ov.error ? <ErrorState message={ov.error} onRetry={ov.reload} /> : (

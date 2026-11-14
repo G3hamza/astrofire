@@ -69,7 +69,7 @@ def scenario(environment: str = "iss", o2: float | None = None, pressure: float 
     r = res["result"]
     caveats = []
     if not material:
-        caveats.append("No material was given; AstroFire does not assume one, so only general evidence is shown.")
+        caveats.append("No material was given; StarryNight does not assume one, so only general evidence is shown.")
     if fuel_type and fuel_type.lower() not in ("solid", "solid material"):
         caveats.append(f"Fuel type '{fuel_type}': the scenario engine scores solid-material tests; droplet and gas flames are shown only as atmosphere evidence.")
     verdict_line = f"VERDICT: {r['verdict']} (coverage: {_coverage(r)})"
@@ -133,7 +133,7 @@ def compare(ids: list[str]) -> dict:
     table = [{"attribute": name, "values": {p["acronym"]: fn(p) for p in ps}, "differs": len({fn(p) for p in ps}) > 1} for name, fn in rows]
     tbl = reg.add("investigation", "Comparison table (computed from NASA tables): " + " | ".join(
         f"{t['attribute']}: " + "; ".join(f"{k}={v}" for k, v in t["values"].items()) for t in table),
-        source_file="data/gold/analytics/investigation_profiles.json", title="AstroFire comparison table", level="analysis")
+        source_file="data/gold/analytics/investigation_profiles.json", title="StarryNight comparison table", level="analysis")
     diffs = [t["attribute"] for t in table if t["differs"]]
     same = [t["attribute"] for t in table if not t["differs"]]
     text, ev = L.write("compare", f"Compare {', '.join(p['acronym'] for p in ps)}", reg.block())

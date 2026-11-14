@@ -6,6 +6,12 @@ import { EmptyState, Skeleton } from "./components/ui";
 import GapsPage from "./pages/GapsPage";
 import HomePage from "./pages/HomePage";
 import ScenarioPage from "./pages/ScenarioPage";
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/500.css";
+import "@fontsource/ibm-plex-sans/600.css";
+import "@fontsource/ibm-plex-sans/700.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
 import "./index.css";
 
 // Heavier, less-visited pages load on demand (Recharts lives only in the charts chunk).
@@ -26,7 +32,7 @@ const TITLES: [RegExp, (m: RegExpMatchArray) => string][] = [
   [/^\/$/, () => "Home"], [/^\/scenario/, () => "Scenario check"], [/^\/compare/, () => "Compare scenarios"], [/^\/gaps/, () => "Gaps map"],
   [/^\/charts/, () => "Evidence charts"], [/^\/experiments/, () => "NASA experiments"], [/^\/investigations/, () => "Investigations"], [/^\/rank/, () => "Habitat ranking"], [/^\/ask/, () => "Ask"], [/^\/applications/, () => "Data and applications"],
   [/^\/materials\/(.+)/, (m) => `Material ${decodeURIComponent(m[1])}`], [/^\/materials/, () => "Materials"],
-  [/^\/data/, () => "Data quality"], [/^\/style/, () => "Design system"],
+  [/^\/data/, () => "Data quality"], [/^\/about/, () => "About"], [/^\/style/, () => "Design system"],
 ];
 
 function RouteEffects() {
@@ -34,7 +40,7 @@ function RouteEffects() {
   useEffect(() => {
     let name = "Page not found";
     for (const [re, fn] of TITLES) { const m = pathname.match(re); if (m) { name = fn(m); break; } }
-    document.title = `${name} · AstroFire`;
+    document.title = `${name} · StarryNight`;
     if (!hash) window.scrollTo(0, 0);
   }, [pathname, hash]);
   return null;
@@ -43,7 +49,7 @@ function RouteEffects() {
 function NotFound() {
   return (
     <div className="mx-auto max-w-xl space-y-4 pt-10">
-      <EmptyState title="This page doesn't exist" hint="The link may be old. Every AstroFire screen is in the top menu." />
+      <EmptyState title="This page doesn't exist" hint="The link may be old. Every StarryNight screen is in the top menu." />
       <p className="text-center"><Link to="/">Back to Home</Link></p>
     </div>
   );

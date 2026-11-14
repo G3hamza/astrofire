@@ -4,14 +4,14 @@ import { SourceChip } from "./SourceChip";
 import { Card } from "./ui";
 
 /* Facts below are taken from the official NASA pages linked on each card (Space Apps 2026 challenge resources).
-   "What it means for AstroFire" is our interpretation and is labelled as such. */
+   "What it means for StarryNight" is our interpretation and is labelled as such. */
 
 const CASES = [
   {
     when: "27 Jan 1967 · launch-pad test", title: "Apollo 1", Icon: Flame,
     facts: "The cabin was pressurized with 100% oxygen. A flash fire swept through the spacecraft so quickly there was no time to open the hatches. Air Force pathologists concluded the crew died of carbon monoxide and other toxic gases; their burns were likely survivable.",
     lesson: "NASA restricted and controlled the amount and location of combustible material in the spacecraft, and redesigned the hatch to open in three seconds.",
-    ours: "Oxygen-rich air plus cabin materials is the core risk. AstroFire flags every condition above the oxygen NASA tested, and shows smoke data, because the gases killed the crew.",
+    ours: "Oxygen-rich air plus cabin materials is the core risk. StarryNight flags every condition above the oxygen NASA tested, and shows smoke data, because the gases killed the crew.",
     link: "/scenario?material=PMMA+%28acrylic%29&mission=exploration&flow=5", linkText: "Check a raised-oxygen scenario",
     url: "https://sma.nasa.gov/sma-disciplines/accllp/apollo-1", label: "NASA · Apollo 1",
   },
@@ -27,20 +27,20 @@ const CASES = [
     when: "1970 · on the way to the Moon", title: "Apollo 13", Icon: Rocket,
     facts: "On the third day of the mission oxygen tank number two blew up, leading to the failure of tank number one and threatening the loss of all electrical power and water. The Lunar Module Aquarius kept the crew alive and brought them home.",
     lesson: "The review board recommended redesigning the Service Module oxygen storage system and reviewing every Apollo system that uses cryogenic oxygen. The page also notes that Apollo 1's added wiring insulation helped prevent arcing.",
-    ours: "Oxygen systems are a hazard in their own right, and fixes from one accident protect the next mission. AstroFire shows where today's evidence stops, so the gaps get tested before a crew depends on them.",
+    ours: "Oxygen systems are a hazard in their own right, and fixes from one accident protect the next mission. StarryNight shows where today's evidence stops, so the gaps get tested before a crew depends on them.",
     link: "/gaps", linkText: "See what was never tested",
     url: "https://sma.nasa.gov/sma-disciplines/accllp/apollo-13", label: "NASA · Apollo 13",
   },
 ];
 
-export function WhyItMatters() {
+export function WhyItMatters({ bare }: { bare?: boolean } = {}) {
   return (
-    <section aria-labelledby="why-h" className="space-y-4">
-      <div className="space-y-1">
+    <section aria-labelledby={bare ? undefined : "why-h"} aria-label={bare ? "Spacecraft fires NASA learned from" : undefined} className="space-y-4">
+      {!bare && <div className="space-y-1">
         <p className="eyebrow">Why it matters</p>
         <h2 id="why-h" className="text-h2">Spacecraft fires NASA learned from</h2>
         <p className="max-w-3xl text-muted">Each lesson below changed how spacecraft are built. Moon and Mars habitats will run at 34% oxygen, a condition no solid material has been fire-tested at in space.</p>
-      </div>
+      </div>}
       <div className="grid gap-4 lg:grid-cols-3">
         {CASES.map((c) => (
           <Card key={c.title} as="article" className="flex flex-col gap-3 p-5">
@@ -52,7 +52,7 @@ export function WhyItMatters() {
             <p className="text-ink/90">{c.facts}</p>
             <p className="text-sm text-muted"><b className="text-ink">What NASA changed:</b> {c.lesson}</p>
             <p className="rounded-lg border border-dashed border-signal/50 bg-signal/5 p-3 text-sm text-ink/90">
-              <span className="eyebrow mb-1 block text-signal">What it means for AstroFire (our reading)</span>{c.ours}
+              <span className="eyebrow mb-1 block text-signal">What it means for StarryNight (our reading)</span>{c.ours}
             </p>
             <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-1">
               <SourceChip href={c.url} label={c.label} />
@@ -84,7 +84,7 @@ export function ChallengeResources() {
     <Card id="resources">
       <div className="space-y-1 border-b border-line/70 px-5 py-4">
         <p className="eyebrow">Space Apps 2026 · Flame in Freefall</p>
-        <h3 className="text-h3">Official challenge resources and how AstroFire uses them</h3>
+        <h3 className="text-h3">Official challenge resources and how StarryNight uses them</h3>
       </div>
       <ul className="divide-y divide-line/50">
         {CHALLENGE_RESOURCES.map((r) => (

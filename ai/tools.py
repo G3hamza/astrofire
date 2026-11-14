@@ -144,7 +144,7 @@ def rank_habitat(reg: Registry, habitat: str = "moon", pillar: str | None = None
         e = reg.add("ranking", f"Rank {r['rank']} for {hab['name']} ({hab['o2_pct']:g}% O2, {hab['pressure_kpa']:g} kPa, {hab['gravity_g']:g} g): "
                     f"{r['acronym']} score {r['score']:.0f}/100. " + " ".join(r["reasons"][:3]),
                     investigation_id=r["investigation_id"], acronym=r["acronym"], psi_url=r["psi_url"], url=r["psi_url"],
-                    title=f"AstroFire habitat ranking ({habitat})", source_file="backend/ranking.py (computed)", level="analysis")
+                    title=f"StarryNight habitat ranking ({habitat})", source_file="backend/ranking.py (computed)", level="analysis")
         ids.append(e.id)
     return {"habitat": hab, "ranked": rows, "evidence": ids}
 

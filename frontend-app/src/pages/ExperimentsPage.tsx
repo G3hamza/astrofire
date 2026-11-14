@@ -8,7 +8,7 @@ import { useQuery } from "../lib/api";
 import { client, PSI_PORTAL } from "../lib/client";
 import type { CsvRow } from "../lib/types";
 
-/* Every NASA investigation in the dataset, what it measured, and how AstroFire uses it.
+/* Every NASA investigation in the dataset, what it measured, and how StarryNight uses it.
    Droplets, smoke and gas jets are different experiment kinds and are never mixed into solid-material results. */
 
 const ROLE: Record<string, { what: string; use: string; where?: string; Icon: typeof Flame }> = {
@@ -65,7 +65,7 @@ export default function ExperimentsPage() {
                   <span className="tnum ml-auto text-sm text-muted">{Number(i.records)} rows</span>
                 </div>
                 <p className="text-sm text-ink/90">{r?.what ?? i.title}</p>
-                <p className="text-sm text-muted"><b className="text-ink">In AstroFire:</b> {r?.use ?? "Loaded in the pipeline."}</p>
+                <p className="text-sm text-muted"><b className="text-ink">In StarryNight:</b> {r?.use ?? "Loaded in the pipeline."}</p>
                 <div className="mt-auto flex flex-wrap items-center gap-2 pt-1">
                   <SourceChip href={`${PSI_PORTAL}/${i.investigation_id}`} label={`NASA PSI · ${i.investigation_id}`} />
                   {r?.where && <a href={r.where} className="text-sm">See it →</a>}
@@ -145,7 +145,7 @@ function FlexSection() {
             <p className="text-sm text-muted">
               <b className="tnum text-ink">{near.length}</b> nitrogen-diluted FLEX tests ran at 30% O₂ or more below 80 kPa, the closest any space flame has come
               to the habitat point. CFI adds <b className="tnum text-ink">{(cfi.data ?? []).filter((r) => Number(r.pressure_kpa) < 80).length}</b> tests below 80 kPa, but only at 21% O₂ and without recorded outcomes.
-              These are liquid fuel droplets, not cabin materials, so AstroFire shows them as atmosphere evidence only.
+              These are liquid fuel droplets, not cabin materials, so StarryNight shows them as atmosphere evidence only.
             </p>
             <div className="flex flex-wrap gap-2">
               <SourceChip href={`${PSI_PORTAL}/PSI-69`} label="NASA PSI · FLEX (PSI-69)" />
@@ -210,7 +210,7 @@ function GasSection() {
             </div>
             <p className="text-sm text-muted">
               <b className="tnum text-ink">{near.length}</b> ACME tests ran at 30–40% O₂ and 80 kPa or below, around the habitat point. They are gas flames, not cabin
-              materials, so AstroFire shows them as atmosphere evidence only. CFI-G pressure is NASA's approximate value.
+              materials, so StarryNight shows them as atmosphere evidence only. CFI-G pressure is NASA's approximate value.
             </p>
             <div className="flex flex-wrap gap-2">
               <SourceChip href={`${PSI_PORTAL}/PSI-159`} label="NASA PSI · ACME CFI-G (PSI-159)" />
@@ -247,7 +247,7 @@ function LogsSection() {
     <Card id="logs">
       <CardHeader eyebrow="Session logs and indexes" title="PSI tables that log test days, not individual tests" />
       <div className="space-y-3 p-5">
-        <p className="text-sm text-muted">Loaded so every PSI combustion table is in AstroFire. These rows are test days, figure lists or sampling sessions, so they are never counted as tests.</p>
+        <p className="text-sm text-muted">Loaded so every PSI combustion table is in StarryNight. These rows are test days, figure lists or sampling sessions, so they are never counted as tests.</p>
         {q.error ? <ErrorState message={q.error} onRetry={q.reload} /> : !q.data ? <Skeleton className="h-40" /> : (
           <div className="overflow-x-auto rounded-lg border border-line">
             <table className="w-full min-w-[620px] text-left text-sm">
@@ -282,7 +282,7 @@ function Flex2Section() {
     <Card id="flex2">
       <CardHeader eyebrow="FLEX-2 · test matrix" title="Conditions NASA ran, per fuel" />
       <div className="space-y-3 p-5">
-        <p className="text-sm text-muted">NASA's FLEX-2 table lists, for each fuel, the range of conditions used. It has no rows for individual tests and no outcomes, so AstroFire never counts these as tests.</p>
+        <p className="text-sm text-muted">NASA's FLEX-2 table lists, for each fuel, the range of conditions used. It has no rows for individual tests and no outcomes, so StarryNight never counts these as tests.</p>
         {q.error ? <ErrorState message={q.error} onRetry={q.reload} /> : !q.data ? <Skeleton className="h-40" /> : (
           <div className="overflow-x-auto rounded-lg border border-line">
             <table className="w-full min-w-[620px] text-left text-sm">

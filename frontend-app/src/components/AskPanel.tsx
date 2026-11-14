@@ -21,12 +21,12 @@ export function AskPanel() {
   return (
     <>
       {!open && (
-        <button type="button" onClick={() => setOpen(true)} aria-label="Ask AstroFire's AI analyst"
-          className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-signal px-4 py-3 font-semibold text-space shadow-glow hover:bg-signal/90">
-          <MessageSquareText size={18} aria-hidden /> Ask AI
+        <button type="button" onClick={() => setOpen(true)} aria-label="Ask StarryNight's AI analyst"
+          className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full border border-signal/50 bg-surface px-4 py-3 font-semibold text-ink shadow-card hover:border-signal">
+          <MessageSquareText size={18} className="text-signal" aria-hidden /> Ask AI
         </button>
       )}
-      <aside aria-label="AstroFire AI analyst" aria-hidden={!open}
+      <aside aria-label="StarryNight AI analyst" aria-hidden={!open}
         className={`fixed inset-y-0 right-0 z-50 w-full max-w-[480px] flex-col border-l border-line bg-space shadow-card ${open ? "flex" : "hidden"}`}>
         <header className="flex items-center gap-3 border-b border-line px-4 py-3">
           <MessageSquareText size={18} className="text-signal" aria-hidden />

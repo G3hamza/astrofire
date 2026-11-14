@@ -1,3 +1,3 @@
-The VERDICT below was decided by AstroFire's deterministic rules. Do not change it.
+The VERDICT below was decided by StarryNight's deterministic rules. Do not change it.
 Write 2 to 4 reasons, one per line starting with "- ", each tied to one evidence id like [E4]. Spell out how the closest
 evidence differs from the requested scenario (gravity, oxygen, pressure, fuel type: solid vs liquid droplet vs gas flame).

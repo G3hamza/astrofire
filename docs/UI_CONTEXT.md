@@ -33,14 +33,15 @@ Colors are CSS variables (RGB channels) in `src/index.css`, mapped in `tailwind.
 
 | Token | Hex | Use |
 |---|---|---|
-| space | #060A13 | page background |
-| surface | #0D1423 | cards |
-| raised | #151F34 | inputs, hover, nested cards |
-| line | #24324E | borders |
-| ink | #E8EEF8 | primary text |
-| muted | #9CACC7 | secondary text |
-| faint | #6E7E9B | captions, disabled |
-| signal | #38D6F5 | primary accent / links / focus (mission cyan) |
+| space | #05070D | page background |
+| surface | #0B0F1A | cards |
+| raised | #121828 | inputs, hover, nested cards |
+| line | #222C44 | borders |
+| ink | #ECF1F8 | primary text |
+| muted | #A0ADC4 | secondary text |
+| faint | #74819A | captions, disabled |
+| signal | #5CE1E6 | scientific cyan: links, focus, data highlights |
+| flare | #FFB84D | the one action accent: primary buttons, habitat design point |
 | burn | #EA6624 | outcome: burned |
 | out | #4B8FF7 | outcome: went out / extinction |
 | blow | #E9479A | outcome: blowoff |
@@ -49,7 +50,8 @@ Colors are CSS variables (RGB channels) in `src/index.css`, mapped in `tailwind.
 | caution | #FBBF24 | flags, borderline, inferred, assumed |
 | ok | #34D399 | observed / measured |
 
-- Fonts: **Inter** (UI), **JetBrains Mono** (ids, numbers, file#row). Fallbacks: Segoe UI / Consolas.
+- Brand: **StarryNight** (logo: cyan four-point star with a flare core). Fonts: **IBM Plex Sans** (UI) and **IBM Plex Mono** (readouts, ids, file#row), self-hosted via @fontsource.
+- Libraries: Radix UI (tabs, tooltip), Motion (section reveals), visx (evidence map on Home: `components/charts/AtmosphereMap.tsx`). NASA photos in `frontend-app/public/img/` with credits on screen.
 - Type scale: label 12px uppercase tracking 0.08em · sm 13 · base 15 · lg 18 · h3 20 · h2 26 · h1 36 · display 56.
 - Radius: cards 14px. Shadows: `card`, `glow` (signal ring), `danger` (red ring for insufficient verdict).
 - Animations: `shimmer` (skeletons), `pulseDot` (live/loading dot). Respect `prefers-reduced-motion`.

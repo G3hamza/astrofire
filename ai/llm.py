@@ -71,7 +71,7 @@ def write(task: str, question: str, evidence: str, extra: str = "", history: lis
             if served and f"served_by:{served}" not in events:
                 events.append(f"served_by:{served}")
         except Exception as e:  # every model failed (rate limit, no credits, timeout): caller falls back to its template
-            log.warning("AstroFire AI: LLM call failed (%s)", type(e).__name__)
+            log.warning("StarryNight AI: LLM call failed (%s)", type(e).__name__)
             return None, events + [f"skipped:{s}" for s in getattr(e, "events", [])] + [f"llm_error:{type(e).__name__}"]
         out = normalize(G.redact_secrets(out))
         probs = G.no_probability_violations(out)

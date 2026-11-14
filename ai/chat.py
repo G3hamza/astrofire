@@ -65,13 +65,13 @@ def _from_arabic(q: str) -> str:
     if not hints and _AR_GREETING.search(q):
         hints = ["who are you"]
     return f"{q} [{' '.join(hints)}]" if hints else q
-ABOUT_ANSWER = ("I'm AstroFire's evidence-grounded analyst. I answer questions about NASA's Physical Sciences Informatics (PSI) "
+ABOUT_ANSWER = ("I'm StarryNight's evidence-grounded analyst. I answer questions about NASA's Physical Sciences Informatics (PSI) "
                 "combustion experiments (24 investigations flown on the ISS and the Cygnus spacecraft) for spacecraft, ISS, Moon "
-                "and Mars base fire safety. Every answer is built from NASA records through AstroFire's engines and cites its sources; "
+                "and Mars base fire safety. Every answer is built from NASA records through StarryNight's engines and cites its sources; "
                 "when NASA has not tested something, I say \"Insufficient validated experimental evidence\" instead of guessing.")
 ABOUT_FINDINGS = [
     "Rank: which NASA investigations matter most for a spacecraft, the ISS, a Moon base, a lunar rover or a Mars base.",
-    "Scenarios in your own words: e.g. \"Would Nomex burn at 30% oxygen and 71 kPa on the Moon?\" (verdict from AstroFire's rule engine).",
+    "Scenarios in your own words: e.g. \"Would Nomex burn at 30% oxygen and 71 kPa on the Moon?\" (verdict from StarryNight's rule engine).",
     "Summaries and comparisons: what BASS-II, Saffire, SAME/SAME-R, FLEX or ACME tested, and how two investigations differ.",
     "Gaps and data: what has never been tested (e.g. solid materials at Moon/Mars conditions) and which NASA datasets you can download.",
 ]
@@ -229,7 +229,7 @@ def _gather(intent: str, msg: str, ent: dict, reg: Registry) -> dict:
             T.search_passages(reg, msg, k=2, investigation=inv)
         elif intent == "datasets":
             ctx["datasets"] = T.list_datasets(reg)
-            ctx["limits"].append("The ML table is not validated; AstroFire does not present any model output as a prediction.")
+            ctx["limits"].append("The ML table is not validated; StarryNight does not present any model output as a prediction.")
         elif intent == "earth":
             T.search_passages(reg, "Earth application spinoff firefighter detector extinguisher", k=4, content_type="challenge_resource")
             T.search_passages(reg, "Earth benefits terrestrial fire safety " + msg, k=3, content_type="nasa_text")
@@ -255,7 +255,7 @@ def _template(intent: str, msg: str, ent: dict, reg: Registry, ctx: dict) -> dic
         return {"answer": f"{G.INSUFFICIENT} {ctx['tool_error']}", "findings": [], "interpretation": [], "limits": limits}
     if intent == "scenario":
         s = ctx["scenario"]
-        answer = f"Verdict from AstroFire's rule engine: {s['verdict']} (coverage: {s['coverage']})."
+        answer = f"Verdict from StarryNight's rule engine: {s['verdict']} (coverage: {s['coverage']})."
         if s["verdict"].startswith("Insufficient"):
             answer = f"{G.INSUFFICIENT} " + answer
         findings = list(s["reasons"])
@@ -269,7 +269,7 @@ def _template(intent: str, msg: str, ent: dict, reg: Registry, ctx: dict) -> dic
         top = ", ".join(f"{x['acronym']} ({x['score']:.0f})" for x in r["ranked"][:3])
         answer = f"For the {r['habitat']['name']}, the most relevant PSI investigations are {top} [{r['evidence'][0]}]."
         findings = [f"{reg.get(i).text} [{i}]" for i in r["evidence"]]
-        interp.append("AstroFire interpretation: the ranking weighs condition closeness, challenge relevance, fuel type and evidence quality; it is a relevance order, not a safety rating.")
+        interp.append("StarryNight interpretation: the ranking weighs condition closeness, challenge relevance, fuel type and evidence quality; it is a relevance order, not a safety rating.")
         if r["habitat"]["gravity_g"] > 0:
             limits.append("PSI has no partial-gravity combustion data; every investigation only bounds this gravity from ~0 g.")
     elif intent == "compare":
@@ -283,12 +283,12 @@ def _template(intent: str, msg: str, ent: dict, reg: Registry, ctx: dict) -> dic
         g = ctx["gaps"]
         answer = g["narrative"]
         findings = [f"{e.text} [{e.id}]" for e in reg.items if e.kind == "gap"][:5]
-        interp.append("AstroFire interpretation: microgravity results can only bound Moon/Mars behavior; partial-gravity tests (LUCI, FM2) are needed to close this gap.")
+        interp.append("StarryNight interpretation: microgravity results can only bound Moon/Mars behavior; partial-gravity tests (LUCI, FM2) are needed to close this gap.")
     elif intent == "datasets":
         answer = "These Gold datasets hold NASA test conditions and outcomes you can use for modeling; each lists its real columns and limits."
         findings = [f"{reg.get(i).text} [{i}]" for i in ctx["datasets"]]
     elif intent == "fabrication":
-        answer = f"{G.INSUFFICIENT} AstroFire does not invent measurements, thresholds or predictions; it reports only values in NASA's PSI records."
+        answer = f"{G.INSUFFICIENT} StarryNight does not invent measurements, thresholds or predictions; it reports only values in NASA's PSI records."
     else:
         if not reg.items:
             return {"answer": G.OFF_TOPIC, "findings": [], "interpretation": [], "limits": limits}
@@ -302,7 +302,7 @@ def _template(intent: str, msg: str, ent: dict, reg: Registry, ctx: dict) -> dic
         answer = f"{lead.text[:900 if lead.level == 'analysis' else 450]} [{lead.id}]"
         findings = [f"{e.text[:350]} [{e.id}]" for e in order[1:6]]
         if intent in ("earth", "equipment"):
-            interp.append("AstroFire interpretation: these are design implications suggested by the NASA research aims above, not tested product results.")
+            interp.append("StarryNight interpretation: these are design implications suggested by the NASA research aims above, not tested product results.")
         if intent == "summary" and ctx.get("records"):
             rec = ctx["records"]
             if rec["summary"]:
@@ -330,7 +330,7 @@ def analyze(question: str, habitat: str | None = None, history: list | None = No
     ent = _entities(G.sanitize(q) if injection else q, hist, habitat)
     if injection:
         base["guardrails"].append("prompt_injection_ignored")
-        base["limits"].append("Instructions inside the question that try to change AstroFire's rules or reveal configuration were ignored.")
+        base["limits"].append("Instructions inside the question that try to change StarryNight's rules or reveal configuration were ignored.")
     clean_q = G.sanitize(q) or q
     if not injection and ABOUT.search(clean_q) and not G.OUT_OF_SCOPE.search(clean_q) and not G.DOMAIN.search(re.sub(r"\b(data|nasa|fire)\b", "", clean_q, flags=re.I)):
         fu = ["Which investigations matter most for a Moon base?", "Would Nomex burn at 30% oxygen and 71 kPa on the Moon?",
@@ -340,7 +340,7 @@ def analyze(question: str, habitat: str | None = None, history: list | None = No
     if G.is_off_topic(clean_q, history_has_context=bool(ent["history_investigations"])) or (injection and not G.DOMAIN.search(clean_q)):
         fu = _followups("ask", ent, Registry())
         return {**base, "intent": "out_of_scope", "answer": G.OFF_TOPIC, "followups": fu, "suggested_followups": fu, "mode": "template",
-                "limits": base["limits"] + ["AstroFire answers questions about NASA PSI combustion and spacecraft / habitat fire safety. "
+                "limits": base["limits"] + ["StarryNight answers questions about NASA PSI combustion and spacecraft / habitat fire safety. "
                                             "Rocket and propellant fires are outside the PSI data."],
                 "latency_ms": int((time.time() - t0) * 1000)}
     intent = classify(clean_q, ent, ent["history_investigations"])
@@ -387,7 +387,7 @@ def analyze(question: str, habitat: str | None = None, history: list | None = No
             else:
                 events.append("ai_answer_rejected_no_valid_citations")
     if ctx.get("scenario") and ctx["scenario"]["verdict"] not in draft["answer"]:   # the engine's verdict is always stated
-        draft["answer"] = f"Verdict from AstroFire's rule engine: {ctx['scenario']['verdict']}. " + draft["answer"]
+        draft["answer"] = f"Verdict from StarryNight's rule engine: {ctx['scenario']['verdict']}. " + draft["answer"]
     insufficient = ctx.get("insufficient") or intent == "fabrication" or draft["answer"].startswith(G.INSUFFICIENT)
     if insufficient and not draft["answer"].startswith(G.INSUFFICIENT):
         draft["answer"] = f"{G.INSUFFICIENT} {draft['answer']}"

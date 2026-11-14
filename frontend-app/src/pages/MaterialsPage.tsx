@@ -133,7 +133,7 @@ export function MaterialDetail() {
       {isUnknown(m.classification_basis) && (
         <Callout tone="caution" title="NASA never named this material">
           <p className="mt-2 text-ink/90">
-            The test table only says <b>{split(m.original_names).join(" · ") || "a shape"}</b>. AstroFire lists it as
+            The test table only says <b>{split(m.original_names).join(" · ") || "a shape"}</b>. StarryNight lists it as
             {" "}<b>{m.candidate_family || "an unknown family"}</b> only as a low-confidence candidate, and does not use it as same-material evidence.
           </p>
         </Callout>

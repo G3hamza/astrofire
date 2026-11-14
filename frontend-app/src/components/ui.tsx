@@ -8,7 +8,7 @@ export function Card({ children, className, tone, as: Tag = "section", id }:
   { children: ReactNode; className?: string; tone?: "default" | "danger" | "signal"; as?: "section" | "div" | "article"; id?: string }) {
   return (
     <Tag id={id} className={cx("scroll-mt-20",
-      "rounded-card border bg-surface/90 shadow-card backdrop-blur-sm",
+      "rounded-card border bg-surface shadow-card",
       tone === "danger" ? "border-danger/50 shadow-danger" : tone === "signal" ? "border-signal/40 shadow-glow" : "border-line",
       className,
     )}>
@@ -32,15 +32,15 @@ export function CardHeader({ eyebrow, title, right }: { eyebrow?: string; title:
 /* ---------- Button ---------- */
 type BtnVariant = "primary" | "secondary" | "ghost";
 const BTN: Record<BtnVariant, string> = {
-  primary: "bg-signal text-space hover:bg-signal/90 font-semibold",
-  secondary: "border border-line bg-raised text-ink hover:border-signal/60",
+  primary: "bg-flare text-space hover:bg-flare/90 font-semibold",
+  secondary: "border border-line bg-transparent text-ink hover:border-ink/40 hover:bg-raised",
   ghost: "text-muted hover:bg-raised hover:text-ink",
 };
 export function Button({ variant = "primary", icon, children, className, ...rest }:
   ButtonHTMLAttributes<HTMLButtonElement> & { variant?: BtnVariant; icon?: ReactNode }) {
   return (
     <button
-      className={cx("inline-flex h-10 items-center gap-2 rounded-lg px-4 text-base transition-colors disabled:opacity-50", BTN[variant], className)}
+      className={cx("inline-flex h-10 items-center gap-2 rounded-full px-5 text-base transition-colors disabled:opacity-50", BTN[variant], className)}
       {...rest}
     >
       {icon}

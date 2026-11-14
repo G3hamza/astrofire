@@ -3,7 +3,7 @@
 Challenge objectives covered: "extract data that supports predictive modeling", "highlight research that informs the
 development of next-generation fire safety controls and equipment", "potential applications of the PSI data on Earth".
 Every statement is NASA's own text (investigation.json research impacts / objectives) or the challenge's resources tab,
-with its source. AstroFire's own reading is returned separately as `interpretation`, labelled as such.
+with its source. StarryNight's own reading is returned separately as `interpretation`, labelled as such.
 """
 import csv
 import json
@@ -42,7 +42,7 @@ PILLAR_WORDS = {
     "detection": r"detect|sensor|smoke|alarm|particle|instrument",
     "suppression": r"suppress|extingu|inert|CO2|helium|dilut",
 }
-# AstroFire's reading per pillar. Interpretation, not NASA results: shown separately and labelled.
+# StarryNight's reading per pillar. Interpretation, not NASA results: shown separately and labelled.
 INTERPRETATION = {
     "prevention": "Material selection for Moon/Mars habitats would need flammability data at higher oxygen and lower pressure than any PSI solid test; "
                   "the PSI results define the cabin-air baseline that new tests (LUCI, FM2) would extend.",
@@ -102,7 +102,7 @@ def equipment():
         order = {"direct": 0, "related": 1, "background": 2}
         items.sort(key=lambda x: (order[x["relevance_tier"]], x["acronym"]))
         out.append({"pillar": pillar, "investigations": items, "interpretation": INTERPRETATION[pillar],
-                    "interpretation_label": "AstroFire interpretation (not a NASA result)"})
+                    "interpretation_label": "StarryNight interpretation (not a NASA result)"})
     return out
 
 

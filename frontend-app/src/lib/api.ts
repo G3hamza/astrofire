@@ -15,7 +15,7 @@ export async function api<T>(path: string, init?: RequestInit): Promise<T> {
       headers: { "content-type": "application/json", ...(init?.headers ?? {}) },
     });
   } catch {
-    throw new ApiError("The AstroFire API is not reachable. Is the server running?");
+    throw new ApiError("The StarryNight API is not reachable. Is the server running?");
   }
   if (!res.ok) {
     let detail = res.statusText;

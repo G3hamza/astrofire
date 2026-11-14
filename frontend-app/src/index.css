@@ -4,16 +4,18 @@
 
 /* ---- Design tokens (RGB channels). Dark only: projector + high contrast (NFR5). ---- */
 :root {
-  --space: 6 10 19;        /* #060A13 */
-  --surface: 13 20 35;     /* #0D1423 */
-  --raised: 21 31 52;      /* #151F34 */
-  --line: 36 50 78;        /* #24324E */
+  /* StarryNight: deep midnight, one cyan for science, one warm flare accent for actions. */
+  --space: 5 7 13;         /* #05070D page */
+  --surface: 11 15 26;     /* #0B0F1A panels */
+  --raised: 18 24 40;      /* #121828 inputs, hover, nested */
+  --line: 34 44 68;        /* #222C44 hairlines */
 
-  --ink: 232 238 248;      /* #E8EEF8  contrast 16:1 on space */
-  --muted: 156 172 199;    /* #9CACC7  7.9:1 */
-  --faint: 110 126 155;    /* #6E7E9B  4.6:1 */
+  --ink: 236 241 248;      /* #ECF1F8 */
+  --muted: 160 173 196;    /* #A0ADC4 */
+  --faint: 116 129 154;    /* #74819A  >= 4.6:1 on space */
 
-  --signal: 56 214 245;    /* #38D6F5 mission cyan */
+  --signal: 92 225 230;    /* #5CE1E6 scientific cyan */
+  --flare: 255 184 77;     /* #FFB84D the one action accent */
 
   --burn: 234 102 36;      /* #EA6624 flame orange (CVD-validated set) */
   --out: 75 143 247;       /* #4B8FF7 cold blue */
@@ -29,13 +31,8 @@
 
 @layer base {
   html { background: rgb(var(--space)); }
-  body {
-    @apply bg-space text-ink font-sans text-base antialiased;
-    background-image:
-      radial-gradient(1200px 600px at 85% -10%, rgb(var(--signal) / 0.07), transparent 60%),
-      radial-gradient(900px 500px at -10% 110%, rgb(var(--burn) / 0.05), transparent 60%);
-    background-attachment: fixed;
-  }
+  body { @apply bg-space text-ink font-sans text-base antialiased; font-feature-settings: "ss02", "tnum" 0; }
+  h1, h2, h3 { text-wrap: balance; }
   :focus-visible { outline: 2px solid rgb(var(--signal)); outline-offset: 2px; border-radius: 6px; }
   ::selection { background: rgb(var(--signal) / 0.3); }
   a { @apply text-signal underline-offset-2 hover:underline; }
@@ -43,6 +40,15 @@
 
 @layer components {
   .eyebrow { @apply font-mono text-label uppercase text-muted; }
+  .kicker { @apply font-mono text-label uppercase tracking-[0.22em] text-signal; }
+  .readout { @apply font-mono tnum; }
+  .hairline { @apply border-line/70; }
+  /* HUD crosshair: a small "+" used to mark measured points on photographs and charts. */
+  .hud-cross { position: absolute; width: 14px; height: 14px; transform: translate(-50%, -50%); pointer-events: none; }
+  .hud-cross::before, .hud-cross::after { content: ""; position: absolute; background: rgb(var(--ink) / 0.55); }
+  .hud-cross::before { left: 6px; top: 0; width: 1px; height: 14px; }
+  .hud-cross::after { top: 6px; left: 0; width: 14px; height: 1px; }
+  .photo-fade { mask-image: linear-gradient(to bottom, black 55%, transparent); }
   .tnum { font-variant-numeric: tabular-nums; }
   .grid-bg {
     background-image:
